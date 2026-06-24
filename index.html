@@ -809,6 +809,122 @@
             *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
             .tilt3d { animation: none; transform: none; }
         }
+
+        /* ============================================================
+           WORLD-CLASS MEDIA — cinematic hero, film, editorial, marquee
+        ============================================================ */
+        .eyebrow { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+        .eyebrow.center { text-align: center; }
+        .gold-divider { width: 64px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
+
+        /* Cinematic hero */
+        .hero--cinematic { background: #0d0b08; color: #fff; }
+        .hero--cinematic::before { display: none; }
+        .hero-media { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+        .hero-film { position: absolute; inset: -12%;
+            background:
+                radial-gradient(closest-side at 28% 36%, rgba(201,169,110,0.55), transparent 60%),
+                radial-gradient(closest-side at 74% 62%, rgba(212,115,123,0.34), transparent 60%),
+                radial-gradient(closest-side at 55% 88%, rgba(139,189,217,0.30), transparent 60%),
+                linear-gradient(120deg, #15110b, #241a10 55%, #120f0a);
+            filter: saturate(1.05);
+            animation: meshDrift 20s ease-in-out infinite alternate;
+        }
+        @keyframes meshDrift { 0% { transform: translate3d(-2%, -1%, 0) scale(1.06); } 100% { transform: translate3d(2%, 2%, 0) scale(1.14); } }
+        .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.42; mix-blend-mode: screen; z-index: 1; }
+        .hero-grain { position: absolute; inset: 0; z-index: 2; opacity: 0.07; pointer-events: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+            animation: grainShift 1.2s steps(3) infinite; }
+        @keyframes grainShift { 0% { transform: translate(0,0); } 33% { transform: translate(-6px,4px); } 66% { transform: translate(4px,-6px); } 100% { transform: translate(0,0); } }
+        .hero-sweep { position: absolute; top: -50%; left: -60%; width: 50%; height: 200%; z-index: 2; pointer-events: none;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.06), transparent); transform: skewX(-18deg); animation: sweep 9s ease-in-out infinite; }
+        @keyframes sweep { 0% { left: -60%; } 55%, 100% { left: 140%; } }
+        .hero-overlay { position: absolute; inset: 0; z-index: 3; pointer-events: none;
+            background: radial-gradient(ellipse at 50% 40%, rgba(13,11,8,0.1), rgba(13,11,8,0.55) 75%), linear-gradient(180deg, rgba(13,11,8,0.5), transparent 30%, rgba(13,11,8,0.7)); }
+        .hero--cinematic .hero-content { z-index: 4; }
+        .hero--cinematic .hero-tagline { color: var(--gold-light); }
+        .hero--cinematic .hero-title { color: #fff; text-shadow: 0 2px 40px rgba(0,0,0,0.45); }
+        .hero--cinematic .hero-subtitle { color: rgba(255,255,255,0.82); }
+        .scroll-cue { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; }
+        .scroll-cue .line { width: 1px; height: 46px; background: linear-gradient(rgba(255,255,255,0.7), transparent); transform-origin: top; animation: scrollLine 2.2s ease-in-out infinite; }
+        @keyframes scrollLine { 0%, 100% { transform: scaleY(0.35); opacity: 0.3; } 50% { transform: scaleY(1); opacity: 0.85; } }
+
+        /* Reusable media frame with graceful fallback */
+        .media { position: relative; overflow: hidden; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--cream), var(--gold-light)); }
+        .media-img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.2,.8,.2,1); position: relative; z-index: 2; }
+        .media:hover .media-img { transform: scale(1.06); }
+        .media-fallback { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; color: var(--gold-dark); }
+        .media--duotone .media-img { filter: grayscale(1) contrast(1.05) brightness(0.95) sepia(0.22); }
+        .media--duotone::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(150deg, rgba(201,169,110,0.42), rgba(20,15,10,0.40)); mix-blend-mode: multiply; }
+
+        /* The Film section */
+        .film-section { padding: 100px 0 0; background: var(--ink); color: var(--ink-text); text-align: center; }
+        .film-stage { position: relative; height: 70vh; min-height: 420px; margin-top: 40px; overflow: hidden; }
+        .film-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; }
+        .film-fallback-art { z-index: 1; }
+        .film-overlay { position: absolute; inset: 0; z-index: 3; background: radial-gradient(ellipse at center, transparent 30%, rgba(13,11,8,0.55)); pointer-events: none; }
+        .film-caption { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); z-index: 4; font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; color: #fff; letter-spacing: 1px; text-shadow: 0 2px 20px rgba(0,0,0,0.5); padding: 0 20px; }
+
+        /* Editorial campaign */
+        .campaign-section { padding: 110px 0; background: var(--ivory); }
+        .campaign-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+        .campaign-grid.reverse { direction: rtl; }
+        .campaign-grid.reverse > * { direction: ltr; }
+        .campaign-media { height: 560px; }
+        .campaign-text h2 { font-size: 2.6rem; margin-bottom: 18px; line-height: 1.15; }
+        .campaign-text p { color: var(--warm-gray); line-height: 1.85; margin-bottom: 24px; max-width: 460px; }
+
+        /* Press marquee */
+        .press-section { padding: 46px 0; background: var(--charcoal); color: #fff; overflow: hidden; }
+        .press-eyebrow { text-align: center; font-size: 0.66rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 24px; }
+        .marquee { position: relative; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+        .marquee-track { display: flex; gap: 64px; width: max-content; animation: marquee 26s linear infinite; }
+        .marquee-track span { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 3px; color: rgba(255,255,255,0.7); white-space: nowrap; }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        @media (max-width: 768px) {
+            .campaign-grid { grid-template-columns: 1fr; gap: 28px; }
+            .campaign-grid.reverse { direction: ltr; }
+            .campaign-media { height: 360px; }
+            .campaign-text h2 { font-size: 2rem; }
+            .film-stage { height: 52vh; }
+            .film-caption { font-size: 1.05rem; }
+            .marquee-track span { font-size: 1.2rem; }
+        }
+
+        /* ============================================================
+           VIDEO GALLERIES + IMAGE GALLERIES + MEDIA LIGHTBOX
+        ============================================================ */
+        .media-showcase { padding: 90px 0; background: var(--ivory); }
+        .media-showcase.alt { background: var(--cream); }
+        .mt-section { margin-top: 64px; }
+        .video-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .video-card { position: relative; border: none; background: none; padding: 0; cursor: pointer; text-align: left; display: block; width: 100%; }
+        .video-card-poster { height: 230px; border-radius: var(--radius-lg); }
+        .video-play { position: absolute; top: calc(50% - 18px); left: 50%; transform: translate(-50%, -50%); z-index: 5; width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; color: var(--charcoal); box-shadow: var(--shadow-md); transition: var(--transition); }
+        .video-card:hover .video-play { transform: translate(-50%, -50%) scale(1.12); background: #fff; }
+        .video-duration { position: absolute; top: 12px; right: 12px; z-index: 5; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.7rem; letter-spacing: 0.5px; padding: 3px 9px; border-radius: 6px; }
+        .video-title { display: block; padding: 14px 4px 0; font-family: var(--font-heading); font-size: 1.05rem; color: var(--charcoal); }
+        .video-tag { display: block; padding: 2px 4px 0; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .gallery-item { height: 210px; cursor: pointer; }
+
+        .media-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(10,8,6,0.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 28px; }
+        .media-modal.open { opacity: 1; pointer-events: auto; }
+        .media-modal-inner { position: relative; max-width: 920px; width: 100%; }
+        .media-modal-video, .media-modal-img { width: 100%; max-height: 80vh; border-radius: var(--radius-lg); display: block; background: #000; object-fit: contain; }
+        .media-modal-caption { color: rgba(255,255,255,0.85); text-align: center; margin-top: 14px; font-family: var(--font-heading); font-style: italic; font-size: 1.1rem; }
+        .media-modal-close { position: absolute; top: -48px; right: 0; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.15); color: #fff; font-size: 1.5rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .media-modal-close:hover { background: rgba(255,255,255,0.3); transform: rotate(90deg); }
+
+        @media (max-width: 768px) {
+            .video-gallery { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .video-card-poster { height: 210px; }
+            .gallery-item { height: 170px; }
+            .media-modal-close { top: 0; right: 0; }
+        }
     </style>
 </head>
 <body>
@@ -874,9 +990,18 @@
     ============================================================ -->
     <div class="page active" id="page-home">
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-decoration hero-decoration-1"></div>
-            <div class="hero-decoration hero-decoration-2"></div>
+        <section class="hero hero--cinematic">
+            <div class="hero-media">
+                <div class="hero-film"></div>
+                <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1" onerror="this.classList.add('hidden')">
+                    <source src="https://mdn.github.io/shared-assets/videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+                </video>
+                <div class="hero-grain"></div>
+                <div class="hero-sweep"></div>
+                <div class="hero-overlay"></div>
+            </div>
             <div class="hero-content">
                 <p class="hero-tagline">Artisan Perfumery from Kerala</p>
                 <h1 class="hero-title">LUMIÈRE</h1>
@@ -888,6 +1013,18 @@
                     <button class="btn-secondary" onclick="showPage('about')">
                         <i data-lucide="book-open" width="16" height="16"></i> Our Story
                     </button>
+                </div>
+            </div>
+            <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+        </section>
+
+        <!-- Press / Accolades marquee -->
+        <section class="press-section">
+            <p class="press-eyebrow">As featured in</p>
+            <div class="marquee">
+                <div class="marquee-track">
+                    <span>VOGUE</span><span>GQ</span><span>ELLE</span><span>Harper's BAZAAR</span><span>FORBES</span><span>GRAZIA</span><span>Cond&eacute; Nast</span>
+                    <span>VOGUE</span><span>GQ</span><span>ELLE</span><span>Harper's BAZAAR</span><span>FORBES</span><span>GRAZIA</span><span>Cond&eacute; Nast</span>
                 </div>
             </div>
         </section>
@@ -917,13 +1054,32 @@
             </div>
         </section>
 
+        <!-- Editorial Campaign -->
+        <section class="campaign-section">
+            <div class="container">
+                <div class="campaign-grid">
+                    <figure class="media media--duotone campaign-media reveal">
+                        <img class="media-img" src="https://picsum.photos/seed/lumiere-campaign/1100/1300" alt="LUMIÈRE campaign imagery" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                        <div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>The Campaign</span></div></div>
+                    </figure>
+                    <div class="campaign-text reveal">
+                        <p class="eyebrow">The Campaign &mdash; SS26</p>
+                        <h2>Light, Captured in Glass</h2>
+                        <p>Our latest campaign follows a single ray of morning light as it moves through a Kerala garden &mdash; from the first jasmine at dawn to the warm amber of dusk. Three fragrances, one unbroken story of nature transformed.</p>
+                        <button class="btn-secondary" onclick="showPage('collections')">View the Collection</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Brand Story Teaser -->
         <section class="story-section">
             <div class="container">
                 <div class="story-content">
-                    <div class="story-image reveal">
-                        <div class="img-caption"><span class="img-monogram">L</span><span>The Kerala Atelier</span></div>
-                    </div>
+                    <figure class="story-image media media--duotone reveal">
+                        <img class="media-img" src="https://picsum.photos/seed/lumiere-atelier/900/760" alt="The LUMIÈRE atelier in the hills of Kerala" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                        <div class="media-fallback"><div class="img-caption"><span class="img-monogram">L</span><span>The Kerala Atelier</span></div></div>
+                    </figure>
                     <div class="story-text reveal">
                         <h2>Born in the Gardens of Kerala</h2>
                         <p>LUMIÈRE was born from a simple belief: that the finest fragrances come from the purest ingredients. Nestled in the verdant hills of Kerala, our atelier draws inspiration from centuries of botanical wisdom.</p>
@@ -931,6 +1087,35 @@
                         <button class="btn-secondary" onclick="showPage('about')">Discover Our Heritage</button>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- The Film -->
+        <section class="film-section">
+            <div class="container">
+                <p class="eyebrow center">The Film</p>
+                <h2 class="section-title reveal">A Scent, In Motion</h2>
+                <div class="gold-divider reveal"></div>
+            </div>
+            <div class="film-stage reveal">
+                <div class="hero-film film-fallback-art"></div>
+                <video class="film-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" onerror="this.classList.add('hidden')">
+                    <source src="https://mdn.github.io/shared-assets/videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+                </video>
+                <div class="film-overlay"></div>
+                <div class="film-caption">"Crafted from Nature. Made for You."</div>
+            </div>
+        </section>
+
+        <!-- Home Video Stories -->
+        <section class="media-showcase">
+            <div class="container">
+                <p class="eyebrow center">Stories</p>
+                <h2 class="section-title reveal">Watch &amp; Discover</h2>
+                <p class="section-subtitle reveal">Step inside our world &mdash; from the Kerala atelier to the art of the blend</p>
+                <div class="video-gallery reveal" id="homeVideoGallery"></div>
             </div>
         </section>
 
@@ -984,9 +1169,10 @@
                     <p>LUMIÈRE was founded in 2019 in the heart of Kerala, India, where the air itself tells stories of jasmine, sandalwood, and monsoon rain. Our founder, inspired by generations of botanical knowledge, set out to create fragrances that capture the essence of Indian nature.</p>
                     <p>Today, LUMIÈRE stands at the intersection of traditional Indian perfumery and modern luxury, creating scents that resonate with the soul.</p>
                 </div>
-                <div class="about-hero-image reveal">
-                    <span class="img-caption"><span class="img-monogram">&#10047;</span><span>Kerala Botanical Gardens</span></span>
-                </div>
+                <figure class="about-hero-image media media--duotone reveal">
+                    <img class="media-img" src="https://picsum.photos/seed/lumiere-kerala/1000/1000" alt="Kerala botanical gardens" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                    <div class="media-fallback"><span class="img-caption"><span class="img-monogram">&#10047;</span><span>Kerala Botanical Gardens</span></span></div>
+                </figure>
             </div>
         </div>
 
@@ -1243,6 +1429,18 @@
             </div>
         </section>
 
+        <!-- NOIR videos + gallery (admin-managed media; demo data) -->
+        <section class="media-showcase alt">
+            <div class="container">
+                <p class="eyebrow center">Watch</p>
+                <h2 class="section-title reveal">NOIR in Motion</h2>
+                <div class="video-gallery reveal" id="noirVideos"></div>
+                <p class="eyebrow center mt-section">Gallery</p>
+                <h2 class="section-title reveal">The NOIR Gallery</h2>
+                <div class="gallery-grid reveal" id="noirGallery"></div>
+            </div>
+        </section>
+
         <!-- Related Products -->
         <section class="related-products">
             <div class="container">
@@ -1377,6 +1575,18 @@
                 <div class="reviews-grid reveal" id="bloomReviewsGrid"></div>
             </div>
         </section>
+
+        <!-- BLOOM videos + gallery (admin-managed media; demo data) -->
+        <section class="media-showcase alt">
+            <div class="container">
+                <p class="eyebrow center">Watch</p>
+                <h2 class="section-title reveal">BLOOM in Motion</h2>
+                <div class="video-gallery reveal" id="bloomVideos"></div>
+                <p class="eyebrow center mt-section">Gallery</p>
+                <h2 class="section-title reveal">The BLOOM Gallery</h2>
+                <div class="gallery-grid reveal" id="bloomGallery"></div>
+            </div>
+        </section>
     </div>
 
     <!-- ============================================================
@@ -1481,6 +1691,18 @@
                 <h2 class="section-title reveal">Reviews</h2>
                 <div class="reviews-summary reveal" id="aquaReviewsSummary"></div>
                 <div class="reviews-grid reveal" id="aquaReviewsGrid"></div>
+            </div>
+        </section>
+
+        <!-- AQUA videos + gallery (admin-managed media; demo data) -->
+        <section class="media-showcase alt">
+            <div class="container">
+                <p class="eyebrow center">Watch</p>
+                <h2 class="section-title reveal">AQUA in Motion</h2>
+                <div class="video-gallery reveal" id="aquaVideos"></div>
+                <p class="eyebrow center mt-section">Gallery</p>
+                <h2 class="section-title reveal">The AQUA Gallery</h2>
+                <div class="gallery-grid reveal" id="aquaGallery"></div>
             </div>
         </section>
     </div>
@@ -1907,6 +2129,18 @@
     </div>
 
     <!-- ============================================================
+         MEDIA LIGHTBOX (video + image)
+    ============================================================ -->
+    <div class="media-modal" id="mediaModal" onclick="closeMedia()">
+        <div class="media-modal-inner" onclick="event.stopPropagation()">
+            <button class="media-modal-close" onclick="closeMedia()" aria-label="Close">&times;</button>
+            <video class="media-modal-video hidden" id="modalVideo" controls playsinline preload="metadata"></video>
+            <img class="media-modal-img hidden" id="modalImg" alt="">
+            <p class="media-modal-caption" id="modalCaption"></p>
+        </div>
+    </div>
+
+    <!-- ============================================================
          FOOTER
     ============================================================ -->
     <footer class="footer">
@@ -2086,6 +2320,118 @@
         }
 
         /* ============================================================
+           MEDIA LIBRARY (videos + images) — DEMO DATA
+           Admin: edit these arrays to manage each product's media.
+           Swap `src`/`poster`/seed values for real asset URLs anytime.
+        ============================================================ */
+        const DEMO_VIDEO = 'https://mdn.github.io/shared-assets/videos/flower.mp4';
+
+        const HOME_VIDEOS = [
+            { tag: 'Brand Film', title: 'The LUMIÈRE Story', duration: '2:32', poster: 'https://picsum.photos/seed/lumiere-home-v1/640/420', src: DEMO_VIDEO },
+            { tag: 'Behind the Scenes', title: 'Inside the Kerala Atelier', duration: '1:50', poster: 'https://picsum.photos/seed/lumiere-home-v2/640/420', src: DEMO_VIDEO },
+            { tag: 'Craft', title: 'From Petal to Bottle', duration: '1:12', poster: 'https://picsum.photos/seed/lumiere-home-v3/640/420', src: DEMO_VIDEO }
+        ];
+
+        const PRODUCT_MEDIA = {
+            noir: {
+                videos: [
+                    { tag: 'Campaign', title: 'NOIR — The Film', duration: '1:24', poster: 'https://picsum.photos/seed/noir-v1/640/420', src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'Oud and Amber, Explained', duration: '0:48', poster: 'https://picsum.photos/seed/noir-v2/640/420', src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Blending NOIR', duration: '2:10', poster: 'https://picsum.photos/seed/noir-v3/640/420', src: DEMO_VIDEO }
+                ],
+                images: ['noir-g1', 'noir-g2', 'noir-g3', 'noir-g4']
+            },
+            bloom: {
+                videos: [
+                    { tag: 'Campaign', title: 'BLOOM — A Garden at Dawn', duration: '1:38', poster: 'https://picsum.photos/seed/bloom-v1/640/420', src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'Jasmine and Rose, Up Close', duration: '0:52', poster: 'https://picsum.photos/seed/bloom-v2/640/420', src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Harvesting at First Light', duration: '1:46', poster: 'https://picsum.photos/seed/bloom-v3/640/420', src: DEMO_VIDEO }
+                ],
+                images: ['bloom-g1', 'bloom-g2', 'bloom-g3', 'bloom-g4']
+            },
+            aqua: {
+                videos: [
+                    { tag: 'Campaign', title: 'AQUA — Where Sea Meets Skin', duration: '1:15', poster: 'https://picsum.photos/seed/aqua-v1/640/420', src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'The Sea-Salt Accord', duration: '0:44', poster: 'https://picsum.photos/seed/aqua-v2/640/420', src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Bottling the Coast', duration: '1:30', poster: 'https://picsum.photos/seed/aqua-v3/640/420', src: DEMO_VIDEO }
+                ],
+                images: ['aqua-g1', 'aqua-g2', 'aqua-g3', 'aqua-g4']
+            }
+        };
+
+        function escAttr(s) { return String(s).replace(/'/g, '\u2019').replace(/"/g, ''); }
+
+        function renderVideoCards(list) {
+            return list.map(function (v) {
+                return '<button class="video-card" onclick="openVideo(\'' + v.src + '\',\'' + escAttr(v.title) + '\')">' +
+                    '<figure class="media media--duotone video-card-poster">' +
+                        '<img class="media-img" src="' + v.poster + '" alt="' + escAttr(v.title) + '" loading="lazy" decoding="async" onerror="this.classList.add(\'hidden\')">' +
+                        '<div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#9658;</span><span>' + escAttr(v.tag) + '</span></div></div>' +
+                    '</figure>' +
+                    '<span class="video-duration">' + v.duration + '</span>' +
+                    '<span class="video-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>' +
+                    '<span class="video-tag">' + escAttr(v.tag) + '</span>' +
+                    '<span class="video-title">' + escAttr(v.title) + '</span>' +
+                '</button>';
+            }).join('');
+        }
+
+        function renderImageItems(seeds, label) {
+            return seeds.map(function (seed) {
+                var url = 'https://picsum.photos/seed/' + seed + '/640/640';
+                return '<figure class="media media--duotone gallery-item" onclick="openImage(\'' + url + '\',\'' + escAttr(label) + '\')">' +
+                    '<img class="media-img" src="' + url + '" alt="' + escAttr(label) + '" loading="lazy" decoding="async" onerror="this.classList.add(\'hidden\')">' +
+                    '<div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>' + escAttr(label) + '</span></div></div>' +
+                '</figure>';
+            }).join('');
+        }
+
+        function renderMediaGallery(product) {
+            var data = PRODUCT_MEDIA[product];
+            if (!data) return;
+            var v = document.getElementById(product + 'Videos');
+            if (v) v.innerHTML = renderVideoCards(data.videos);
+            var g = document.getElementById(product + 'Gallery');
+            if (g) g.innerHTML = renderImageItems(data.images, product.toUpperCase() + ' Gallery');
+        }
+
+        function renderHomeVideos() {
+            var el = document.getElementById('homeVideoGallery');
+            if (el) el.innerHTML = renderVideoCards(HOME_VIDEOS);
+        }
+
+        /* Media lightbox (video + image) */
+        function openVideo(src, title) {
+            var m = document.getElementById('mediaModal'),
+                v = document.getElementById('modalVideo'),
+                img = document.getElementById('modalImg');
+            img.classList.add('hidden'); img.removeAttribute('src');
+            v.classList.remove('hidden'); v.src = src;
+            document.getElementById('modalCaption').textContent = title || '';
+            m.classList.add('open');
+            try { v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+        }
+
+        function openImage(src, caption) {
+            var m = document.getElementById('mediaModal'),
+                v = document.getElementById('modalVideo'),
+                img = document.getElementById('modalImg');
+            try { v.pause(); } catch (e) {}
+            v.classList.add('hidden'); v.removeAttribute('src');
+            img.src = src; img.classList.remove('hidden');
+            document.getElementById('modalCaption').textContent = caption || '';
+            m.classList.add('open');
+        }
+
+        function closeMedia() {
+            var m = document.getElementById('mediaModal'),
+                v = document.getElementById('modalVideo');
+            try { v.pause(); } catch (e) {}
+            v.removeAttribute('src');
+            m.classList.remove('open');
+        }
+
+        /* ============================================================
            QUANTITY STEPPERS (product pages)
         ============================================================ */
         let productQty = { noir: 1, bloom: 1, aqua: 1 };
@@ -2163,9 +2509,10 @@
                 updatePaymentTotal();
             }
 
-            // Product pages: render demo reviews and bind 3D tilt
+            // Product pages: render demo reviews, media galleries, and bind 3D tilt
             if (pageId === 'noir' || pageId === 'bloom' || pageId === 'aqua') {
                 renderReviews(pageId);
+                renderMediaGallery(pageId);
                 setTimeout(initTilt, 60);
             }
 
@@ -2596,6 +2943,8 @@
                 initRevealAnimations();
                 updateCartDisplay();
                 initTilt();
+                renderHomeVideos();
+                document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMedia(); });
             } catch (err) {
                 // Never let a JS error blank the page: reveal all content.
                 revealAll();
