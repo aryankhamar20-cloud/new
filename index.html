@@ -6,8 +6,8 @@
     <title>LUMIÈRE - Crafted from Nature. Made for You.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>document.documentElement.className += ' js';</script>
     <style>
         /* ============================================================
            LUMIÈRE - Premium Perfume Brand Website
@@ -36,8 +36,9 @@
             --bloom-peach: #F5DDD0;
             --aqua-blue: #B8D8E8;
             --aqua-light: #E8F4FA;
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+            --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
             --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
             --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
@@ -187,7 +188,8 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes wave { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal { opacity: 1; transform: none; transition: opacity 0.8s ease, transform 0.8s ease; }
+        .js .reveal { opacity: 0; transform: translateY(30px); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .btn-primary {
             display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
@@ -583,6 +585,8 @@
            Utility Classes (extracted from inline styles)
         ============================================================ */
         .hidden { display: none; }
+        .lum-icon { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+        i[data-lucide] { display: inline-flex; }
         .text-warm-gray { color: var(--warm-gray); }
         .text-italic { font-style: italic; }
         .text-italic-noir { font-style: italic; color: var(--noir-dark); }
@@ -622,6 +626,47 @@
         .swatch-noir { background: linear-gradient(135deg, #F5E6C8, #D4A55A); }
         .swatch-bloom { background: linear-gradient(135deg, #FDE8EF, #F0C4D0); }
         .swatch-aqua { background: linear-gradient(135deg, #E8F4FA, #B8D8E8); }
+
+        /* ============================================================
+           PREMIUM POLISH — SVG perfume bottle illustrations
+        ============================================================ */
+        .bottle {
+            width: clamp(120px, 20vw, 190px); height: auto; display: block; margin: 0 auto;
+            filter: drop-shadow(0 22px 38px rgba(0,0,0,0.16));
+            animation: float 5.5s ease-in-out infinite;
+        }
+        .bottle .b-cap { fill: var(--bc); }
+        .bottle .b-neck { fill: var(--bc); opacity: 0.9; }
+        .bottle .b-body { fill: var(--bb); stroke: rgba(255,255,255,0.55); stroke-width: 1.5; }
+        .bottle .b-shine { fill: rgba(255,255,255,0.4); }
+        .bottle .b-label { fill: rgba(255,255,255,0.94); }
+        .bottle .b-name { font-family: var(--font-heading); font-size: 15px; font-weight: 600; fill: var(--bc); text-anchor: middle; letter-spacing: 2px; }
+        .bottle .b-sub { font-family: var(--font-body); font-size: 4.6px; fill: var(--warm-gray); text-anchor: middle; letter-spacing: 2.5px; }
+        .bottle--noir { --bc: #8B6914; --bb: #D9AE63; }
+        .bottle--bloom { --bc: #C45D67; --bb: #F1A8B6; }
+        .bottle--aqua { --bc: #3E84AC; --bb: #9BCBE0; }
+        .bottle--sm { width: clamp(90px, 14vw, 130px); }
+
+        /* Elegant captioned image frames (replaces bare placeholder text) */
+        .img-caption { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
+        .img-caption .img-monogram {
+            width: 56px; height: 56px; border-radius: 50%;
+            border: 1px solid currentColor; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 1px; opacity: 0.85;
+        }
+        .img-caption span { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase; opacity: 0.7; }
+
+        /* Refined typographic + interaction polish */
+        .hero-title { letter-spacing: 6px; }
+        .section-title { letter-spacing: 0.5px; }
+        .btn-primary::after {
+            content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: skewX(-20deg); transition: left 0.6s ease;
+        }
+        .btn-primary:hover::after { left: 140%; }
+        .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); background: rgba(250,248,242,0.95); }
+        .collection-card-image { position: relative; }
     </style>
 </head>
 <body>
@@ -675,7 +720,7 @@
             <div class="cart-coupon-msg" id="drawerCouponMsg"></div>
             <div class="cart-totals" id="drawerTotals">
                 <div class="cart-totals-row"><span>Subtotal</span><span id="drawerSubtotal">&#8377;0</span></div>
-                <div class="cart-totals-row" id="drawerDiscountRow" class="hidden"><span>Discount</span><span id="drawerDiscount">-&#8377;0</span></div>
+                <div class="cart-totals-row hidden" id="drawerDiscountRow"><span>Discount</span><span id="drawerDiscount">-&#8377;0</span></div>
                 <div class="cart-totals-row total"><span>Total</span><span id="drawerTotal">&#8377;0</span></div>
             </div>
             <button class="cart-checkout-btn" onclick="showPage('cart'); toggleCart();">Proceed to Checkout</button>
@@ -735,7 +780,7 @@
             <div class="container">
                 <div class="story-content">
                     <div class="story-image reveal">
-                        <span>Brand Heritage Image Placeholder</span>
+                        <div class="img-caption"><span class="img-monogram">L</span><span>The Kerala Atelier</span></div>
                     </div>
                     <div class="story-text reveal">
                         <h2>Born in the Gardens of Kerala</h2>
@@ -798,7 +843,7 @@
                     <p>Today, LUMIÈRE stands at the intersection of traditional Indian perfumery and modern luxury, creating scents that resonate with the soul.</p>
                 </div>
                 <div class="about-hero-image reveal">
-                    <span>Kerala Botanical Garden - Image Placeholder</span>
+                    <span class="img-caption"><span class="img-monogram">&#10047;</span><span>Kerala Botanical Gardens</span></span>
                 </div>
             </div>
         </div>
@@ -864,7 +909,7 @@
 
         <section class="founder-section">
             <div class="container reveal">
-                <div class="founder-avatar">Founder Photo</div>
+                <div class="founder-avatar">MK</div>
                 <h2 class="section-title">Meet Our Founder</h2>
                 <blockquote>"I wanted to create fragrances that smell like home, like memory, like the first rain on Kerala soil."</blockquote>
                 <p class="text-warm-gray">Meera Krishnan, Founder &amp; Creative Director</p>
@@ -885,7 +930,7 @@
                 <!-- NOIR Card -->
                 <div class="collection-card reveal" onclick="showPage('noir')">
                     <div class="collection-card-image noir-bg">
-                        <span class="text-italic-noir">NOIR Bottle Placeholder</span>
+                        <svg class="bottle bottle--noir" viewBox="0 0 140 230" role="img" aria-label="NOIR perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">NOIR</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
                     </div>
                     <div class="collection-card-content">
                         <h3>NOIR</h3>
@@ -897,7 +942,7 @@
                 <!-- BLOOM Card -->
                 <div class="collection-card reveal" onclick="showPage('bloom')">
                     <div class="collection-card-image bloom-bg">
-                        <span class="text-italic-rose">BLOOM Bottle Placeholder</span>
+                        <svg class="bottle bottle--bloom" viewBox="0 0 140 230" role="img" aria-label="BLOOM perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">BLOOM</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
                     </div>
                     <div class="collection-card-content">
                         <h3>BLOOM</h3>
@@ -909,7 +954,7 @@
                 <!-- AQUA Card -->
                 <div class="collection-card reveal" onclick="showPage('aqua')">
                     <div class="collection-card-image aqua-bg">
-                        <span class="text-italic-sky">AQUA Bottle Placeholder</span>
+                        <svg class="bottle bottle--aqua" viewBox="0 0 140 230" role="img" aria-label="AQUA perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">AQUA</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
                     </div>
                     <div class="collection-card-content">
                         <h3>AQUA</h3>
@@ -929,7 +974,7 @@
         <!-- Full-height split hero -->
         <div class="noir-hero">
             <div class="noir-hero-image">
-                <div class="noir-bottle-placeholder">NOIR Bottle Image Placeholder</div>
+                <svg class="bottle bottle--noir" viewBox="0 0 140 230" role="img" aria-label="NOIR perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">NOIR</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
             </div>
             <div class="noir-hero-text">
                 <h1>NOIR</h1>
@@ -1024,7 +1069,7 @@
         <!-- Asymmetric hero with overlay card -->
         <div class="bloom-hero">
             <div class="bloom-hero-image">
-                <div class="bloom-bottle-placeholder">BLOOM Bottle Image Placeholder</div>
+                <svg class="bottle bottle--bloom" viewBox="0 0 140 230" role="img" aria-label="BLOOM perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">BLOOM</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
                 <div class="bloom-hero-overlay">
                     <h1>BLOOM</h1>
                     <p class="product-subtitle">"The scent of a garden at dawn"</p>
@@ -1033,7 +1078,7 @@
             </div>
             <div class="bloom-hero-right">
                 <div class="bloom-lifestyle-caption">
-                    <p>Lifestyle Image Placeholder</p>
+                    <div class="img-caption"><span class="img-monogram">&#10047;</span><span>Garden at Dawn</span></div>
                     <p class="bloom-caption-text">Botanical Garden Setting</p>
                 </div>
             </div>
@@ -1043,14 +1088,14 @@
         <section class="bloom-editorial">
             <div class="container">
                 <div class="bloom-block reveal">
-                    <div class="bloom-block-image">Jasmine Field - Image Placeholder</div>
+                    <div class="bloom-block-image"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>Jasmine Fields</span></div></div>
                     <div class="bloom-block-text">
                         <h3>A Garden at Dawn</h3>
                         <p>BLOOM opens with the dewy freshness of morning jasmine, harvested at first light when the flowers are at their most fragrant. This is the scent of Kerala's gardens waking up, of petals unfurling in the golden hour.</p>
                     </div>
                 </div>
                 <div class="bloom-block reverse reveal">
-                    <div class="bloom-block-image bloom-block-img-gradient">Rose Garden - Image Placeholder</div>
+                    <div class="bloom-block-image bloom-block-img-gradient"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>Damascus Rose</span></div></div>
                     <div class="bloom-block-text">
                         <h3>Heart of Romance</h3>
                         <p>At its heart, Damascus rose and ripe peach create an intoxicating warmth. These are the notes that make BLOOM unforgettable, lingering on scarves and in memories long after you have left the room.</p>
@@ -1097,6 +1142,7 @@
     <div class="page" id="page-aqua">
         <!-- Minimal header with wave animation -->
         <div class="aqua-header">
+            <svg class="bottle bottle--aqua bottle--sm" viewBox="0 0 140 230" role="img" aria-label="AQUA perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">AQUA</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
             <h1>AQUA</h1>
             <p class="product-subtitle">"Pure. Fresh. Endless."</p>
         </div>
@@ -1174,7 +1220,7 @@
                         <p>Explore our collection and find your signature scent.</p>
                         <button class="btn-primary mt-24" onclick="showPage('collections')">Browse Collection</button>
                     </div>
-                    <div class="cart-page-layout" id="cartPageLayout" class="hidden">
+                    <div class="cart-page-layout hidden" id="cartPageLayout">
                         <div class="cart-page-items" id="cartPageItems">
                             <!-- Cart items rendered by JS -->
                         </div>
@@ -1186,7 +1232,7 @@
                             </div>
                             <div class="cart-coupon-msg" id="pageCouponMsg"></div>
                             <div class="cart-summary-row"><span>Subtotal</span><span id="pageSubtotal">&#8377;0</span></div>
-                            <div class="cart-summary-row discount" id="pageDiscountRow" class="hidden"><span>Discount</span><span id="pageDiscount">-&#8377;0</span></div>
+                            <div class="cart-summary-row discount hidden" id="pageDiscountRow"><span>Discount</span><span id="pageDiscount">-&#8377;0</span></div>
                             <div class="cart-summary-row"><span>Shipping</span><span id="pageShipping">Free</span></div>
                             <div class="cart-summary-row total"><span>Total</span><span id="pageTotal">&#8377;0</span></div>
                             <button class="proceed-payment-btn" onclick="showPage('payment')">Proceed to Payment</button>
@@ -1268,9 +1314,9 @@
 
                             <h2 class="mt-32">Payment Method</h2>
                             <div class="payment-methods">
-                                <div class="payment-method-tab active" onclick="switchPaymentMethod('card')">Credit/Debit Card</div>
-                                <div class="payment-method-tab" onclick="switchPaymentMethod('upi')">UPI</div>
-                                <div class="payment-method-tab" onclick="switchPaymentMethod('netbanking')">Net Banking</div>
+                                <div class="payment-method-tab active" onclick="switchPaymentMethod('card', this)">Credit/Debit Card</div>
+                                <div class="payment-method-tab" onclick="switchPaymentMethod('upi', this)">UPI</div>
+                                <div class="payment-method-tab" onclick="switchPaymentMethod('netbanking', this)">Net Banking</div>
                             </div>
 
                             <!-- Card Payment -->
@@ -1350,7 +1396,7 @@
             <!-- Blog Grid -->
             <div class="blog-grid" id="blogGrid">
                 <div class="blog-card reveal">
-                    <div class="blog-card-image blog-img-tips">Featured Image Placeholder</div>
+                    <div class="blog-card-image blog-img-tips"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>The Journal</span></div></div>
                     <div class="blog-card-content">
                         <span class="blog-card-tag">Tips</span>
                         <h3>The Art of Applying Perfume: A Complete Guide</h3>
@@ -1362,7 +1408,7 @@
                     </div>
                 </div>
                 <div class="blog-card reveal">
-                    <div class="blog-card-image blog-img-ingredients">Featured Image Placeholder</div>
+                    <div class="blog-card-image blog-img-ingredients"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>Ingredients</span></div></div>
                     <div class="blog-card-content">
                         <span class="blog-card-tag">Ingredients</span>
                         <h3>Kerala Jasmine: The Queen of Indian Perfumery</h3>
@@ -1374,7 +1420,7 @@
                     </div>
                 </div>
                 <div class="blog-card reveal">
-                    <div class="blog-card-image blog-img-lifestyle">Featured Image Placeholder</div>
+                    <div class="blog-card-image blog-img-lifestyle"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>Lifestyle</span></div></div>
                     <div class="blog-card-content">
                         <span class="blog-card-tag">Lifestyle</span>
                         <h3>How to Build Your Fragrance Wardrobe</h3>
@@ -1386,7 +1432,7 @@
                     </div>
                 </div>
                 <div class="blog-card reveal">
-                    <div class="blog-card-image blog-img-process">Featured Image Placeholder</div>
+                    <div class="blog-card-image blog-img-process"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>Behind the Scenes</span></div></div>
                     <div class="blog-card-content">
                         <span class="blog-card-tag">Behind the Scenes</span>
                         <h3>From Petal to Bottle: Our Extraction Process</h3>
@@ -1404,7 +1450,7 @@
                 <div class="blog-back-btn" onclick="hideBlogPost()">
                     <i data-lucide="arrow-left" width="16" height="16"></i> Back to Journal
                 </div>
-                <div class="blog-post-header-image">Article Header Image Placeholder</div>
+                <div class="blog-post-header-image"><div class="img-caption"><span class="img-monogram">L</span><span>The Art of Perfume</span></div></div>
                 <div class="blog-post-body">
                     <span class="blog-card-tag">Tips</span>
                     <h1>The Art of Applying Perfume: A Complete Guide</h1>
@@ -1645,6 +1691,52 @@
         };
 
         /* ============================================================
+           INLINE SVG ICON SYSTEM (no external CDN dependency)
+           Replaces every [data-lucide] placeholder with inline SVG.
+        ============================================================ */
+        const ICONS = {
+            'shopping-bag': '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+            'x': '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+            'sparkles': '<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>',
+            'book-open': '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+            'leaf': '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
+            'hand': '<path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+            'recycle': '<path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>',
+            'flower-2': '<path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/><circle cx="12" cy="8" r="2"/><path d="M12 10v12"/><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"/><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"/>',
+            'trees': '<path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/>',
+            'droplets': '<path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/>',
+            'arrow-right': '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+            'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+            'heart': '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+            'search': '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+            'chevron-down': '<path d="m6 9 6 6 6-6"/>',
+            'chevron-up': '<path d="m18 15-6-6-6 6"/>',
+            'truck': '<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
+            'refresh-cw': '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
+            'shield-check': '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+            'message-circle': '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+            'lock': '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+            'check': '<path d="M20 6 9 17l-5-5"/>',
+            'trash-2': '<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>'
+        };
+
+        function renderIcons(root) {
+            const scope = root || document;
+            const els = scope.querySelectorAll('[data-lucide]');
+            els.forEach(function (el) {
+                const name = el.getAttribute('data-lucide');
+                const inner = ICONS[name];
+                if (!inner) return;
+                const w = el.getAttribute('width') || 24;
+                const h = el.getAttribute('height') || 24;
+                el.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h +
+                    '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+                    'stroke-linecap="round" stroke-linejoin="round" class="lum-icon">' + inner + '</svg>';
+                el.removeAttribute('data-lucide');
+            });
+        }
+
+        /* ============================================================
            SPA NAVIGATION
         ============================================================ */
         function showPage(pageId) {
@@ -1684,10 +1776,8 @@
                 updatePaymentTotal();
             }
 
-            // Re-initialize lucide icons for new page
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
+            // Re-render inline SVG icons for the new page
+            renderIcons();
 
             // Trigger reveal animations
             setTimeout(initRevealAnimations, 100);
@@ -1920,10 +2010,8 @@
                 document.getElementById('pageDiscountRow').style.display = 'none';
             }
 
-            // Re-initialize icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
+            // Re-render inline SVG icons
+            renderIcons();
         }
 
         /* ============================================================
@@ -1943,11 +2031,13 @@
         /* ============================================================
            PAYMENT SYSTEM
         ============================================================ */
-        function switchPaymentMethod(method) {
+        function switchPaymentMethod(method, tabEl) {
             document.querySelectorAll('.payment-method-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.payment-method-content').forEach(content => content.classList.remove('active'));
 
-            event.target.classList.add('active');
+            if (tabEl) {
+                tabEl.classList.add('active');
+            }
             document.getElementById('payment' + method.charAt(0).toUpperCase() + method.slice(1)).classList.add('active');
         }
 
@@ -2000,10 +2090,8 @@
             couponApplied = null;
             updateCartDisplay();
 
-            // Re-initialize icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
+            // Re-render inline SVG icons
+            renderIcons();
         }
 
         /* ============================================================
@@ -2013,7 +2101,7 @@
             document.getElementById('blogGrid').style.display = 'none';
             const expanded = document.getElementById('blogPostExpanded');
             expanded.classList.add('show');
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+            renderIcons();
         }
 
         function hideBlogPost() {
@@ -2068,17 +2156,30 @@
 
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('scrollTopBtn');
-            if (window.scrollY > 300) {
-                btn.classList.add('show');
-            } else {
-                btn.classList.remove('show');
+            if (btn) {
+                btn.classList.toggle('show', window.scrollY > 300);
+            }
+            const nav = document.querySelector('.navbar');
+            if (nav) {
+                nav.classList.toggle('scrolled', window.scrollY > 30);
             }
         });
 
         /* ============================================================
            SCROLL REVEAL ANIMATIONS (IntersectionObserver)
+           Falls back to showing everything if observers are unavailable.
         ============================================================ */
+        function revealAll() {
+            document.querySelectorAll('.reveal').forEach(function (el) {
+                el.classList.add('visible');
+            });
+        }
+
         function initRevealAnimations() {
+            if (!('IntersectionObserver' in window)) {
+                revealAll();
+                return;
+            }
             const reveals = document.querySelectorAll('.reveal:not(.visible)');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -2095,18 +2196,28 @@
         /* ============================================================
            INITIALIZATION
         ============================================================ */
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Lucide icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
+        function initApp() {
+            try {
+                renderIcons();
+                initRevealAnimations();
+                updateCartDisplay();
+            } catch (err) {
+                // Never let a JS error blank the page: reveal all content.
+                revealAll();
+                if (window.console && console.error) {
+                    console.error('LUMIÈRE init error:', err);
+                }
             }
+        }
 
-            // Initialize reveal animations
-            initRevealAnimations();
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
 
-            // Initialize cart display
-            updateCartDisplay();
-        });
+        // Safety net: if anything stalls, make sure content becomes visible.
+        window.setTimeout(revealAll, 1200);
     </script>
 </body>
 </html>
