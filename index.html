@@ -666,7 +666,149 @@
         }
         .btn-primary:hover::after { left: 140%; }
         .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); background: rgba(250,248,242,0.95); }
-        .collection-card-image { position: relative; }
+        /* ============================================================
+           ADVANCED PRODUCT EXPERIENCE — dark accents, 3D, meters, reviews
+        ============================================================ */
+        :root {
+            --ink: #17130D; --ink-2: #221B12; --ink-soft: #2C2519;
+            --ink-text: #ECE3D2; --ink-muted: #B6A788; --ink-line: rgba(201,169,110,0.22);
+        }
+
+        /* Dark accent band (adds depth/balance to the light palette) */
+        .dark-band { position: relative; overflow: hidden; padding: 96px 0; background: radial-gradient(ellipse at 50% -20%, #2c2417 0%, #15110b 72%); color: var(--ink-text); }
+        .dark-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 82% 18%, rgba(201,169,110,0.12), transparent 42%); pointer-events: none; }
+        .dark-band .section-title { color: #fff; }
+        .dark-band .section-subtitle, .dark-band p { color: var(--ink-muted); }
+        .dark-band .container { position: relative; z-index: 1; }
+        .gold-text { color: var(--gold-light); }
+        .ritual-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
+        .ritual-step { padding: 34px 26px; border: 1px solid var(--ink-line); border-radius: var(--radius-lg); background: rgba(255,255,255,0.025); transition: var(--transition); }
+        .ritual-step:hover { transform: translateY(-6px); border-color: var(--gold); background: rgba(201,169,110,0.07); }
+        .ritual-num { font-family: var(--font-heading); font-size: 2.2rem; color: var(--gold); margin-bottom: 10px; }
+        .ritual-step h4 { color: #fff; font-size: 1.15rem; margin-bottom: 8px; }
+        .ritual-step p { font-size: 0.9rem; line-height: 1.7; }
+
+        /* 3D interactive bottle stage */
+        .stage3d { position: relative; perspective: 1100px; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 440px; }
+        .stage-glow { position: absolute; width: 58%; aspect-ratio: 1 / 1; border-radius: 50%; filter: blur(72px); opacity: 0.5; background: var(--glow, rgba(201,169,110,0.6)); animation: glowPulse 7s ease-in-out infinite; }
+        @keyframes glowPulse { 0%, 100% { transform: scale(0.9); opacity: 0.4; } 50% { transform: scale(1.1); opacity: 0.62; } }
+        .tilt3d { position: relative; transform-style: preserve-3d; transition: transform 0.3s cubic-bezier(.2,.8,.2,1); animation: sway3d 8s ease-in-out infinite; will-change: transform; }
+        @keyframes sway3d { 0%, 100% { transform: rotateY(-13deg) rotateX(5deg); } 50% { transform: rotateY(13deg) rotateX(0deg); } }
+        .tilt3d .bottle { position: relative; z-index: 2; margin: 0; transform: translateZ(55px); animation: floatBottle 5.5s ease-in-out infinite; }
+        @keyframes floatBottle { 0%, 100% { transform: translateZ(55px) translateY(0); } 50% { transform: translateZ(55px) translateY(-12px); } }
+        .tilt3d .stage-reflection { position: absolute; left: 50%; bottom: 2%; width: 62%; transform: translateX(-50%) rotateX(180deg); opacity: 0.14; filter: blur(0.4px); -webkit-mask-image: linear-gradient(to bottom, #000, transparent 65%); mask-image: linear-gradient(to bottom, #000, transparent 65%); animation: none; }
+        .stage-pedestal { position: absolute; bottom: 7%; left: 50%; transform: translateX(-50%); width: 46%; height: 26px; border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,0.30), transparent 70%); filter: blur(5px); }
+        .stage-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+        .stage-particles span { position: absolute; bottom: 24%; width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); opacity: 0; animation: rise 6.5s linear infinite; }
+        .stage-particles span:nth-child(1) { left: 42%; animation-delay: 0s; }
+        .stage-particles span:nth-child(2) { left: 54%; animation-delay: 1.4s; }
+        .stage-particles span:nth-child(3) { left: 48%; animation-delay: 2.8s; }
+        .stage-particles span:nth-child(4) { left: 60%; animation-delay: 4s; width: 4px; }
+        .stage-particles span:nth-child(5) { left: 38%; animation-delay: 5.2s; width: 4px; }
+        @keyframes rise { 0% { transform: translateY(0) scale(0.6); opacity: 0; } 15% { opacity: 0.85; } 100% { transform: translateY(-240px) scale(1.15); opacity: 0; } }
+        .glow-noir { --glow: rgba(201,169,110,0.7); }
+        .glow-bloom { --glow: rgba(240,160,176,0.65); }
+        .glow-aqua { --glow: rgba(139,189,217,0.6); }
+        .stage3d.compact { min-height: 300px; }
+        .aqua-rating { justify-content: center; }
+        .aqua-meters, .bloom-purchase-inner .meters { margin-left: auto; margin-right: auto; }
+        .bloom-purchase-inner .meter-label, .aqua-meters .meter-label { text-align: left; }
+
+        /* Rating + badges */
+        .rating-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 10px 0 18px; }
+        .stars { color: var(--gold); letter-spacing: 2px; font-size: 1rem; }
+        .rating-num { font-weight: 700; }
+        .rating-count { color: var(--warm-gray); font-size: 0.85rem; }
+        .badge-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: var(--champagne); color: var(--gold-dark); }
+
+        /* Scent meters */
+        .meters { display: grid; gap: 15px; margin: 22px 0; max-width: 420px; }
+        .meter-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--warm-gray); margin-bottom: 6px; letter-spacing: 0.5px; }
+        .meter-track { height: 8px; border-radius: 50px; background: var(--light-gray); overflow: hidden; }
+        .meter-fill { height: 100%; border-radius: inherit; transform-origin: left; animation: growX 1.3s cubic-bezier(.2,.8,.2,1) both; background: linear-gradient(90deg, var(--gold-light), var(--gold-dark)); }
+        .meter-fill.mf-bloom { background: linear-gradient(90deg, var(--bloom-pink), var(--rose-deep)); }
+        .meter-fill.mf-aqua { background: linear-gradient(90deg, var(--aqua-blue), var(--sky-deep)); }
+        @keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        .w-60{width:60%}.w-65{width:65%}.w-70{width:70%}.w-72{width:72%}.w-75{width:75%}.w-78{width:78%}.w-80{width:80%}.w-82{width:82%}.w-85{width:85%}.w-88{width:88%}.w-90{width:90%}.w-92{width:92%}.w-95{width:95%}.w-98{width:98%}
+        .w-0{width:0}.w-1{width:1%}.w-2{width:2%}.w-3{width:3%}.w-4{width:4%}.w-10{width:10%}.w-13{width:13%}.w-16{width:16%}.w-86{width:86%}
+        .av-noir{background:#8B6914}.av-bloom{background:#C45D67}.av-aqua{background:#3E84AC}
+
+        /* Trust badges + quantity stepper */
+        .trust-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0; }
+        .trust-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; font-size: 0.74rem; color: var(--warm-gray); }
+        .trust-item .lum-icon { color: var(--gold-dark); }
+        .qty-stepper { display: inline-flex; align-items: center; border: 1px solid var(--light-gray); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+        .qty-stepper button { width: 44px; height: 46px; background: var(--cream); font-size: 1.2rem; font-weight: 600; color: var(--charcoal); transition: var(--transition); }
+        .qty-stepper button:hover { background: var(--gold-light); }
+        .qty-stepper span { min-width: 52px; text-align: center; font-weight: 700; }
+
+        /* Customer reviews (demo data) */
+        .reviews-section { padding: 90px 0; background: var(--cream); }
+        .reviews-summary { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; margin: 8px auto 44px; }
+        .reviews-score { text-align: center; }
+        .reviews-score .big { font-family: var(--font-heading); font-size: 3.6rem; color: var(--gold-dark); line-height: 1; }
+        .reviews-score .stars { font-size: 1.1rem; }
+        .reviews-bars { min-width: 240px; display: grid; gap: 7px; }
+        .rbar { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; color: var(--warm-gray); }
+        .rbar .meter-track { flex: 1; height: 6px; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .review-card { background: white; border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-sm); transition: var(--transition); }
+        .review-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+        .review-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .review-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 600; color: #fff; flex-shrink: 0; }
+        .review-name { font-weight: 600; font-size: 0.92rem; }
+        .review-loc { font-size: 0.78rem; color: var(--warm-gray); }
+        .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 8px; }
+        .review-text { color: var(--warm-gray); font-size: 0.9rem; line-height: 1.7; font-style: italic; }
+        .review-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+        .review-date { font-size: 0.72rem; color: var(--warm-gray); }
+        .verified { font-size: 0.68rem; color: #2E7D32; font-weight: 700; letter-spacing: 0.3px; }
+
+        /* ============================================================
+           RESPONSIVE / MOBILE-FRIENDLY PASS
+        ============================================================ */
+        @media (max-width: 960px) {
+            .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+            .ritual-grid { grid-template-columns: 1fr; gap: 18px; }
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0 18px; }
+            .section-title { font-size: 1.95rem; }
+            .section-subtitle { font-size: 0.94rem; margin-bottom: 36px; }
+            .hero-title { font-size: clamp(2.6rem, 13vw, 3.6rem); letter-spacing: 3px; }
+            .hero-subtitle { font-size: 1.15rem; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .reviews-summary { gap: 22px; }
+            .reviews-bars { width: 100%; min-width: 0; }
+            .trust-row { grid-template-columns: 1fr; gap: 10px; }
+            .trust-item { flex-direction: row; justify-content: center; gap: 10px; font-size: 0.82rem; }
+            .meters, .aqua-meters, .bloom-purchase-inner .meters { max-width: 100%; }
+            .dark-band { padding: 64px 0; }
+            .stage3d, .stage3d.compact { min-height: 320px; }
+            .reviews-section { padding: 64px 0; }
+            .noir-hero-text .badge-pill, .bloom-hero-overlay .badge-pill { margin-bottom: 6px; }
+            .nav-logo { font-size: 1.5rem; letter-spacing: 2px; }
+            .live-chat-btn { transform: scale(0.9); }
+        }
+        @media (max-width: 480px) {
+            .section-title { font-size: 1.6rem; }
+            .reviews-score .big { font-size: 2.8rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-btns { flex-direction: column; align-items: stretch; width: 100%; }
+            .hero-btns .btn-primary, .hero-btns .btn-secondary { width: 100%; justify-content: center; }
+            .noir-hero-text h1 { font-size: 2.2rem; }
+            .bloom-hero-overlay h1 { font-size: 2.1rem; }
+            .aqua-header h1 { font-size: 2.2rem; letter-spacing: 3px; }
+            .qty-stepper button { width: 40px; height: 42px; }
+            .ritual-step { padding: 26px 20px; }
+            .review-card { padding: 22px; }
+            .stage3d, .stage3d.compact { min-height: 280px; }
+            .bottle { width: clamp(110px, 42vw, 160px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+            .tilt3d { animation: none; transform: none; }
+        }
     </style>
 </head>
 <body>
@@ -974,12 +1116,27 @@
         <!-- Full-height split hero -->
         <div class="noir-hero">
             <div class="noir-hero-image">
-                <svg class="bottle bottle--noir" viewBox="0 0 140 230" role="img" aria-label="NOIR perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">NOIR</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
+                <div class="stage3d glow-noir">
+                    <div class="stage-glow"></div>
+                    <div class="stage-particles"><span></span><span></span><span></span><span></span><span></span></div>
+                    <div class="tilt3d">
+                        <svg class="bottle bottle--noir" viewBox="0 0 140 230" role="img" aria-label="NOIR perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">NOIR</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
+                        <svg class="bottle bottle--noir stage-reflection" viewBox="0 0 140 230" aria-hidden="true"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/></svg>
+                    </div>
+                    <div class="stage-pedestal"></div>
+                </div>
             </div>
             <div class="noir-hero-text">
+                <span class="badge-pill">&#9733; Bestseller</span>
                 <h1>NOIR</h1>
                 <p class="product-subtitle">"For those who command the room"</p>
+                <div class="rating-row"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rating-num">4.9</span><span class="rating-count">&middot; 214 reviews</span></div>
                 <p class="product-desc">A commanding blend of aged oud, warm amber, and smoky vetiver. NOIR is the fragrance of quiet power, worn by those who lead without raising their voice.</p>
+                <div class="meters">
+                    <div><div class="meter-label"><span>Longevity</span><span>8&ndash;12 hrs</span></div><div class="meter-track"><div class="meter-fill w-95"></div></div></div>
+                    <div><div class="meter-label"><span>Sillage</span><span>Strong</span></div><div class="meter-track"><div class="meter-fill w-88"></div></div></div>
+                    <div><div class="meter-label"><span>Projection</span><span>Bold</span></div><div class="meter-track"><div class="meter-fill w-82"></div></div></div>
+                </div>
             </div>
         </div>
 
@@ -1032,13 +1189,57 @@
                             <div class="size-price">&#8377;5,999</div>
                         </div>
                     </div>
-                    <button class="add-to-cart-btn" onclick="addToCart('NOIR by LUMIÈRE', selectedSizes.noir.size, selectedSizes.noir.price, 'noir')">
+                    <div class="qty-stepper">
+                        <button onclick="changeQty('noir', -1)" aria-label="Decrease quantity">&minus;</button>
+                        <span id="noirQty">1</span>
+                        <button onclick="changeQty('noir', 1)" aria-label="Increase quantity">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('NOIR by LUMIÈRE', selectedSizes.noir.size, selectedSizes.noir.price, 'noir', productQty.noir)">
                         <i data-lucide="shopping-bag" width="18" height="18"></i> Add to Cart
                     </button>
                     <button class="wishlist-btn">
                         <i data-lucide="heart" width="18" height="18"></i> Add to Wishlist
                     </button>
+                    <div class="trust-row">
+                        <div class="trust-item"><i data-lucide="truck" width="22" height="22"></i> Free shipping over &#8377;3,000</div>
+                        <div class="trust-item"><i data-lucide="shield-check" width="22" height="22"></i> 100% Authentic</div>
+                        <div class="trust-item"><i data-lucide="refresh-cw" width="22" height="22"></i> 7-Day Returns</div>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Dark ritual band (adds depth to the palette) -->
+        <section class="dark-band">
+            <div class="container">
+                <h2 class="section-title reveal">The NOIR Ritual</h2>
+                <p class="section-subtitle reveal">Four moments to wear power with intention</p>
+                <div class="ritual-grid reveal">
+                    <div class="ritual-step">
+                        <div class="ritual-num">01</div>
+                        <h4>Prime</h4>
+                        <p>Apply to clean, moisturised skin so the <span class="gold-text">oud</span> and amber bind and last the full evening.</p>
+                    </div>
+                    <div class="ritual-step">
+                        <div class="ritual-num">02</div>
+                        <h4>Pulse</h4>
+                        <p>Mist the wrists, base of the throat and behind the ears &mdash; the warmest pulse points.</p>
+                    </div>
+                    <div class="ritual-step">
+                        <div class="ritual-num">03</div>
+                        <h4>Layer</h4>
+                        <p>One spray on fabric leaves a quiet <span class="gold-text">smoky trail</span> that lingers for hours.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer reviews (demo data) -->
+        <section class="reviews-section">
+            <div class="container">
+                <h2 class="section-title reveal">What Our Clients Say</h2>
+                <div class="reviews-summary reveal" id="noirReviewsSummary"></div>
+                <div class="reviews-grid reveal" id="noirReviewsGrid"></div>
             </div>
         </section>
 
@@ -1069,10 +1270,20 @@
         <!-- Asymmetric hero with overlay card -->
         <div class="bloom-hero">
             <div class="bloom-hero-image">
-                <svg class="bottle bottle--bloom" viewBox="0 0 140 230" role="img" aria-label="BLOOM perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">BLOOM</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
+                <div class="stage3d glow-bloom">
+                    <div class="stage-glow"></div>
+                    <div class="stage-particles"><span></span><span></span><span></span><span></span><span></span></div>
+                    <div class="tilt3d">
+                        <svg class="bottle bottle--bloom" viewBox="0 0 140 230" role="img" aria-label="BLOOM perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">BLOOM</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
+                        <svg class="bottle bottle--bloom stage-reflection" viewBox="0 0 140 230" aria-hidden="true"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/></svg>
+                    </div>
+                    <div class="stage-pedestal"></div>
+                </div>
                 <div class="bloom-hero-overlay">
+                    <span class="badge-pill">New Season</span>
                     <h1>BLOOM</h1>
                     <p class="product-subtitle">"The scent of a garden at dawn"</p>
+                    <div class="rating-row"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rating-num">4.8</span><span class="rating-count">&middot; 187 reviews</span></div>
                     <p class="text-description">A romantic bouquet of Kerala jasmine, Damascus rose, and sun-ripened peach, delicately layered over a bed of soft musks.</p>
                 </div>
             </div>
@@ -1124,14 +1335,46 @@
         <section class="bloom-purchase">
             <div class="bloom-purchase-inner reveal">
                 <h2 class="section-title">Choose Your Size</h2>
+                <div class="meters">
+                    <div><div class="meter-label"><span>Longevity</span><span>7&ndash;10 hrs</span></div><div class="meter-track"><div class="meter-fill mf-bloom w-85"></div></div></div>
+                    <div><div class="meter-label"><span>Sillage</span><span>Moderate</span></div><div class="meter-track"><div class="meter-fill mf-bloom w-78"></div></div></div>
+                    <div><div class="meter-label"><span>Freshness</span><span>Radiant</span></div><div class="meter-track"><div class="meter-fill mf-bloom w-90"></div></div></div>
+                </div>
                 <div class="bloom-size-selector" id="bloomSizes">
                     <div class="bloom-size-option" onclick="selectSize('bloom', '30ml', 2499, this)">30ml - &#8377;2,499</div>
                     <div class="bloom-size-option selected" onclick="selectSize('bloom', '50ml', 3799, this)">50ml - &#8377;3,799</div>
                     <div class="bloom-size-option" onclick="selectSize('bloom', '100ml', 5999, this)">100ml - &#8377;5,999</div>
                 </div>
-                <button class="bloom-add-btn" onclick="addToCart('BLOOM by LUMIÈRE', selectedSizes.bloom.size, selectedSizes.bloom.price, 'bloom')">
+                <div class="qty-stepper">
+                    <button onclick="changeQty('bloom', -1)" aria-label="Decrease quantity">&minus;</button>
+                    <span id="bloomQty">1</span>
+                    <button onclick="changeQty('bloom', 1)" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="bloom-add-btn" onclick="addToCart('BLOOM by LUMIÈRE', selectedSizes.bloom.size, selectedSizes.bloom.price, 'bloom', productQty.bloom)">
                     <i data-lucide="shopping-bag" width="18" height="18"></i> Add to Cart
                 </button>
+                <div class="trust-row">
+                    <div class="trust-item"><i data-lucide="truck" width="22" height="22"></i> Free shipping over &#8377;3,000</div>
+                    <div class="trust-item"><i data-lucide="shield-check" width="22" height="22"></i> 100% Authentic</div>
+                    <div class="trust-item"><i data-lucide="refresh-cw" width="22" height="22"></i> 7-Day Returns</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dark accent band -->
+        <section class="dark-band">
+            <div class="container">
+                <h2 class="section-title reveal">Bottled at First Light</h2>
+                <p class="section-subtitle reveal">Our jasmine is hand-picked before sunrise, when each blossom holds its <span class="gold-text">most fragrant breath</span> &mdash; a fleeting window our growers in Kerala have honoured for generations.</p>
+            </div>
+        </section>
+
+        <!-- Customer reviews (demo data) -->
+        <section class="reviews-section">
+            <div class="container">
+                <h2 class="section-title reveal">Loved by Our Community</h2>
+                <div class="reviews-summary reveal" id="bloomReviewsSummary"></div>
+                <div class="reviews-grid reveal" id="bloomReviewsGrid"></div>
             </div>
         </section>
     </div>
@@ -1142,9 +1385,18 @@
     <div class="page" id="page-aqua">
         <!-- Minimal header with wave animation -->
         <div class="aqua-header">
-            <svg class="bottle bottle--aqua bottle--sm" viewBox="0 0 140 230" role="img" aria-label="AQUA perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">AQUA</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
+            <div class="stage3d compact glow-aqua">
+                <div class="stage-glow"></div>
+                <div class="stage-particles"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="tilt3d">
+                    <svg class="bottle bottle--aqua bottle--sm" viewBox="0 0 140 230" role="img" aria-label="AQUA perfume bottle"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">AQUA</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>
+                    <svg class="bottle bottle--aqua bottle--sm stage-reflection" viewBox="0 0 140 230" aria-hidden="true"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/></svg>
+                </div>
+                <div class="stage-pedestal"></div>
+            </div>
             <h1>AQUA</h1>
             <p class="product-subtitle">"Pure. Fresh. Endless."</p>
+            <div class="rating-row aqua-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rating-num">4.7</span><span class="rating-count">&middot; 156 reviews</span></div>
         </div>
 
         <!-- 6-module CSS grid -->
@@ -1185,6 +1437,11 @@
         <section class="aqua-purchase">
             <div class="container">
                 <h2 class="section-title reveal">Select Size</h2>
+                <div class="meters reveal aqua-meters">
+                    <div><div class="meter-label"><span>Longevity</span><span>8&ndash;10 hrs</span></div><div class="meter-track"><div class="meter-fill mf-aqua w-80"></div></div></div>
+                    <div><div class="meter-label"><span>Freshness</span><span>Crisp</span></div><div class="meter-track"><div class="meter-fill mf-aqua w-95"></div></div></div>
+                    <div><div class="meter-label"><span>Versatility</span><span>Everyday</span></div><div class="meter-track"><div class="meter-fill mf-aqua w-92"></div></div></div>
+                </div>
                 <div class="aqua-tabs" id="aquaSizes">
                     <div class="aqua-tab" onclick="selectSize('aqua', '30ml', 2499, this)">
                         <span class="tab-size">30ml</span>
@@ -1199,9 +1456,31 @@
                         <span class="tab-price">&#8377;5,999</span>
                     </div>
                 </div>
-                <button class="aqua-add-btn" onclick="addToCart('AQUA by LUMIÈRE', selectedSizes.aqua.size, selectedSizes.aqua.price, 'aqua')">
+                <div class="qty-stepper">
+                    <button onclick="changeQty('aqua', -1)" aria-label="Decrease quantity">&minus;</button>
+                    <span id="aquaQty">1</span>
+                    <button onclick="changeQty('aqua', 1)" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="aqua-add-btn" onclick="addToCart('AQUA by LUMIÈRE', selectedSizes.aqua.size, selectedSizes.aqua.price, 'aqua', productQty.aqua)">
                     Add to Cart
                 </button>
+            </div>
+        </section>
+
+        <!-- Dark accent band -->
+        <section class="dark-band">
+            <div class="container">
+                <h2 class="section-title reveal">Where Sea Meets Skin</h2>
+                <p class="section-subtitle reveal">A mineral-fresh accord built on Italian bergamot and a <span class="gold-text">sea-salt heart</span>, inspired by the pristine shorelines of the Kerala coast.</p>
+            </div>
+        </section>
+
+        <!-- Customer reviews (demo data) -->
+        <section class="reviews-section">
+            <div class="container">
+                <h2 class="section-title reveal">Reviews</h2>
+                <div class="reviews-summary reveal" id="aquaReviewsSummary"></div>
+                <div class="reviews-grid reveal" id="aquaReviewsGrid"></div>
             </div>
         </section>
     </div>
@@ -1737,6 +2016,114 @@
         }
 
         /* ============================================================
+           DEMO DATA — product ratings & customer reviews
+        ============================================================ */
+        const PRODUCT_DATA = {
+            noir:  { name: 'NOIR',  score: 4.9, count: 214, dist: [86, 10, 3, 1, 0], avatar: '#8B6914' },
+            bloom: { name: 'BLOOM', score: 4.8, count: 187, dist: [82, 13, 4, 1, 0], avatar: '#C45D67' },
+            aqua:  { name: 'AQUA',  score: 4.7, count: 156, dist: [78, 16, 4, 2, 0], avatar: '#3E84AC' }
+        };
+
+        const REVIEWS = {
+            noir: [
+                { name: 'Priya Sharma', loc: 'Mumbai', r: 5, date: 'May 2026', text: 'Absolutely intoxicating. The oud is rich without being overwhelming and it lasts the entire day. Pure luxury in a bottle.' },
+                { name: 'Arjun Nair', loc: 'Kochi', r: 5, date: 'Apr 2026', text: 'NOIR is my signature now. The saffron opening is unreal and the dry-down is warm and smoky. Compliments everywhere I go.' },
+                { name: 'Rohan Mehta', loc: 'Delhi', r: 4, date: 'Apr 2026', text: 'Commanding and sophisticated. Wears beautifully in the evening. Took one star only because I wish the 100ml was easier to grab.' }
+            ],
+            bloom: [
+                { name: 'Ananya Reddy', loc: 'Bangalore', r: 5, date: 'May 2026', text: 'It smells like my grandmother\u2019s garden in Munnar. Romantic, soft and incredibly long lasting. My everyday favourite.' },
+                { name: 'Sara Thomas', loc: 'Thrissur', r: 5, date: 'Apr 2026', text: 'The jasmine and peach combination is divine. Feminine without being too sweet. I get asked what I am wearing constantly.' },
+                { name: 'Neha Kapoor', loc: 'Pune', r: 4, date: 'Mar 2026', text: 'Gorgeous floral that feels expensive. Beautiful for spring. Wish it projected a touch more, but the scent itself is stunning.' }
+            ],
+            aqua: [
+                { name: 'Rahul Menon', loc: 'Chennai', r: 5, date: 'May 2026', text: 'So fresh and clean, perfect for our climate. The sea-salt accord is genius. My go-to for work and the gym.' },
+                { name: 'Kabir Singh', loc: 'Hyderabad', r: 5, date: 'Apr 2026', text: 'Minimalist and crisp, exactly what I wanted. Bergamot up top, soft musk later. Easily an everyday signature.' },
+                { name: 'Divya Pillai', loc: 'Trivandrum', r: 4, date: 'Mar 2026', text: 'Light, breezy and effortless. Great value at this price. Reapply once mid-day and you are set. Love it.' }
+            ]
+        };
+
+        function starString(n) {
+            var full = '\u2605'.repeat(n);
+            var empty = '\u2606'.repeat(5 - n);
+            return full + empty;
+        }
+
+        function renderReviews(product) {
+            var data = PRODUCT_DATA[product];
+            var list = REVIEWS[product];
+            if (!data || !list) return;
+            var summary = document.getElementById(product + 'ReviewsSummary');
+            var grid = document.getElementById(product + 'ReviewsGrid');
+            if (summary) {
+                var bars = '';
+                var labels = [5, 4, 3, 2, 1];
+                for (var i = 0; i < data.dist.length; i++) {
+                    bars += '<div class="rbar"><span>' + labels[i] + '\u2605</span><div class="meter-track"><div class="meter-fill w-' + data.dist[i] + '"></div></div><span>' + data.dist[i] + '%</span></div>';
+                }
+                summary.innerHTML =
+                    '<div class="reviews-score"><div class="big">' + data.score.toFixed(1) + '</div>' +
+                    '<div class="stars">' + starString(Math.round(data.score)) + '</div>' +
+                    '<div class="rating-count">Based on ' + data.count + ' reviews</div></div>' +
+                    '<div class="reviews-bars">' + bars + '</div>';
+            }
+            if (grid) {
+                var cards = '';
+                list.forEach(function (rv) {
+                    var initials = rv.name.split(' ').map(function (w) { return w.charAt(0); }).join('').slice(0, 2);
+                    cards +=
+                        '<div class="review-card">' +
+                            '<div class="review-head">' +
+                                '<div class="review-avatar av-' + product + '">' + initials + '</div>' +
+                                '<div><div class="review-name">' + rv.name + '</div><div class="review-loc">' + rv.loc + '</div></div>' +
+                            '</div>' +
+                            '<div class="review-stars">' + starString(rv.r) + '</div>' +
+                            '<p class="review-text">"' + rv.text + '"</p>' +
+                            '<div class="review-foot"><span class="review-date">' + rv.date + '</span><span class="verified">\u2713 Verified Purchase</span></div>' +
+                        '</div>';
+                });
+                grid.innerHTML = cards;
+            }
+        }
+
+        /* ============================================================
+           QUANTITY STEPPERS (product pages)
+        ============================================================ */
+        let productQty = { noir: 1, bloom: 1, aqua: 1 };
+
+        function changeQty(product, delta) {
+            var q = Math.max(1, Math.min(10, (productQty[product] || 1) + delta));
+            productQty[product] = q;
+            var el = document.getElementById(product + 'Qty');
+            if (el) el.textContent = q;
+        }
+
+        /* ============================================================
+           3D INTERACTIVE BOTTLE — perspective tilt on pointer move
+        ============================================================ */
+        function initTilt() {
+            var canHover = false;
+            try { canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { canHover = false; }
+            if (!canHover) return; // touch devices keep the gentle CSS auto-sway
+            document.querySelectorAll('.stage3d').forEach(function (stage) {
+                if (stage.dataset.tiltBound) return;
+                stage.dataset.tiltBound = '1';
+                var card = stage.querySelector('.tilt3d');
+                if (!card) return;
+                stage.addEventListener('mousemove', function (e) {
+                    var rect = stage.getBoundingClientRect();
+                    var px = (e.clientX - rect.left) / rect.width - 0.5;
+                    var py = (e.clientY - rect.top) / rect.height - 0.5;
+                    card.style.animation = 'none';
+                    card.style.transform = 'rotateY(' + (px * 26) + 'deg) rotateX(' + (-py * 18) + 'deg)';
+                });
+                stage.addEventListener('mouseleave', function () {
+                    card.style.transform = '';
+                    card.style.animation = '';
+                });
+            });
+        }
+
+        /* ============================================================
            SPA NAVIGATION
         ============================================================ */
         function showPage(pageId) {
@@ -1776,6 +2163,12 @@
                 updatePaymentTotal();
             }
 
+            // Product pages: render demo reviews and bind 3D tilt
+            if (pageId === 'noir' || pageId === 'bloom' || pageId === 'aqua') {
+                renderReviews(pageId);
+                setTimeout(initTilt, 60);
+            }
+
             // Re-render inline SVG icons for the new page
             renderIcons();
 
@@ -1803,10 +2196,11 @@
             drawer.classList.toggle('open');
         }
 
-        function addToCart(name, size, price, variant) {
+        function addToCart(name, size, price, variant, qty) {
+            qty = (typeof qty === 'number' && qty > 0) ? qty : 1;
             const existingItem = cart.find(item => item.name === name && item.size === size);
             if (existingItem) {
-                existingItem.qty += 1;
+                existingItem.qty += qty;
             } else {
                 cart.push({
                     id: Date.now(),
@@ -1814,7 +2208,7 @@
                     size: size,
                     price: price,
                     variant: variant,
-                    qty: 1
+                    qty: qty
                 });
             }
             updateCartDisplay();
@@ -2201,6 +2595,7 @@
                 renderIcons();
                 initRevealAnimations();
                 updateCartDisplay();
+                initTilt();
             } catch (err) {
                 // Never let a JS error blank the page: reveal all content.
                 revealAll();
