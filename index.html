@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMIÈRE - Crafted from Nature. Made for You.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"><\/script>
+    <style>
+        /* ============================================================
+           LUMIÈRE - Premium Perfume Brand Website
+           CSS Custom Properties, Reset & Global Styles
+        ============================================================ */
+        :root {
+            --ivory: #FAF8F2;
+            --cream: #F5F0E8;
+            --gold: #C9A96E;
+            --gold-light: #E8D5A8;
+            --gold-dark: #A67C3D;
+            --blush: #F2D5D5;
+            --rose: #E8A0A0;
+            --rose-deep: #D4737B;
+            --sky: #D4E8F5;
+            --sky-deep: #8BBDD9;
+            --sage: #D4E8D4;
+            --charcoal: #2C2C2C;
+            --warm-gray: #6B6560;
+            --light-gray: #E8E4DE;
+            --peach: #F5DDD0;
+            --champagne: #F7F0E0;
+            --noir-amber: #D4A55A;
+            --noir-dark: #8B6914;
+            --bloom-pink: #F0C4D0;
+            --bloom-peach: #F5DDD0;
+            --aqua-blue: #B8D8E8;
+            --aqua-light: #E8F4FA;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background: var(--ivory);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5 { font-family: var(--font-heading); font-weight: 500; line-height: 1.2; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: var(--font-body); }
+        img { max-width: 100%; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ============================================================
+           NAVIGATION
+        ============================================================ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(250, 248, 242, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+            padding: 16px 0; transition: var(--transition);
+        }
+        .navbar .container { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo {
+            font-family: var(--font-heading); font-size: 1.8rem; font-weight: 600;
+            color: var(--gold); letter-spacing: 3px; cursor: pointer;
+        }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links a {
+            font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px;
+            color: var(--warm-gray); transition: var(--transition); position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--gold); transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-actions { display: flex; align-items: center; gap: 16px; }
+        .cart-btn {
+            position: relative; background: none; border: none;
+            color: var(--warm-gray); transition: var(--transition); padding: 8px;
+        }
+        .cart-btn:hover { color: var(--gold); }
+        .cart-badge {
+            position: absolute; top: 0; right: 0;
+            background: var(--gold); color: white;
+            font-size: 0.65rem; font-weight: 700;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: scale(0); transition: var(--transition);
+        }
+        .cart-badge.show { opacity: 1; transform: scale(1); }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 8px;
+        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); transition: var(--transition); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed; top: 70px; left: 0; right: 0;
+                background: rgba(250, 248, 242, 0.98); backdrop-filter: blur(20px);
+                flex-direction: column; padding: 32px; gap: 24px;
+                transform: translateY(-100%); opacity: 0; pointer-events: none; transition: var(--transition);
+            }
+            .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+        }
+
+        /* ============================================================
+           CART DRAWER
+        ============================================================ */
+        .cart-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.3);
+            z-index: 2000; opacity: 0; pointer-events: none; transition: var(--transition);
+        }
+        .cart-overlay.open { opacity: 1; pointer-events: all; }
+        .cart-drawer {
+            position: fixed; top: 0; right: 0; width: 420px; max-width: 90vw;
+            height: 100vh; background: var(--ivory); z-index: 2001;
+            transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column; box-shadow: var(--shadow-lg);
+        }
+        .cart-drawer.open { transform: translateX(0); }
+        .cart-drawer-header {
+            padding: 24px; border-bottom: 1px solid var(--light-gray);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .cart-drawer-header h3 { font-size: 1.3rem; }
+        .cart-close-btn { background: none; color: var(--warm-gray); padding: 8px; transition: var(--transition); }
+        .cart-close-btn:hover { color: var(--charcoal); }
+        .cart-drawer-items { flex: 1; overflow-y: auto; padding: 24px; }
+        .cart-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-gray); }
+        .cart-item-swatch { width: 60px; height: 60px; border-radius: var(--radius); flex-shrink: 0; }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-family: var(--font-heading); font-size: 0.95rem; margin-bottom: 4px; }
+        .cart-item-size { font-size: 0.8rem; color: var(--warm-gray); }
+        .cart-item-price { font-weight: 600; font-size: 0.9rem; margin-top: 4px; }
+        .cart-item-controls { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+        .cart-item-controls button {
+            width: 28px; height: 28px; border-radius: 50%; background: var(--cream);
+            border: 1px solid var(--light-gray); display: flex; align-items: center;
+            justify-content: center; font-size: 0.85rem; font-weight: 600; transition: var(--transition);
+        }
+        .cart-item-controls button:hover { background: var(--gold-light); }
+        .cart-item-qty { font-weight: 600; min-width: 20px; text-align: center; }
+        .cart-item-remove { background: none !important; border: none !important; color: var(--rose-deep); font-size: 0.75rem; margin-left: auto; cursor: pointer; }
+        .cart-drawer-footer { padding: 24px; border-top: 1px solid var(--light-gray); }
+        .cart-coupon { display: flex; gap: 8px; margin-bottom: 16px; }
+        .cart-coupon input { flex: 1; padding: 10px 14px; border: 1px solid var(--light-gray); border-radius: var(--radius); font-size: 0.85rem; background: white; }
+        .cart-coupon button { padding: 10px 16px; background: var(--charcoal); color: white; border-radius: var(--radius); font-size: 0.8rem; font-weight: 600; transition: var(--transition); }
+        .cart-coupon button:hover { background: var(--gold); }
+        .cart-coupon-msg { font-size: 0.8rem; margin-bottom: 8px; color: var(--gold-dark); }
+        .cart-totals { margin-bottom: 16px; }
+        .cart-totals-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9rem; }
+        .cart-totals-row.total { font-weight: 700; font-size: 1.05rem; border-top: 1px solid var(--light-gray); padding-top: 12px; margin-top: 8px; }
+        .cart-checkout-btn {
+            width: 100%; padding: 16px; background: var(--gold); color: white;
+            border-radius: var(--radius); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.5px; transition: var(--transition);
+        }
+        .cart-checkout-btn:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .cart-empty { text-align: center; padding: 60px 20px; color: var(--warm-gray); }
+        .cart-empty i { margin-bottom: 16px; opacity: 0.5; }
+
+        /* ============================================================
+           PAGE TRANSITIONS & UTILITIES
+        ============================================================ */
+        .page { display: none; min-height: 100vh; padding-top: 80px; animation: fadeIn 0.5s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes wave { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
+            background: var(--gold); color: white; border-radius: var(--radius);
+            font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px; transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px;
+            background: transparent; border: 2px solid var(--gold); color: var(--gold);
+            border-radius: var(--radius); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px; transition: var(--transition);
+        }
+        .btn-secondary:hover { background: var(--gold); color: white; transform: translateY(-2px); }
+        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 16px; color: var(--charcoal); }
+        .section-subtitle { text-align: center; color: var(--warm-gray); max-width: 600px; margin: 0 auto 48px; font-size: 1rem; }
+
+        /* ============================================================
+           HOME PAGE
+        ============================================================ */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--champagne) 30%, var(--cream) 60%, var(--peach) 100%);
+            position: relative; overflow: hidden; padding-top: 80px;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(201,169,110,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(242,213,213,0.1) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; padding: 0 24px; }
+        .hero-tagline { font-family: var(--font-body); font-size: 0.9rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+        .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 400; margin-bottom: 24px; line-height: 1.1; }
+        .hero-subtitle { font-family: var(--font-heading); font-style: italic; font-size: 1.4rem; color: var(--warm-gray); margin-bottom: 40px; }
+        .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .hero-decoration { position: absolute; border-radius: 50%; opacity: 0.15; animation: float 6s ease-in-out infinite; }
+        .hero-decoration-1 { background: var(--gold-light); top: 10%; right: 10%; width: 300px; height: 300px; animation-delay: -2s; }
+        .hero-decoration-2 { background: var(--blush); bottom: 15%; left: 5%; width: 200px; height: 200px; animation-delay: -4s; }
+
+        .values-section { padding: 100px 0; background: white; }
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 48px; }
+        .value-card { text-align: center; padding: 40px 24px; border-radius: var(--radius-lg); background: var(--ivory); transition: var(--transition); }
+        .value-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); }
+        .value-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--gold-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--gold-dark); }
+        .value-card h3 { margin-bottom: 12px; font-size: 1.3rem; }
+        .value-card p { color: var(--warm-gray); font-size: 0.9rem; }
+
+        .story-section { padding: 100px 0; background: var(--cream); }
+        .story-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .story-image { height: 400px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--gold-light), var(--peach)); display: flex; align-items: center; justify-content: center; color: var(--gold-dark); font-style: italic; }
+        .story-text h2 { font-size: 2.2rem; margin-bottom: 20px; }
+        .story-text p { color: var(--warm-gray); margin-bottom: 16px; line-height: 1.8; }
+
+        .testimonials-section { padding: 100px 0; background: white; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .testimonial-card { padding: 32px; background: var(--ivory); border-radius: var(--radius-lg); text-align: center; transition: var(--transition); }
+        .testimonial-card:hover { box-shadow: var(--shadow-md); }
+        .testimonial-stars { color: var(--gold); margin-bottom: 16px; font-size: 1.1rem; }
+        .testimonial-text { font-style: italic; color: var(--warm-gray); margin-bottom: 20px; line-height: 1.8; }
+        .testimonial-author { font-weight: 600; font-size: 0.9rem; }
+
+        .newsletter-section { padding: 80px 0; background: linear-gradient(135deg, var(--champagne), var(--cream)); text-align: center; }
+        .newsletter-form { display: flex; gap: 12px; max-width: 500px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+        .newsletter-form input { flex: 1; min-width: 250px; padding: 14px 20px; border: 1px solid var(--light-gray); border-radius: var(--radius); font-size: 0.9rem; background: white; }
+        .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+        .newsletter-success { display: none; color: var(--gold-dark); font-weight: 500; margin-top: 16px; }
+
+        @media (max-width: 768px) {
+            .values-grid, .testimonials-grid { grid-template-columns: 1fr; }
+            .story-content { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================================
+           ABOUT PAGE
+        ============================================================ */
+        .about-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; align-items: center; gap: 60px; padding: 60px 0; }
+        .about-hero-text h1 { font-size: 3rem; margin-bottom: 20px; }
+        .about-hero-text p { color: var(--warm-gray); line-height: 1.8; margin-bottom: 16px; }
+        .about-hero-image { height: 500px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--sage), var(--gold-light)); display: flex; align-items: center; justify-content: center; color: var(--warm-gray); font-style: italic; }
+        .craftsmanship-section { padding: 100px 0; background: white; }
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; }
+        .process-step { text-align: center; position: relative; }
+        .process-step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-weight: 700; }
+        .process-step h4 { margin-bottom: 8px; font-size: 1.1rem; }
+        .process-step p { color: var(--warm-gray); font-size: 0.85rem; }
+        .ingredients-section { padding: 100px 0; background: var(--cream); }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .ingredient-card { padding: 32px; background: white; border-radius: var(--radius-lg); text-align: center; transition: var(--transition); }
+        .ingredient-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .ingredient-icon { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
+        .ingredient-card h4 { margin-bottom: 8px; }
+        .ingredient-card p { color: var(--warm-gray); font-size: 0.85rem; }
+        .founder-section { padding: 100px 0; background: white; text-align: center; }
+        .founder-avatar { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-light), var(--champagne)); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; color: var(--gold-dark); font-style: italic; font-size: 0.85rem; }
+        .founder-section blockquote { font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; max-width: 700px; margin: 0 auto 16px; color: var(--warm-gray); }
+        @media (max-width: 768px) {
+            .about-hero { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: repeat(2, 1fr); }
+            .ingredients-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================================
+           COLLECTIONS PAGE
+        ============================================================ */
+        .collections-hero { text-align: center; padding: 80px 0 40px; }
+        .collections-hero h1 { font-size: 3rem; margin-bottom: 16px; }
+        .collections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding-bottom: 100px; }
+        .collection-card { border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); cursor: pointer; }
+        .collection-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-lg); }
+        .collection-card-image { height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 40px; text-align: center; }
+        .collection-card-image.noir-bg { background: linear-gradient(135deg, #F5E6C8, #E8D5A8, #D4A55A); }
+        .collection-card-image.bloom-bg { background: linear-gradient(135deg, #FDE8EF, #F5C6D0, #E8A0A0); }
+        .collection-card-image.aqua-bg { background: linear-gradient(135deg, #E8F4FA, #B8D8E8, #8BBDD9); }
+        .collection-card-content { padding: 28px; background: white; }
+        .collection-card-content h3 { font-size: 1.5rem; margin-bottom: 8px; }
+        .collection-card-content p { color: var(--warm-gray); font-size: 0.9rem; margin-bottom: 12px; }
+        .collection-card-price { color: var(--gold-dark); font-weight: 600; font-size: 0.9rem; margin-bottom: 16px; }
+        .collection-card-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-weight: 600; font-size: 0.9rem; transition: var(--transition); }
+        .collection-card-btn:hover { gap: 10px; }
+        @media (max-width: 768px) { .collections-grid { grid-template-columns: 1fr; } }
+
+        /* ============================================================
+           PRODUCT PAGE - NOIR (Full-height Split Hero Layout)
+        ============================================================ */
+        .noir-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+        .noir-hero-image { background: linear-gradient(135deg, #F5E6C8, #E8D5A8, #C9A96E); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .noir-hero-image::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(201,169,110,0.2), transparent 70%); }
+        .noir-bottle-placeholder { width: 200px; height: 400px; border-radius: 80px 80px 40px 40px; background: linear-gradient(180deg, rgba(139,105,20,0.3), rgba(201,169,110,0.5)); border: 2px solid rgba(201,169,110,0.4); display: flex; align-items: center; justify-content: center; color: var(--gold-dark); font-style: italic; font-size: 0.85rem; text-align: center; padding: 20px; animation: float 4s ease-in-out infinite; position: relative; z-index: 1; }
+        .noir-hero-text { display: flex; flex-direction: column; justify-content: center; padding: 60px; background: var(--ivory); }
+        .noir-hero-text h1 { font-size: 4rem; letter-spacing: 4px; margin-bottom: 8px; color: var(--noir-dark); }
+        .noir-hero-text .product-subtitle { font-family: var(--font-heading); font-style: italic; font-size: 1.2rem; color: var(--warm-gray); margin-bottom: 24px; }
+        .noir-hero-text .product-desc { color: var(--warm-gray); line-height: 1.8; max-width: 400px; }
+        .noir-pyramid { padding: 80px 0; background: white; }
+        .pyramid-bands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+        .pyramid-band { padding: 40px 32px; text-align: center; border-right: 1px solid var(--light-gray); }
+        .pyramid-band:last-child { border-right: none; }
+        .pyramid-band-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 12px; }
+        .pyramid-band h3 { font-size: 1.3rem; margin-bottom: 8px; }
+        .pyramid-band p { color: var(--warm-gray); font-size: 0.9rem; }
+        .noir-info { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 80px 0; background: var(--cream); }
+        .noir-info-story h3 { font-size: 1.8rem; margin-bottom: 16px; }
+        .noir-info-story p { color: var(--warm-gray); line-height: 1.8; margin-bottom: 12px; }
+        .noir-purchase { padding: 40px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+        .size-selector { display: flex; gap: 12px; margin-bottom: 24px; }
+        .size-option { flex: 1; padding: 16px 12px; border: 2px solid var(--light-gray); border-radius: var(--radius); text-align: center; cursor: pointer; transition: var(--transition); background: white; }
+        .size-option:hover { border-color: var(--gold-light); }
+        .size-option.selected { border-color: var(--gold); background: var(--champagne); }
+        .size-option .size-ml { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .size-option .size-price { font-size: 0.85rem; color: var(--warm-gray); }
+        .add-to-cart-btn { width: 100%; padding: 16px; background: var(--gold); color: white; border-radius: var(--radius); font-size: 1rem; font-weight: 600; transition: var(--transition); margin-bottom: 12px; }
+        .add-to-cart-btn:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .wishlist-btn { width: 100%; padding: 14px; background: transparent; border: 2px solid var(--light-gray); border-radius: var(--radius); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); color: var(--warm-gray); }
+        .wishlist-btn:hover { border-color: var(--rose); color: var(--rose-deep); }
+        .related-products { padding: 80px 0; background: white; }
+        .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .related-card { padding: 24px; background: var(--ivory); border-radius: var(--radius-lg); text-align: center; cursor: pointer; transition: var(--transition); }
+        .related-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .related-card-img { height: 150px; border-radius: var(--radius); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-style: italic; color: var(--warm-gray); font-size: 0.85rem; }
+        .related-card h4 { margin-bottom: 4px; }
+        .related-card p { font-size: 0.85rem; color: var(--warm-gray); }
+        @media (max-width: 768px) {
+            .noir-hero { grid-template-columns: 1fr; }
+            .noir-hero-image { min-height: 50vh; }
+            .noir-hero-text { padding: 40px 24px; }
+            .noir-hero-text h1 { font-size: 2.5rem; }
+            .pyramid-bands { grid-template-columns: 1fr; }
+            .pyramid-band { border-right: none; border-bottom: 1px solid var(--light-gray); }
+            .noir-info { grid-template-columns: 1fr; padding: 40px 0; }
+            .size-selector { flex-direction: column; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================================
+           PRODUCT PAGE - BLOOM (Magazine Editorial Layout)
+        ============================================================ */
+        .bloom-hero { display: grid; grid-template-columns: 3fr 2fr; min-height: 90vh; position: relative; }
+        .bloom-hero-image { background: linear-gradient(135deg, #FDE8EF, #F5C6D0, #F0A0B0); display: flex; align-items: center; justify-content: center; position: relative; }
+        .bloom-bottle-placeholder { width: 180px; height: 350px; border-radius: 60px 60px 30px 30px; background: linear-gradient(180deg, rgba(240,160,176,0.4), rgba(245,198,208,0.6)); border: 2px solid rgba(232,160,160,0.4); display: flex; align-items: center; justify-content: center; color: var(--rose-deep); font-style: italic; font-size: 0.85rem; text-align: center; padding: 20px; animation: float 5s ease-in-out infinite; }
+        .bloom-hero-overlay { position: absolute; bottom: 60px; right: -40px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); max-width: 400px; z-index: 2; }
+        .bloom-hero-overlay h1 { font-size: 2.8rem; color: var(--rose-deep); margin-bottom: 8px; }
+        .bloom-hero-overlay .product-subtitle { font-family: var(--font-heading); font-style: italic; font-size: 1.1rem; color: var(--warm-gray); margin-bottom: 16px; }
+        .bloom-hero-right { background: var(--ivory); display: flex; align-items: center; justify-content: center; padding: 60px; }
+        .bloom-editorial { padding: 80px 0; }
+        .bloom-block { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 60px; padding: 40px 0; }
+        .bloom-block.reverse { direction: rtl; }
+        .bloom-block.reverse > * { direction: ltr; }
+        .bloom-block-image { height: 350px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--blush), var(--bloom-pink)); display: flex; align-items: center; justify-content: center; color: var(--rose-deep); font-style: italic; }
+        .bloom-block-text h3 { font-size: 1.8rem; margin-bottom: 16px; color: var(--rose-deep); }
+        .bloom-block-text p { color: var(--warm-gray); line-height: 1.8; }
+        .bloom-notes { padding: 60px 0; background: linear-gradient(135deg, #FFF5F7, #FDE8EF); text-align: center; }
+        .petal-tags { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 32px; }
+        .petal-tag { padding: 12px 24px; background: rgba(255,255,255,0.8); border: 1px solid var(--bloom-pink); border-radius: 50px; font-size: 0.9rem; color: var(--rose-deep); animation: float 3s ease-in-out infinite; transition: var(--transition); }
+        .petal-tag:nth-child(2) { animation-delay: -1s; }
+        .petal-tag:nth-child(3) { animation-delay: -2s; }
+        .petal-tag:nth-child(4) { animation-delay: -0.5s; }
+        .petal-tag:nth-child(5) { animation-delay: -1.5s; }
+        .petal-tag:hover { background: var(--bloom-pink); color: white; transform: scale(1.1); }
+        .bloom-purchase { padding: 80px 0; background: white; }
+        .bloom-purchase-inner { max-width: 500px; margin: 0 auto; text-align: center; }
+        .bloom-size-selector { display: flex; gap: 16px; justify-content: center; margin: 32px 0; }
+        .bloom-size-option { padding: 16px 24px; border: 2px solid var(--bloom-pink); border-radius: 50px; cursor: pointer; transition: var(--transition); background: white; }
+        .bloom-size-option:hover, .bloom-size-option.selected { background: var(--bloom-pink); color: white; border-color: var(--rose); }
+        .bloom-add-btn { padding: 16px 48px; background: linear-gradient(135deg, var(--rose), var(--rose-deep)); color: white; border-radius: 50px; font-size: 1rem; font-weight: 600; transition: var(--transition); }
+        .bloom-add-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(232,160,160,0.4); }
+        @media (max-width: 768px) {
+            .bloom-hero { grid-template-columns: 1fr; }
+            .bloom-hero-overlay { position: relative; bottom: auto; right: auto; margin: -40px 20px 0; }
+            .bloom-hero-right { display: none; }
+            .bloom-block { grid-template-columns: 1fr; }
+            .bloom-block.reverse { direction: ltr; }
+            .bloom-size-selector { flex-direction: column; align-items: center; }
+        }
+
+        /* ============================================================
+           PRODUCT PAGE - AQUA (Modular CSS Grid)
+        ============================================================ */
+        .aqua-header { padding: 60px 0 40px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(180deg, var(--aqua-light), var(--ivory)); }
+        .aqua-header::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--aqua-blue), var(--sky-deep), var(--aqua-blue)); background-size: 200% auto; animation: wave 3s ease-in-out infinite; }
+        .aqua-header h1 { font-size: 3rem; font-weight: 300; letter-spacing: 6px; color: var(--sky-deep); }
+        .aqua-header .product-subtitle { font-family: var(--font-heading); font-style: italic; color: var(--warm-gray); margin-top: 8px; }
+        .aqua-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 2px; background: var(--light-gray); }
+        .aqua-module { padding: 48px 32px; background: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 250px; transition: var(--transition); }
+        .aqua-module:hover { background: var(--aqua-light); }
+        .aqua-module-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sky-deep); margin-bottom: 12px; }
+        .aqua-module h3 { font-size: 1.4rem; margin-bottom: 8px; font-weight: 400; }
+        .aqua-module p { color: var(--warm-gray); font-size: 0.85rem; max-width: 250px; }
+        .aqua-purchase { padding: 60px 0; background: var(--ivory); }
+        .aqua-tabs { display: flex; justify-content: center; gap: 0; margin-bottom: 32px; border: 1px solid var(--aqua-blue); border-radius: var(--radius); overflow: hidden; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .aqua-tab { flex: 1; padding: 16px; text-align: center; cursor: pointer; transition: var(--transition); background: white; border-right: 1px solid var(--aqua-blue); font-size: 0.9rem; }
+        .aqua-tab:last-child { border-right: none; }
+        .aqua-tab:hover { background: var(--aqua-light); }
+        .aqua-tab.selected { background: var(--sky-deep); color: white; }
+        .aqua-tab .tab-size { font-weight: 700; display: block; }
+        .aqua-tab .tab-price { font-size: 0.8rem; opacity: 0.8; }
+        .aqua-add-btn { display: block; width: 100%; max-width: 500px; margin: 0 auto; padding: 18px; background: var(--sky-deep); color: white; border-radius: var(--radius); font-size: 1rem; font-weight: 600; letter-spacing: 1px; transition: var(--transition); }
+        .aqua-add-btn:hover { background: #6BA8C4; transform: translateY(-2px); }
+        @media (max-width: 768px) {
+            .aqua-grid { grid-template-columns: 1fr; }
+            .aqua-tabs { flex-direction: column; }
+            .aqua-tab { border-right: none; border-bottom: 1px solid var(--aqua-blue); }
+            .aqua-tab:last-child { border-bottom: none; }
+        }
+
+        /* ============================================================
+           CART / CHECKOUT PAGE
+        ============================================================ */
+        .cart-page-section { padding: 60px 0; }
+        .cart-page-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: start; }
+        .cart-page-items { background: white; border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-sm); }
+        .cart-page-item { display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--light-gray); }
+        .cart-page-item:last-child { border-bottom: none; }
+        .cart-page-item-swatch { width: 80px; height: 80px; border-radius: var(--radius); flex-shrink: 0; }
+        .cart-page-item-info { flex: 1; }
+        .cart-page-item-name { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 4px; }
+        .cart-page-item-size { font-size: 0.85rem; color: var(--warm-gray); }
+        .cart-page-item-controls { display: flex; align-items: center; gap: 12px; }
+        .cart-page-item-controls button { width: 32px; height: 32px; border-radius: 50%; background: var(--cream); border: 1px solid var(--light-gray); font-weight: 600; transition: var(--transition); display: flex; align-items: center; justify-content: center; }
+        .cart-page-item-controls button:hover { background: var(--gold-light); }
+        .cart-page-item-price { font-weight: 700; min-width: 80px; text-align: right; }
+        .cart-page-item-remove { color: var(--rose-deep); background: none !important; border: none !important; cursor: pointer; padding: 8px; }
+        .cart-page-summary { background: white; border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-sm); position: sticky; top: 100px; }
+        .cart-page-summary h3 { font-size: 1.3rem; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--light-gray); }
+        .cart-page-coupon { display: flex; gap: 8px; margin-bottom: 24px; }
+        .cart-page-coupon input { flex: 1; padding: 12px 16px; border: 1px solid var(--light-gray); border-radius: var(--radius); font-size: 0.9rem; }
+        .cart-page-coupon button { padding: 12px 20px; background: var(--charcoal); color: white; border-radius: var(--radius); font-weight: 600; font-size: 0.85rem; transition: var(--transition); }
+        .cart-page-coupon button:hover { background: var(--gold); }
+        .cart-summary-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.95rem; }
+        .cart-summary-row.total { font-size: 1.2rem; font-weight: 700; border-top: 2px solid var(--light-gray); padding-top: 16px; margin-top: 12px; }
+        .cart-summary-row.discount { color: var(--gold-dark); }
+        .proceed-payment-btn { width: 100%; padding: 18px; background: var(--gold); color: white; border-radius: var(--radius); font-size: 1rem; font-weight: 700; margin-top: 24px; transition: var(--transition); }
+        .proceed-payment-btn:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .cart-page-empty { text-align: center; padding: 80px 20px; color: var(--warm-gray); }
+        @media (max-width: 768px) { .cart-page-layout { grid-template-columns: 1fr; } .cart-page-item { flex-wrap: wrap; } }
+
+        /* ============================================================
+           PAYMENT PAGE
+        ============================================================ */
+        .payment-section { padding: 60px 0; }
+        .payment-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+        .payment-form-section { background: white; border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-sm); }
+        .payment-form-section h2 { font-size: 1.5rem; margin-bottom: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--warm-gray); margin-bottom: 6px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--light-gray); border-radius: var(--radius); font-size: 0.9rem; font-family: var(--font-body); transition: var(--transition); background: white; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,169,110,0.1); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .payment-methods { display: flex; gap: 12px; margin-bottom: 24px; }
+        .payment-method-tab { flex: 1; padding: 14px; border: 2px solid var(--light-gray); border-radius: var(--radius); text-align: center; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: var(--transition); background: white; }
+        .payment-method-tab.active { border-color: var(--gold); background: var(--champagne); color: var(--gold-dark); }
+        .payment-method-content { display: none; }
+        .payment-method-content.active { display: block; }
+        .place-order-btn { width: 100%; padding: 18px; background: var(--gold); color: white; border-radius: var(--radius); font-size: 1.1rem; font-weight: 700; margin-top: 24px; transition: var(--transition); }
+        .place-order-btn:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .card-preview-wrapper { perspective: 1000px; margin-bottom: 32px; }
+        .card-preview { width: 100%; max-width: 380px; height: 220px; margin: 0 auto; position: relative; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+        .card-preview.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back { position: absolute; inset: 0; border-radius: var(--radius-lg); backface-visibility: hidden; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-front { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; }
+        .card-front .card-chip { width: 40px; height: 30px; background: rgba(255,255,255,0.3); border-radius: 6px; }
+        .card-front .card-number { font-size: 1.3rem; letter-spacing: 3px; font-family: monospace; }
+        .card-front .card-details { display: flex; justify-content: space-between; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .card-back { background: linear-gradient(135deg, var(--gold-dark), #7A5C1E); color: white; transform: rotateY(180deg); }
+        .card-back .card-strip { height: 40px; background: rgba(0,0,0,0.3); border-radius: 4px; margin: 0 -28px; padding: 0 28px; }
+        .card-back .card-cvv-strip { height: 36px; background: rgba(255,255,255,0.9); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding: 0 16px; color: var(--charcoal); font-family: monospace; font-size: 1rem; letter-spacing: 2px; }
+        .order-confirmation { display: none; text-align: center; padding: 80px 40px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+        .order-confirmation.show { display: block; animation: fadeIn 0.5s ease; }
+        .order-check { width: 80px; height: 80px; border-radius: 50%; background: var(--sage); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: #4CAF50; animation: pulse 1s ease; }
+        .order-confirmation h2 { margin-bottom: 12px; color: #4CAF50; }
+        .order-confirmation p { color: var(--warm-gray); margin-bottom: 8px; }
+        .order-number { font-family: monospace; font-size: 1.2rem; font-weight: 700; color: var(--charcoal); margin: 16px 0; }
+        @media (max-width: 768px) { .payment-layout { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } .payment-methods { flex-direction: column; } }
+
+        /* ============================================================
+           BLOG PAGE
+        ============================================================ */
+        .blog-hero { text-align: center; padding: 80px 0 40px; }
+        .blog-hero h1 { font-size: 3rem; margin-bottom: 12px; }
+        .blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; padding-bottom: 80px; }
+        .blog-card { background: white; border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); box-shadow: var(--shadow-sm); }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .blog-card-image { height: 200px; display: flex; align-items: center; justify-content: center; color: var(--warm-gray); font-style: italic; }
+        .blog-card-content { padding: 24px; }
+        .blog-card-tag { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; color: var(--gold); background: var(--champagne); padding: 4px 10px; border-radius: 4px; margin-bottom: 12px; }
+        .blog-card-content h3 { font-size: 1.3rem; margin-bottom: 8px; line-height: 1.3; }
+        .blog-card-content p { color: var(--warm-gray); font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6; }
+        .blog-card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--warm-gray); }
+        .blog-read-more { color: var(--gold); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; transition: var(--transition); cursor: pointer; }
+        .blog-read-more:hover { gap: 8px; }
+        .blog-post-expanded { display: none; padding-bottom: 80px; }
+        .blog-post-expanded.show { display: block; }
+        .blog-post-header-image { height: 300px; border-radius: var(--radius-lg); margin-bottom: 40px; display: flex; align-items: center; justify-content: center; color: var(--warm-gray); font-style: italic; background: linear-gradient(135deg, var(--cream), var(--gold-light)); }
+        .blog-post-body { max-width: 700px; margin: 0 auto; }
+        .blog-post-body h1 { font-size: 2.5rem; margin-bottom: 16px; }
+        .blog-post-body .post-meta { color: var(--warm-gray); margin-bottom: 32px; font-size: 0.9rem; }
+        .blog-post-body p { color: var(--warm-gray); line-height: 1.9; margin-bottom: 20px; font-size: 1rem; }
+        .blog-post-body h2 { font-size: 1.5rem; margin: 32px 0 16px; }
+        .blog-back-btn { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; color: var(--gold); font-weight: 500; cursor: pointer; transition: var(--transition); }
+        .blog-back-btn:hover { gap: 12px; }
+        @media (max-width: 768px) { .blog-grid { grid-template-columns: 1fr; } }
+
+        /* ============================================================
+           HELP & SUPPORT PAGE
+        ============================================================ */
+        .help-hero { text-align: center; padding: 80px 0 40px; background: linear-gradient(135deg, var(--ivory), var(--cream)); }
+        .help-hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
+        .help-search { max-width: 500px; margin: 0 auto; position: relative; }
+        .help-search input { width: 100%; padding: 16px 20px 16px 48px; border: 1px solid var(--light-gray); border-radius: 50px; font-size: 1rem; background: white; box-shadow: var(--shadow-sm); }
+        .help-search input:focus { outline: none; border-color: var(--gold); }
+        .help-search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--warm-gray); }
+        .faq-section { padding: 80px 0; max-width: 800px; margin: 0 auto; }
+        .faq-category { margin-bottom: 32px; }
+        .faq-category h3 { font-size: 1.2rem; margin-bottom: 16px; color: var(--gold-dark); }
+        .faq-item { border: 1px solid var(--light-gray); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; background: white; }
+        .faq-question { padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 500; transition: var(--transition); }
+        .faq-question:hover { background: var(--cream); }
+        .faq-question i { transition: transform 0.3s ease; flex-shrink: 0; margin-left: 12px; }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+        .faq-item.open .faq-answer { max-height: 200px; padding: 0 24px 18px; }
+        .faq-answer p { color: var(--warm-gray); line-height: 1.7; font-size: 0.9rem; }
+        .help-contact-section { padding: 80px 0; background: white; }
+        .help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+        .contact-form { background: var(--ivory); padding: 40px; border-radius: var(--radius-lg); }
+        .contact-form h3 { margin-bottom: 24px; font-size: 1.3rem; }
+        .contact-success { display: none; padding: 16px; background: var(--sage); border-radius: var(--radius); color: #2E7D32; font-weight: 500; margin-top: 16px; text-align: center; }
+        .policy-cards { display: flex; flex-direction: column; gap: 20px; }
+        .policy-card { padding: 28px; background: var(--ivory); border-radius: var(--radius-lg); border-left: 4px solid var(--gold); }
+        .policy-card h4 { margin-bottom: 8px; font-size: 1.1rem; }
+        .policy-card p { color: var(--warm-gray); font-size: 0.9rem; line-height: 1.6; }
+        .live-chat-btn { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: var(--gold); color: white; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); transition: var(--transition); z-index: 999; }
+        .live-chat-btn:hover { transform: scale(1.1); background: var(--gold-dark); }
+        .live-chat-btn .chat-tooltip { position: absolute; right: 70px; background: var(--charcoal); color: white; padding: 8px 14px; border-radius: var(--radius); font-size: 0.8rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: var(--transition); }
+        .live-chat-btn:hover .chat-tooltip { opacity: 1; }
+        @media (max-width: 768px) { .help-grid { grid-template-columns: 1fr; } }
+
+        /* ============================================================
+           SCROLL TO TOP & FOOTER
+        ============================================================ */
+        .scroll-top-btn { position: fixed; bottom: 90px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: white; border: 1px solid var(--light-gray); color: var(--charcoal); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); opacity: 0; pointer-events: none; transition: var(--transition); z-index: 998; }
+        .scroll-top-btn.show { opacity: 1; pointer-events: all; }
+        .scroll-top-btn:hover { background: var(--gold); color: white; border-color: var(--gold); }
+        .footer { background: var(--cream); padding: 60px 0 30px; border-top: 1px solid var(--light-gray); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand { font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 12px; }
+        .footer-desc { color: var(--warm-gray); font-size: 0.85rem; line-height: 1.6; }
+        .footer-col h4 { font-size: 0.9rem; margin-bottom: 16px; color: var(--charcoal); }
+        .footer-col a { display: block; color: var(--warm-gray); font-size: 0.85rem; margin-bottom: 8px; transition: var(--transition); }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid var(--light-gray); color: var(--warm-gray); font-size: 0.8rem; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+
+        /* ============================================================
+           Utility Classes (extracted from inline styles)
+        ============================================================ */
+        .hidden { display: none; }
+        .text-warm-gray { color: var(--warm-gray); }
+        .text-italic { font-style: italic; }
+        .text-italic-noir { font-style: italic; color: var(--noir-dark); }
+        .text-italic-rose { font-style: italic; color: var(--rose-deep); }
+        .text-italic-sky { font-style: italic; color: var(--sky-deep); }
+        .icon-bg-gold-light { background: var(--gold-light); }
+        .icon-bg-peach { background: var(--peach); }
+        .icon-bg-sage { background: var(--sage); }
+        .icon-color-gold-dark { color: var(--gold-dark); }
+        .icon-color-green { color: #4a7c4a; }
+        .mb-12 { margin-bottom: 12px; }
+        .mb-20 { margin-bottom: 20px; }
+        .mb-40 { margin-bottom: 40px; }
+        .mt-8 { margin-top: 8px; }
+        .mt-24 { margin-top: 24px; }
+        .mt-32 { margin-top: 32px; }
+        .m-empty-heading { margin: 16px 0 8px; }
+        .opacity-30 { opacity: 0.3; }
+        .text-sm { font-size: 0.85rem; }
+        .text-xs { font-size: 0.8rem; }
+        .text-description { color: var(--warm-gray); font-size: 0.9rem; }
+        .resize-vertical { resize: vertical; }
+        .policy-icon { vertical-align: middle; margin-right: 8px; }
+        .card-back-body { flex: 1; display: flex; align-items: center; }
+        .card-back-brand { text-align: right; font-size: 0.7rem; opacity: 0.6; }
+        .order-summary-box { background: var(--cream); border-radius: var(--radius-lg); padding: 24px; margin-top: 24px; }
+        .payment-total-row { border: none; margin: 0; padding: 0; }
+        .bloom-lifestyle-caption { text-align: center; color: var(--warm-gray); font-style: italic; }
+        .bloom-caption-text { font-size: 0.8rem; margin-top: 8px; }
+        .related-card-img-bloom { background: linear-gradient(135deg, var(--blush), var(--bloom-pink)); }
+        .related-card-img-aqua { background: linear-gradient(135deg, var(--aqua-light), var(--aqua-blue)); }
+        .blog-img-tips { background: linear-gradient(135deg, var(--cream), var(--gold-light)); }
+        .blog-img-ingredients { background: linear-gradient(135deg, var(--sage), var(--aqua-light)); }
+        .blog-img-lifestyle { background: linear-gradient(135deg, var(--blush), var(--bloom-pink)); }
+        .blog-img-process { background: linear-gradient(135deg, var(--champagne), var(--peach)); }
+        .bloom-block-img-gradient { background: linear-gradient(135deg, var(--peach), var(--bloom-peach)); }
+        .swatch-noir { background: linear-gradient(135deg, #F5E6C8, #D4A55A); }
+        .swatch-bloom { background: linear-gradient(135deg, #FDE8EF, #F0C4D0); }
+        .swatch-aqua { background: linear-gradient(135deg, #E8F4FA, #B8D8E8); }
+    </style>
+</head>
+<body>
+    <!-- ============================================================
+         NAVIGATION
+    ============================================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-logo" onclick="showPage('home')">LUMIÈRE</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')" class="active" data-page="home">Home</a></li>
+                <li><a href="#" onclick="showPage('about')" data-page="about">About</a></li>
+                <li><a href="#" onclick="showPage('collections')" data-page="collections">Collections</a></li>
+                <li><a href="#" onclick="showPage('blog')" data-page="blog">Blog</a></li>
+                <li><a href="#" onclick="showPage('help')" data-page="help">Help</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i data-lucide="shopping-bag" width="20" height="20"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         CART DRAWER
+    ============================================================ -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close-btn" onclick="toggleCart()">
+                <i data-lucide="x" width="20" height="20"></i>
+            </button>
+        </div>
+        <div class="cart-drawer-items" id="cartDrawerItems">
+            <div class="cart-empty" id="cartEmpty">
+                <i data-lucide="shopping-bag" width="48" height="48"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-coupon">
+                <input type="text" placeholder="Coupon code" id="drawerCouponInput">
+                <button onclick="applyDrawerCoupon()">Apply</button>
+            </div>
+            <div class="cart-coupon-msg" id="drawerCouponMsg"></div>
+            <div class="cart-totals" id="drawerTotals">
+                <div class="cart-totals-row"><span>Subtotal</span><span id="drawerSubtotal">&#8377;0</span></div>
+                <div class="cart-totals-row" id="drawerDiscountRow" class="hidden"><span>Discount</span><span id="drawerDiscount">-&#8377;0</span></div>
+                <div class="cart-totals-row total"><span>Total</span><span id="drawerTotal">&#8377;0</span></div>
+            </div>
+            <button class="cart-checkout-btn" onclick="showPage('cart'); toggleCart();">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PAGE 1: HOME
+    ============================================================ -->
+    <div class="page active" id="page-home">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-decoration hero-decoration-1"></div>
+            <div class="hero-decoration hero-decoration-2"></div>
+            <div class="hero-content">
+                <p class="hero-tagline">Artisan Perfumery from Kerala</p>
+                <h1 class="hero-title">LUMIÈRE</h1>
+                <p class="hero-subtitle">"Crafted from Nature. Made for You."</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="showPage('collections')">
+                        <i data-lucide="sparkles" width="16" height="16"></i> Explore Collection
+                    </button>
+                    <button class="btn-secondary" onclick="showPage('about')">
+                        <i data-lucide="book-open" width="16" height="16"></i> Our Story
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2 class="section-title reveal">Our Philosophy</h2>
+                <p class="section-subtitle reveal">Every bottle tells a story of nature, artistry, and intention</p>
+                <div class="values-grid">
+                    <div class="value-card reveal">
+                        <div class="value-icon"><i data-lucide="leaf" width="28" height="28"></i></div>
+                        <h3>Botanical</h3>
+                        <p>Sourced from the lush forests of Kerala, our ingredients are 100% natural and ethically harvested from local botanical gardens.</p>
+                    </div>
+                    <div class="value-card reveal">
+                        <div class="value-icon"><i data-lucide="hand" width="28" height="28"></i></div>
+                        <h3>Handcrafted</h3>
+                        <p>Each fragrance is meticulously blended by master perfumers, combining traditional techniques with modern artistry.</p>
+                    </div>
+                    <div class="value-card reveal">
+                        <div class="value-icon"><i data-lucide="recycle" width="28" height="28"></i></div>
+                        <h3>Sustainable</h3>
+                        <p>From eco-friendly packaging to carbon-neutral shipping, sustainability is woven into every step of our process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Story Teaser -->
+        <section class="story-section">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-image reveal">
+                        <span>Brand Heritage Image Placeholder</span>
+                    </div>
+                    <div class="story-text reveal">
+                        <h2>Born in the Gardens of Kerala</h2>
+                        <p>LUMIÈRE was born from a simple belief: that the finest fragrances come from the purest ingredients. Nestled in the verdant hills of Kerala, our atelier draws inspiration from centuries of botanical wisdom.</p>
+                        <p>Each creation is a tribute to the land that nurtures us, blending rare flowers, aromatic woods, and precious resins into olfactory masterpieces.</p>
+                        <button class="btn-secondary" onclick="showPage('about')">Discover Our Heritage</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials-section">
+            <div class="container">
+                <h2 class="section-title reveal">What Our Clients Say</h2>
+                <p class="section-subtitle reveal">Trusted by fragrance connoisseurs across India</p>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testimonial-text">"NOIR is absolutely intoxicating. I have never received so many compliments on a fragrance. It is pure luxury in a bottle."</p>
+                        <p class="testimonial-author">Priya Sharma, Mumbai</p>
+                    </div>
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testimonial-text">"BLOOM reminds me of my grandmother's garden in Munnar. It is romantic, soft, and incredibly long-lasting. My signature scent."</p>
+                        <p class="testimonial-author">Ananya Reddy, Bangalore</p>
+                    </div>
+                    <div class="testimonial-card reveal">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testimonial-text">"AQUA is so refreshing and clean. Perfect for everyday wear. The quality is unmatched at this price point. Truly premium."</p>
+                        <p class="testimonial-author">Rahul Menon, Delhi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <h2 class="section-title reveal">Stay Connected</h2>
+                <p class="section-subtitle reveal">Subscribe for exclusive launches, perfume tips, and special offers</p>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+                <p class="newsletter-success" id="newsletterSuccess">Welcome to the LUMIÈRE family! Check your inbox for a special surprise.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         PAGE 2: ABOUT US
+    ============================================================ -->
+    <div class="page" id="page-about">
+        <div class="container">
+            <div class="about-hero">
+                <div class="about-hero-text reveal">
+                    <h1>Our Story</h1>
+                    <p>LUMIÈRE was founded in 2019 in the heart of Kerala, India, where the air itself tells stories of jasmine, sandalwood, and monsoon rain. Our founder, inspired by generations of botanical knowledge, set out to create fragrances that capture the essence of Indian nature.</p>
+                    <p>Today, LUMIÈRE stands at the intersection of traditional Indian perfumery and modern luxury, creating scents that resonate with the soul.</p>
+                </div>
+                <div class="about-hero-image reveal">
+                    <span>Kerala Botanical Garden - Image Placeholder</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="craftsmanship-section">
+            <div class="container">
+                <h2 class="section-title reveal">Our Craftsmanship</h2>
+                <p class="section-subtitle reveal">From petal to bottle, every step is an act of devotion</p>
+                <div class="process-steps">
+                    <div class="process-step reveal">
+                        <div class="process-step-num">1</div>
+                        <h4>Source</h4>
+                        <p>We ethically source rare botanicals from Kerala's forests, working directly with local farmers and cooperatives.</p>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="process-step-num">2</div>
+                        <h4>Extract</h4>
+                        <p>Using traditional steam distillation and cold-press methods, we extract the purest essential oils.</p>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="process-step-num">3</div>
+                        <h4>Blend</h4>
+                        <p>Master perfumers compose each fragrance over months, layering notes until perfection is achieved.</p>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="process-step-num">4</div>
+                        <h4>Mature</h4>
+                        <p>Our fragrances rest for 6-8 weeks, allowing the notes to marry and develop their full character.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ingredients-section">
+            <div class="container">
+                <h2 class="section-title reveal">Our Ingredients</h2>
+                <p class="section-subtitle reveal">Nature provides the palette; we create the art</p>
+                <div class="ingredients-grid">
+                    <div class="ingredient-card reveal">
+                        <div class="ingredient-icon icon-bg-gold-light">
+                            <i data-lucide="flower-2" width="32" height="32" class="icon-color-gold-dark"></i>
+                        </div>
+                        <h4>Rare Florals</h4>
+                        <p>Kerala jasmine, Indian rose, champaca, and frangipani handpicked at dawn for peak fragrance.</p>
+                    </div>
+                    <div class="ingredient-card reveal">
+                        <div class="ingredient-icon icon-bg-peach">
+                            <i data-lucide="trees" width="32" height="32" class="icon-color-gold-dark"></i>
+                        </div>
+                        <h4>Precious Woods</h4>
+                        <p>Sustainably sourced Indian sandalwood, agarwood (oud), and cedarwood from certified forests.</p>
+                    </div>
+                    <div class="ingredient-card reveal">
+                        <div class="ingredient-icon icon-bg-sage">
+                            <i data-lucide="droplets" width="32" height="32" class="icon-color-green"></i>
+                        </div>
+                        <h4>Essential Resins</h4>
+                        <p>Frankincense, myrrh, and benzoin collected from ancient trade routes and artisanal distillers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="founder-section">
+            <div class="container reveal">
+                <div class="founder-avatar">Founder Photo</div>
+                <h2 class="section-title">Meet Our Founder</h2>
+                <blockquote>"I wanted to create fragrances that smell like home, like memory, like the first rain on Kerala soil."</blockquote>
+                <p class="text-warm-gray">Meera Krishnan, Founder &amp; Creative Director</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         PAGE 3: COLLECTIONS
+    ============================================================ -->
+    <div class="page" id="page-collections">
+        <div class="container">
+            <div class="collections-hero">
+                <h1 class="reveal">The Collection</h1>
+                <p class="section-subtitle reveal">Three distinct expressions of nature's most precious essences</p>
+            </div>
+            <div class="collections-grid">
+                <!-- NOIR Card -->
+                <div class="collection-card reveal" onclick="showPage('noir')">
+                    <div class="collection-card-image noir-bg">
+                        <span class="text-italic-noir">NOIR Bottle Placeholder</span>
+                    </div>
+                    <div class="collection-card-content">
+                        <h3>NOIR</h3>
+                        <p>For those who command the room. Woody, oud, amber.</p>
+                        <div class="collection-card-price">From &#8377;2,499</div>
+                        <span class="collection-card-btn">Discover <i data-lucide="arrow-right" width="16" height="16"></i></span>
+                    </div>
+                </div>
+                <!-- BLOOM Card -->
+                <div class="collection-card reveal" onclick="showPage('bloom')">
+                    <div class="collection-card-image bloom-bg">
+                        <span class="text-italic-rose">BLOOM Bottle Placeholder</span>
+                    </div>
+                    <div class="collection-card-content">
+                        <h3>BLOOM</h3>
+                        <p>The scent of a garden at dawn. Jasmine, rose, peach.</p>
+                        <div class="collection-card-price">From &#8377;2,499</div>
+                        <span class="collection-card-btn">Discover <i data-lucide="arrow-right" width="16" height="16"></i></span>
+                    </div>
+                </div>
+                <!-- AQUA Card -->
+                <div class="collection-card reveal" onclick="showPage('aqua')">
+                    <div class="collection-card-image aqua-bg">
+                        <span class="text-italic-sky">AQUA Bottle Placeholder</span>
+                    </div>
+                    <div class="collection-card-content">
+                        <h3>AQUA</h3>
+                        <p>Pure. Fresh. Endless. Ocean, bergamot, white musk.</p>
+                        <div class="collection-card-price">From &#8377;2,499</div>
+                        <span class="collection-card-btn">Discover <i data-lucide="arrow-right" width="16" height="16"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PAGE 4: PRODUCT - NOIR (Full-height Split Hero)
+    ============================================================ -->
+    <div class="page" id="page-noir">
+        <!-- Full-height split hero -->
+        <div class="noir-hero">
+            <div class="noir-hero-image">
+                <div class="noir-bottle-placeholder">NOIR Bottle Image Placeholder</div>
+            </div>
+            <div class="noir-hero-text">
+                <h1>NOIR</h1>
+                <p class="product-subtitle">"For those who command the room"</p>
+                <p class="product-desc">A commanding blend of aged oud, warm amber, and smoky vetiver. NOIR is the fragrance of quiet power, worn by those who lead without raising their voice.</p>
+            </div>
+        </div>
+
+        <!-- Horizontal Scent Pyramid -->
+        <section class="noir-pyramid">
+            <div class="container">
+                <h2 class="section-title reveal">The Scent Pyramid</h2>
+                <div class="pyramid-bands reveal">
+                    <div class="pyramid-band">
+                        <div class="pyramid-band-label">Top Notes</div>
+                        <h3>Bergamot &amp; Saffron</h3>
+                        <p>A bright, spicy opening that commands attention from the first breath</p>
+                    </div>
+                    <div class="pyramid-band">
+                        <div class="pyramid-band-label">Heart Notes</div>
+                        <h3>Oud &amp; Rose Absolute</h3>
+                        <p>The rich, complex heart where ancient wood meets timeless floral</p>
+                    </div>
+                    <div class="pyramid-band">
+                        <div class="pyramid-band-label">Base Notes</div>
+                        <h3>Amber &amp; Vetiver</h3>
+                        <p>A warm, smoky foundation that lingers for hours on skin</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-Column Info Layout -->
+        <section class="container">
+            <div class="noir-info">
+                <div class="noir-info-story reveal">
+                    <h3>The Story Behind NOIR</h3>
+                    <p>Inspired by the sacred smoke of temple incense and the warm amber glow of oil lamps, NOIR captures the essence of contemplative evenings in Kerala.</p>
+                    <p>Our master perfumer spent over 14 months perfecting this blend, sourcing the rarest Cambodian oud and pairing it with hand-harvested Kashmiri saffron.</p>
+                    <p>The result is a fragrance that evolves throughout the day, revealing new facets as it interacts with your skin chemistry.</p>
+                </div>
+                <div class="noir-purchase reveal">
+                    <h3 class="mb-20">Select Your Size</h3>
+                    <div class="size-selector" id="noirSizes">
+                        <div class="size-option" onclick="selectSize('noir', '30ml', 2499, this)">
+                            <div class="size-ml">30ml</div>
+                            <div class="size-price">&#8377;2,499</div>
+                        </div>
+                        <div class="size-option selected" onclick="selectSize('noir', '50ml', 3799, this)">
+                            <div class="size-ml">50ml</div>
+                            <div class="size-price">&#8377;3,799</div>
+                        </div>
+                        <div class="size-option" onclick="selectSize('noir', '100ml', 5999, this)">
+                            <div class="size-ml">100ml</div>
+                            <div class="size-price">&#8377;5,999</div>
+                        </div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('NOIR by LUMIÈRE', selectedSizes.noir.size, selectedSizes.noir.price, 'noir')">
+                        <i data-lucide="shopping-bag" width="18" height="18"></i> Add to Cart
+                    </button>
+                    <button class="wishlist-btn">
+                        <i data-lucide="heart" width="18" height="18"></i> Add to Wishlist
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="related-products">
+            <div class="container">
+                <h2 class="section-title reveal">You May Also Like</h2>
+                <div class="related-grid reveal">
+                    <div class="related-card" onclick="showPage('bloom')">
+                        <div class="related-card-img related-card-img-bloom">BLOOM</div>
+                        <h4>BLOOM</h4>
+                        <p>Jasmine, rose, peach</p>
+                    </div>
+                    <div class="related-card" onclick="showPage('aqua')">
+                        <div class="related-card-img related-card-img-aqua">AQUA</div>
+                        <h4>AQUA</h4>
+                        <p>Ocean, bergamot, white musk</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         PAGE 5: PRODUCT - BLOOM (Magazine Editorial Layout)
+    ============================================================ -->
+    <div class="page" id="page-bloom">
+        <!-- Asymmetric hero with overlay card -->
+        <div class="bloom-hero">
+            <div class="bloom-hero-image">
+                <div class="bloom-bottle-placeholder">BLOOM Bottle Image Placeholder</div>
+                <div class="bloom-hero-overlay">
+                    <h1>BLOOM</h1>
+                    <p class="product-subtitle">"The scent of a garden at dawn"</p>
+                    <p class="text-description">A romantic bouquet of Kerala jasmine, Damascus rose, and sun-ripened peach, delicately layered over a bed of soft musks.</p>
+                </div>
+            </div>
+            <div class="bloom-hero-right">
+                <div class="bloom-lifestyle-caption">
+                    <p>Lifestyle Image Placeholder</p>
+                    <p class="bloom-caption-text">Botanical Garden Setting</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alternating editorial blocks -->
+        <section class="bloom-editorial">
+            <div class="container">
+                <div class="bloom-block reveal">
+                    <div class="bloom-block-image">Jasmine Field - Image Placeholder</div>
+                    <div class="bloom-block-text">
+                        <h3>A Garden at Dawn</h3>
+                        <p>BLOOM opens with the dewy freshness of morning jasmine, harvested at first light when the flowers are at their most fragrant. This is the scent of Kerala's gardens waking up, of petals unfurling in the golden hour.</p>
+                    </div>
+                </div>
+                <div class="bloom-block reverse reveal">
+                    <div class="bloom-block-image bloom-block-img-gradient">Rose Garden - Image Placeholder</div>
+                    <div class="bloom-block-text">
+                        <h3>Heart of Romance</h3>
+                        <p>At its heart, Damascus rose and ripe peach create an intoxicating warmth. These are the notes that make BLOOM unforgettable, lingering on scarves and in memories long after you have left the room.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Floating petal scent notes -->
+        <section class="bloom-notes">
+            <div class="container">
+                <h2 class="section-title reveal">Scent Notes</h2>
+                <div class="petal-tags reveal">
+                    <span class="petal-tag">Kerala Jasmine</span>
+                    <span class="petal-tag">Damascus Rose</span>
+                    <span class="petal-tag">Sun-Ripened Peach</span>
+                    <span class="petal-tag">White Lily</span>
+                    <span class="petal-tag">Soft Musk</span>
+                    <span class="petal-tag">Powdery Iris</span>
+                    <span class="petal-tag">Vanilla Bean</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Purchase section -->
+        <section class="bloom-purchase">
+            <div class="bloom-purchase-inner reveal">
+                <h2 class="section-title">Choose Your Size</h2>
+                <div class="bloom-size-selector" id="bloomSizes">
+                    <div class="bloom-size-option" onclick="selectSize('bloom', '30ml', 2499, this)">30ml - &#8377;2,499</div>
+                    <div class="bloom-size-option selected" onclick="selectSize('bloom', '50ml', 3799, this)">50ml - &#8377;3,799</div>
+                    <div class="bloom-size-option" onclick="selectSize('bloom', '100ml', 5999, this)">100ml - &#8377;5,999</div>
+                </div>
+                <button class="bloom-add-btn" onclick="addToCart('BLOOM by LUMIÈRE', selectedSizes.bloom.size, selectedSizes.bloom.price, 'bloom')">
+                    <i data-lucide="shopping-bag" width="18" height="18"></i> Add to Cart
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         PAGE 6: PRODUCT - AQUA (Modular CSS Grid)
+    ============================================================ -->
+    <div class="page" id="page-aqua">
+        <!-- Minimal header with wave animation -->
+        <div class="aqua-header">
+            <h1>AQUA</h1>
+            <p class="product-subtitle">"Pure. Fresh. Endless."</p>
+        </div>
+
+        <!-- 6-module CSS grid -->
+        <div class="aqua-grid">
+            <div class="aqua-module">
+                <div class="aqua-module-label">Top Note</div>
+                <h3>Bergamot</h3>
+                <p>Crisp Italian citrus that opens like a Mediterranean breeze</p>
+            </div>
+            <div class="aqua-module">
+                <div class="aqua-module-label">Heart Note</div>
+                <h3>Sea Salt Accord</h3>
+                <p>The mineral freshness of ocean spray on warm skin</p>
+            </div>
+            <div class="aqua-module">
+                <div class="aqua-module-label">Base Note</div>
+                <h3>White Musk</h3>
+                <p>Clean, powdery warmth that dries down like sun-bleached linen</p>
+            </div>
+            <div class="aqua-module">
+                <div class="aqua-module-label">Character</div>
+                <h3>Minimalist</h3>
+                <p>Designed for those who believe less is more</p>
+            </div>
+            <div class="aqua-module">
+                <div class="aqua-module-label">Inspiration</div>
+                <h3>Kerala Coast</h3>
+                <p>Where the Arabian Sea meets pristine shorelines</p>
+            </div>
+            <div class="aqua-module">
+                <div class="aqua-module-label">Longevity</div>
+                <h3>8-10 Hours</h3>
+                <p>Long-lasting freshness that evolves throughout the day</p>
+            </div>
+        </div>
+
+        <!-- Tab size selector -->
+        <section class="aqua-purchase">
+            <div class="container">
+                <h2 class="section-title reveal">Select Size</h2>
+                <div class="aqua-tabs" id="aquaSizes">
+                    <div class="aqua-tab" onclick="selectSize('aqua', '30ml', 2499, this)">
+                        <span class="tab-size">30ml</span>
+                        <span class="tab-price">&#8377;2,499</span>
+                    </div>
+                    <div class="aqua-tab selected" onclick="selectSize('aqua', '50ml', 3799, this)">
+                        <span class="tab-size">50ml</span>
+                        <span class="tab-price">&#8377;3,799</span>
+                    </div>
+                    <div class="aqua-tab" onclick="selectSize('aqua', '100ml', 5999, this)">
+                        <span class="tab-size">100ml</span>
+                        <span class="tab-price">&#8377;5,999</span>
+                    </div>
+                </div>
+                <button class="aqua-add-btn" onclick="addToCart('AQUA by LUMIÈRE', selectedSizes.aqua.size, selectedSizes.aqua.price, 'aqua')">
+                    Add to Cart
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         PAGE 7: CART / CHECKOUT
+    ============================================================ -->
+    <div class="page" id="page-cart">
+        <section class="cart-page-section">
+            <div class="container">
+                <h1 class="section-title mb-40">Your Cart</h1>
+                <div id="cartPageContent">
+                    <div class="cart-page-empty" id="cartPageEmpty">
+                        <i data-lucide="shopping-bag" width="64" height="64" class="opacity-30"></i>
+                        <h3 class="m-empty-heading">Your cart is empty</h3>
+                        <p>Explore our collection and find your signature scent.</p>
+                        <button class="btn-primary mt-24" onclick="showPage('collections')">Browse Collection</button>
+                    </div>
+                    <div class="cart-page-layout" id="cartPageLayout" class="hidden">
+                        <div class="cart-page-items" id="cartPageItems">
+                            <!-- Cart items rendered by JS -->
+                        </div>
+                        <div class="cart-page-summary">
+                            <h3>Order Summary</h3>
+                            <div class="cart-page-coupon">
+                                <input type="text" placeholder="Coupon code" id="pageCouponInput">
+                                <button onclick="applyPageCoupon()">Apply</button>
+                            </div>
+                            <div class="cart-coupon-msg" id="pageCouponMsg"></div>
+                            <div class="cart-summary-row"><span>Subtotal</span><span id="pageSubtotal">&#8377;0</span></div>
+                            <div class="cart-summary-row discount" id="pageDiscountRow" class="hidden"><span>Discount</span><span id="pageDiscount">-&#8377;0</span></div>
+                            <div class="cart-summary-row"><span>Shipping</span><span id="pageShipping">Free</span></div>
+                            <div class="cart-summary-row total"><span>Total</span><span id="pageTotal">&#8377;0</span></div>
+                            <button class="proceed-payment-btn" onclick="showPage('payment')">Proceed to Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         PAGE 8: PAYMENT GATEWAY
+    ============================================================ -->
+    <div class="page" id="page-payment">
+        <section class="payment-section">
+            <div class="container">
+                <h1 class="section-title mb-40">Payment</h1>
+                <div id="paymentFormWrapper">
+                    <div class="payment-layout">
+                        <!-- Card Preview -->
+                        <div>
+                            <div class="card-preview-wrapper">
+                                <div class="card-preview" id="cardPreview">
+                                    <div class="card-front">
+                                        <div class="card-chip"></div>
+                                        <div class="card-number" id="cardDisplayNum">**** **** **** ****</div>
+                                        <div class="card-details">
+                                            <div><small>CARD HOLDER</small><br><span id="cardDisplayName">YOUR NAME</span></div>
+                                            <div><small>EXPIRES</small><br><span id="cardDisplayExpiry">MM/YY</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="card-strip"></div>
+                                        <div class="card-back-body">
+                                            <div class="card-cvv-strip"><span id="cardDisplayCvv">***</span></div>
+                                        </div>
+                                        <div class="card-back-brand">LUMIÈRE</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Order summary mini -->
+                            <div class="order-summary-box">
+                                <h4 class="mb-12">Order Total</h4>
+                                <div class="cart-summary-row total payment-total-row"><span>Amount</span><span id="paymentTotal">&#8377;0</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Form -->
+                        <div class="payment-form-section">
+                            <h2>Billing Details</h2>
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="billingName" placeholder="Enter your full name" oninput="updateCardName(this.value)">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" placeholder="your@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" placeholder="+91 XXXXX XXXXX">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" placeholder="Street address, apartment, suite">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" placeholder="City">
+                                </div>
+                                <div class="form-group">
+                                    <label>Pincode</label>
+                                    <input type="text" placeholder="XXXXXX">
+                                </div>
+                            </div>
+
+                            <h2 class="mt-32">Payment Method</h2>
+                            <div class="payment-methods">
+                                <div class="payment-method-tab active" onclick="switchPaymentMethod('card')">Credit/Debit Card</div>
+                                <div class="payment-method-tab" onclick="switchPaymentMethod('upi')">UPI</div>
+                                <div class="payment-method-tab" onclick="switchPaymentMethod('netbanking')">Net Banking</div>
+                            </div>
+
+                            <!-- Card Payment -->
+                            <div class="payment-method-content active" id="paymentCard">
+                                <div class="form-group">
+                                    <label>Card Number</label>
+                                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="updateCardNumber(this.value)">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Expiry Date</label>
+                                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" oninput="updateCardExpiry(this.value)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CVV</label>
+                                        <input type="text" id="cardCvv" placeholder="***" maxlength="3" onfocus="flipCard(true)" onblur="flipCard(false)" oninput="updateCardCvv(this.value)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- UPI Payment -->
+                            <div class="payment-method-content" id="paymentUpi">
+                                <div class="form-group">
+                                    <label>UPI ID</label>
+                                    <input type="text" placeholder="yourname@upi">
+                                </div>
+                            </div>
+
+                            <!-- Net Banking -->
+                            <div class="payment-method-content" id="paymentNetbanking">
+                                <div class="form-group">
+                                    <label>Select Bank</label>
+                                    <select>
+                                        <option value="">Choose your bank</option>
+                                        <option>State Bank of India</option>
+                                        <option>HDFC Bank</option>
+                                        <option>ICICI Bank</option>
+                                        <option>Axis Bank</option>
+                                        <option>Kotak Mahindra Bank</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button class="place-order-btn" onclick="placeOrder()">
+                                <i data-lucide="lock" width="18" height="18"></i> Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Confirmation -->
+                <div class="order-confirmation" id="orderConfirmation">
+                    <div class="order-check">
+                        <i data-lucide="check" width="40" height="40"></i>
+                    </div>
+                    <h2>Order Confirmed!</h2>
+                    <p>Thank you for shopping with LUMIÈRE.</p>
+                    <p>Your order has been placed successfully.</p>
+                    <div class="order-number" id="orderNumber">ORD-XXXXXXX</div>
+                    <p class="text-sm">A confirmation email will be sent to your inbox shortly.</p>
+                    <button class="btn-primary mt-24" onclick="showPage('home')">Back to Home</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         PAGE 9: BLOG
+    ============================================================ -->
+    <div class="page" id="page-blog">
+        <div class="container">
+            <div class="blog-hero">
+                <h1 class="reveal">The Journal</h1>
+                <p class="section-subtitle reveal">Stories of scent, nature, and the art of perfumery</p>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid" id="blogGrid">
+                <div class="blog-card reveal">
+                    <div class="blog-card-image blog-img-tips">Featured Image Placeholder</div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-tag">Tips</span>
+                        <h3>The Art of Applying Perfume: A Complete Guide</h3>
+                        <p>Discover the pulse points, layering techniques, and timing secrets that make your fragrance last all day long.</p>
+                        <div class="blog-card-meta">
+                            <span>Dec 15, 2024</span>
+                            <span class="blog-read-more" onclick="showBlogPost()">Read More <i data-lucide="arrow-right" width="14" height="14"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card reveal">
+                    <div class="blog-card-image blog-img-ingredients">Featured Image Placeholder</div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-tag">Ingredients</span>
+                        <h3>Kerala Jasmine: The Queen of Indian Perfumery</h3>
+                        <p>Why jasmine harvested at dawn in Kerala produces an aroma unlike any other in the world, and how we capture it.</p>
+                        <div class="blog-card-meta">
+                            <span>Nov 28, 2024</span>
+                            <span class="blog-read-more">Read More <i data-lucide="arrow-right" width="14" height="14"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card reveal">
+                    <div class="blog-card-image blog-img-lifestyle">Featured Image Placeholder</div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-tag">Lifestyle</span>
+                        <h3>How to Build Your Fragrance Wardrobe</h3>
+                        <p>Just like fashion, your scent should change with the season, occasion, and mood. Here is how to curate the perfect collection.</p>
+                        <div class="blog-card-meta">
+                            <span>Oct 10, 2024</span>
+                            <span class="blog-read-more">Read More <i data-lucide="arrow-right" width="14" height="14"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card reveal">
+                    <div class="blog-card-image blog-img-process">Featured Image Placeholder</div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-tag">Behind the Scenes</span>
+                        <h3>From Petal to Bottle: Our Extraction Process</h3>
+                        <p>A behind-the-scenes look at how we transform raw botanicals into the concentrated essences that define LUMIÈRE.</p>
+                        <div class="blog-card-meta">
+                            <span>Sep 5, 2024</span>
+                            <span class="blog-read-more">Read More <i data-lucide="arrow-right" width="14" height="14"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expanded Blog Post -->
+            <div class="blog-post-expanded" id="blogPostExpanded">
+                <div class="blog-back-btn" onclick="hideBlogPost()">
+                    <i data-lucide="arrow-left" width="16" height="16"></i> Back to Journal
+                </div>
+                <div class="blog-post-header-image">Article Header Image Placeholder</div>
+                <div class="blog-post-body">
+                    <span class="blog-card-tag">Tips</span>
+                    <h1>The Art of Applying Perfume: A Complete Guide</h1>
+                    <p class="post-meta">By Meera Krishnan | December 15, 2024 | 5 min read</p>
+                    <p>Perfume is more than a finishing touch. It is an invisible extension of your personality, a way to leave a lasting impression long after you have left the room. But applying perfume correctly can make the difference between a scent that fades in an hour and one that enchants all day.</p>
+                    <h2>The Pulse Points</h2>
+                    <p>The warmest areas of your body are where perfume truly comes alive. These pulse points include the wrists, behind the ears, the base of the throat, the inside of your elbows, and behind the knees. The heat from these areas helps diffuse and amplify the fragrance.</p>
+                    <h2>The Distance Rule</h2>
+                    <p>Hold the bottle 15-20 cm from your skin when spraying. This allows the fragrance to distribute evenly rather than concentrating in one spot. A light mist that settles on the skin creates a much more natural and elegant scent cloud.</p>
+                    <h2>Layering for Longevity</h2>
+                    <p>For fragrances that last from morning to evening, layer with complementary products. Start with an unscented moisturizer (hydrated skin holds fragrance longer), then apply your perfume. Some of our clients even spray a light mist on their hairbrush before brushing, creating a subtle scent trail.</p>
+                    <h2>The Golden Rule</h2>
+                    <p>Never rub your wrists together after applying perfume. This friction breaks down the top notes and alters the fragrance composition. Instead, simply let it dry naturally and allow the scent to develop on your skin.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PAGE 10: HELP & SUPPORT
+    ============================================================ -->
+    <div class="page" id="page-help">
+        <section class="help-hero">
+            <div class="container">
+                <h1 class="reveal">How Can We Help?</h1>
+                <div class="help-search reveal">
+                    <span class="help-search-icon"><i data-lucide="search" width="18" height="18"></i></span>
+                    <input type="text" placeholder="Search for answers...">
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title reveal">Frequently Asked Questions</h2>
+
+                <!-- Shipping & Delivery -->
+                <div class="faq-category reveal">
+                    <h3>Shipping &amp; Delivery</h3>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>How long does delivery take?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>We deliver within 3-5 business days across India. Express delivery (1-2 days) is available in major cities for an additional fee.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Is shipping free?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>Yes! We offer free standard shipping on all orders above &#8377;3,000. Orders below this threshold have a flat shipping fee of &#8377;99.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Do you ship internationally?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>Currently, we ship within India only. International shipping will be available soon. Join our newsletter for updates.</p></div>
+                    </div>
+                </div>
+
+                <!-- Returns & Exchanges -->
+                <div class="faq-category reveal">
+                    <h3>Returns &amp; Exchanges</h3>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>What is your return policy?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>We accept returns within 7 days of delivery if the product is unopened and in its original packaging. A full refund will be processed within 5-7 business days.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Can I exchange for a different scent?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>Yes! If the product is unopened, you can exchange it for a different fragrance or size within 7 days. Contact our support team to initiate the exchange.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>What if my order arrives damaged?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>We are sorry if that happens! Please contact us within 48 hours with photos of the damage, and we will send a replacement at no cost.</p></div>
+                    </div>
+                </div>
+
+                <!-- Product Authenticity -->
+                <div class="faq-category reveal">
+                    <h3>Product Authenticity</h3>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Are your perfumes 100% authentic?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>Absolutely. LUMIÈRE is a direct-to-consumer brand. Every product is made in our Kerala atelier and ships directly from us. Each bottle includes a unique authenticity code.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Are your products cruelty-free?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>Yes. LUMIÈRE is proudly cruelty-free and vegan. We never test on animals and use only plant-based ingredients and sustainable synthetics.</p></div>
+                    </div>
+                </div>
+
+                <!-- Ingredients & Safety -->
+                <div class="faq-category reveal">
+                    <h3>Ingredients &amp; Safety</h3>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Are your fragrances safe for sensitive skin?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>Our formulations are dermatologically tested and free from parabens, phthalates, and synthetic dyes. However, we recommend a patch test if you have very sensitive skin.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>What is the alcohol content?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>Our Eau de Parfum formulations contain approximately 80% denatured ethanol, which is industry standard and ensures optimal fragrance diffusion and longevity.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>How long do your perfumes last?</span>
+                            <i data-lucide="chevron-down" width="18" height="18"></i>
+                        </div>
+                        <div class="faq-answer"><p>LUMIÈRE fragrances are Eau de Parfum concentration (15-20% fragrance oil), lasting 8-12 hours on skin. Performance varies by fragrance and individual skin chemistry.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-contact-section">
+            <div class="container">
+                <div class="help-grid">
+                    <div class="contact-form">
+                        <h3>Get in Touch</h3>
+                        <form onsubmit="handleContactForm(event)">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea rows="5" placeholder="How can we help you?" class="resize-vertical" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Send Message</button>
+                        </form>
+                        <div class="contact-success" id="contactSuccess">Message sent successfully! We will get back to you within 24 hours.</div>
+                    </div>
+                    <div class="policy-cards">
+                        <div class="policy-card">
+                            <h4><i data-lucide="truck" width="18" height="18" class="policy-icon"></i>Shipping Information</h4>
+                            <p>Free shipping on orders above &#8377;3,000. Standard delivery in 3-5 business days. Express options available at checkout. All orders are carefully packaged to prevent damage.</p>
+                        </div>
+                        <div class="policy-card">
+                            <h4><i data-lucide="refresh-cw" width="18" height="18" class="policy-icon"></i>Return Policy</h4>
+                            <p>7-day easy returns for unopened products. Full refund processed within 5-7 business days. Free return shipping for damaged or incorrect orders.</p>
+                        </div>
+                        <div class="policy-card">
+                            <h4><i data-lucide="shield-check" width="18" height="18" class="policy-icon"></i>Authenticity Guarantee</h4>
+                            <p>Every LUMIÈRE product comes with a unique QR code and holographic seal. Verify authenticity anytime on our website using your product code.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">LUMIÈRE</div>
+                    <p class="footer-desc">Crafted from Nature. Made for You. Premium artisan perfumery from the botanical gardens of Kerala, India.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <a href="#" onclick="showPage('noir')">NOIR</a>
+                    <a href="#" onclick="showPage('bloom')">BLOOM</a>
+                    <a href="#" onclick="showPage('aqua')">AQUA</a>
+                    <a href="#" onclick="showPage('collections')">All Collections</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#" onclick="showPage('about')">About Us</a>
+                    <a href="#" onclick="showPage('blog')">Blog</a>
+                    <a href="#" onclick="showPage('help')">Help & Support</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Pinterest</a>
+                    <a href="#">Email Us</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LUMIÈRE. All rights reserved. Made with love in Kerala, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()">
+        <i data-lucide="chevron-up" width="20" height="20"></i>
+    </button>
+
+    <!-- Live Chat Button -->
+    <button class="live-chat-btn">
+        <span class="chat-tooltip">Chat with us!</span>
+        <i data-lucide="message-circle" width="24" height="24"></i>
+    </button>
+
+    <!-- ============================================================
+         JAVASCRIPT
+    ============================================================ -->
+    <script>
+        /* ============================================================
+           STATE MANAGEMENT
+        ============================================================ */
+        let cart = [];
+        let couponApplied = null;
+        let selectedSizes = {
+            noir: { size: '50ml', price: 3799 },
+            bloom: { size: '50ml', price: 3799 },
+            aqua: { size: '50ml', price: 3799 }
+        };
+
+        /* ============================================================
+           SPA NAVIGATION
+        ============================================================ */
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show target page
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Update nav active state
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile menu
+            document.getElementById('navLinks').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Update cart page if showing cart
+            if (pageId === 'cart') {
+                renderCartPage();
+            }
+
+            // Update payment total
+            if (pageId === 'payment') {
+                updatePaymentTotal();
+            }
+
+            // Re-initialize lucide icons for new page
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Trigger reveal animations
+            setTimeout(initRevealAnimations, 100);
+        }
+
+        /* ============================================================
+           MOBILE MENU
+        ============================================================ */
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            navLinks.classList.toggle('open');
+            hamburger.classList.toggle('active');
+        }
+
+        /* ============================================================
+           CART FUNCTIONALITY
+        ============================================================ */
+        function toggleCart() {
+            const overlay = document.getElementById('cartOverlay');
+            const drawer = document.getElementById('cartDrawer');
+            overlay.classList.toggle('open');
+            drawer.classList.toggle('open');
+        }
+
+        function addToCart(name, size, price, variant) {
+            const existingItem = cart.find(item => item.name === name && item.size === size);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({
+                    id: Date.now(),
+                    name: name,
+                    size: size,
+                    price: price,
+                    variant: variant,
+                    qty: 1
+                });
+            }
+            updateCartDisplay();
+            toggleCart();
+        }
+
+        function updateCartQuantity(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartDisplay();
+            renderCartPage();
+        }
+
+        function removeCartItem(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartDisplay();
+            renderCartPage();
+        }
+
+        function getCartSubtotal() {
+            return cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        }
+
+        function getCartDiscount() {
+            if (!couponApplied) return 0;
+            const subtotal = getCartSubtotal();
+            if (couponApplied === 'LUXURY10') return Math.round(subtotal * 0.1);
+            if (couponApplied === 'BLOOM20') return Math.round(subtotal * 0.2);
+            return 0;
+        }
+
+        function getCartTotal() {
+            return getCartSubtotal() - getCartDiscount();
+        }
+
+        function getCartCount() {
+            return cart.reduce((sum, item) => sum + item.qty, 0);
+        }
+
+        function getSwatchColor(variant) {
+            const colors = {
+                noir: 'linear-gradient(135deg, #F5E6C8, #D4A55A)',
+                bloom: 'linear-gradient(135deg, #FDE8EF, #F0C4D0)',
+                aqua: 'linear-gradient(135deg, #E8F4FA, #B8D8E8)'
+            };
+            return colors[variant] || colors.noir;
+        }
+
+        function updateCartDisplay() {
+            const badge = document.getElementById('cartBadge');
+            const count = getCartCount();
+            badge.textContent = count;
+            badge.classList.toggle('show', count > 0);
+
+            const drawerItems = document.getElementById('cartDrawerItems');
+            const cartEmpty = document.getElementById('cartEmpty');
+
+            if (cart.length === 0) {
+                drawerItems.innerHTML = '<div class="cart-empty"><p>Your cart is empty</p></div>';
+                document.getElementById('drawerDiscountRow').style.display = 'none';
+            } else {
+                let html = '';
+                cart.forEach(item => {
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-swatch swatch-${item.variant}"></div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div class="cart-item-size">${item.size}</div>
+                                <div class="cart-item-price">&#8377;${(item.price * item.qty).toLocaleString('en-IN')}</div>
+                                <div class="cart-item-controls">
+                                    <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                                    <span class="cart-item-qty">${item.qty}</span>
+                                    <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+                                    <button class="cart-item-remove" onclick="removeCartItem(${item.id})">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                drawerItems.innerHTML = html;
+            }
+
+            // Update totals
+            const subtotal = getCartSubtotal();
+            const discount = getCartDiscount();
+            const total = getCartTotal();
+
+            document.getElementById('drawerSubtotal').innerHTML = `&#8377;${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('drawerTotal').innerHTML = `&#8377;${total.toLocaleString('en-IN')}`;
+
+            if (discount > 0) {
+                document.getElementById('drawerDiscountRow').style.display = 'flex';
+                document.getElementById('drawerDiscount').innerHTML = `-&#8377;${discount.toLocaleString('en-IN')}`;
+            } else {
+                document.getElementById('drawerDiscountRow').style.display = 'none';
+            }
+        }
+
+        /* ============================================================
+           COUPON SYSTEM
+        ============================================================ */
+        function applyCoupon(code, msgElement) {
+            const input = code.trim().toUpperCase();
+            if (input === 'LUXURY10') {
+                couponApplied = 'LUXURY10';
+                msgElement.textContent = 'Coupon applied! 10% discount.';
+                msgElement.style.color = '#2E7D32';
+            } else if (input === 'BLOOM20') {
+                couponApplied = 'BLOOM20';
+                msgElement.textContent = 'Coupon applied! 20% discount.';
+                msgElement.style.color = '#2E7D32';
+            } else {
+                couponApplied = null;
+                msgElement.textContent = 'Invalid coupon code.';
+                msgElement.style.color = 'var(--rose-deep)';
+            }
+            updateCartDisplay();
+            renderCartPage();
+        }
+
+        function applyDrawerCoupon() {
+            const code = document.getElementById('drawerCouponInput').value;
+            const msg = document.getElementById('drawerCouponMsg');
+            applyCoupon(code, msg);
+        }
+
+        function applyPageCoupon() {
+            const code = document.getElementById('pageCouponInput').value;
+            const msg = document.getElementById('pageCouponMsg');
+            applyCoupon(code, msg);
+        }
+
+        /* ============================================================
+           CART PAGE RENDERING
+        ============================================================ */
+        function renderCartPage() {
+            const emptyEl = document.getElementById('cartPageEmpty');
+            const layoutEl = document.getElementById('cartPageLayout');
+            const itemsEl = document.getElementById('cartPageItems');
+
+            if (cart.length === 0) {
+                emptyEl.style.display = 'block';
+                layoutEl.style.display = 'none';
+                return;
+            }
+
+            emptyEl.style.display = 'none';
+            layoutEl.style.display = 'grid';
+
+            let html = '';
+            cart.forEach(item => {
+                html += `
+                    <div class="cart-page-item">
+                        <div class="cart-page-item-swatch swatch-${item.variant}"></div>
+                        <div class="cart-page-item-info">
+                            <div class="cart-page-item-name">${item.name}</div>
+                            <div class="cart-page-item-size">${item.size}</div>
+                        </div>
+                        <div class="cart-page-item-controls">
+                            <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button onclick="updateCartQuantity(${item.id}, 1)">+</button>
+                        </div>
+                        <div class="cart-page-item-price">&#8377;${(item.price * item.qty).toLocaleString('en-IN')}</div>
+                        <button class="cart-page-item-remove" onclick="removeCartItem(${item.id})">
+                            <i data-lucide="trash-2" width="16" height="16"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            itemsEl.innerHTML = html;
+
+            // Update summary
+            const subtotal = getCartSubtotal();
+            const discount = getCartDiscount();
+            const total = getCartTotal();
+            const shipping = subtotal >= 3000 ? 0 : 99;
+
+            document.getElementById('pageSubtotal').innerHTML = `&#8377;${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('pageShipping').textContent = shipping === 0 ? 'Free' : `&#8377;${shipping}`;
+            document.getElementById('pageTotal').innerHTML = `&#8377;${(total + shipping).toLocaleString('en-IN')}`;
+
+            if (discount > 0) {
+                document.getElementById('pageDiscountRow').style.display = 'flex';
+                document.getElementById('pageDiscount').innerHTML = `-&#8377;${discount.toLocaleString('en-IN')}`;
+            } else {
+                document.getElementById('pageDiscountRow').style.display = 'none';
+            }
+
+            // Re-initialize icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        /* ============================================================
+           SIZE SELECTOR
+        ============================================================ */
+        function selectSize(product, size, price, element) {
+            selectedSizes[product] = { size, price };
+
+            // Update visual selection
+            const parent = element.parentElement;
+            parent.querySelectorAll('.size-option, .bloom-size-option, .aqua-tab').forEach(el => {
+                el.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        /* ============================================================
+           PAYMENT SYSTEM
+        ============================================================ */
+        function switchPaymentMethod(method) {
+            document.querySelectorAll('.payment-method-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.payment-method-content').forEach(content => content.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById('payment' + method.charAt(0).toUpperCase() + method.slice(1)).classList.add('active');
+        }
+
+        function updateCardNumber(value) {
+            const formatted = value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim();
+            document.getElementById('cardDisplayNum').textContent = formatted || '**** **** **** ****';
+        }
+
+        function updateCardName(value) {
+            document.getElementById('cardDisplayName').textContent = value.toUpperCase() || 'YOUR NAME';
+        }
+
+        function updateCardExpiry(value) {
+            document.getElementById('cardDisplayExpiry').textContent = value || 'MM/YY';
+        }
+
+        function updateCardCvv(value) {
+            document.getElementById('cardDisplayCvv').textContent = value || '***';
+        }
+
+        function flipCard(flip) {
+            const card = document.getElementById('cardPreview');
+            if (flip) {
+                card.classList.add('flipped');
+            } else {
+                card.classList.remove('flipped');
+            }
+        }
+
+        function updatePaymentTotal() {
+            const subtotal = getCartSubtotal();
+            const discount = getCartDiscount();
+            const shipping = subtotal >= 3000 ? 0 : 99;
+            const total = getCartTotal() + shipping;
+            document.getElementById('paymentTotal').innerHTML = `&#8377;${total.toLocaleString('en-IN')}`;
+        }
+
+        function placeOrder() {
+            // Generate order number
+            const orderNum = 'ORD-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+            document.getElementById('orderNumber').textContent = orderNum;
+
+            // Show confirmation, hide form
+            document.getElementById('paymentFormWrapper').style.display = 'none';
+            const confirmation = document.getElementById('orderConfirmation');
+            confirmation.classList.add('show');
+
+            // Clear cart
+            cart = [];
+            couponApplied = null;
+            updateCartDisplay();
+
+            // Re-initialize icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        /* ============================================================
+           BLOG FUNCTIONALITY
+        ============================================================ */
+        function showBlogPost() {
+            document.getElementById('blogGrid').style.display = 'none';
+            const expanded = document.getElementById('blogPostExpanded');
+            expanded.classList.add('show');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function hideBlogPost() {
+            document.getElementById('blogGrid').style.display = 'grid';
+            document.getElementById('blogPostExpanded').classList.remove('show');
+        }
+
+        /* ============================================================
+           FAQ ACCORDION
+        ============================================================ */
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isOpen = faqItem.classList.contains('open');
+
+            // Close all FAQ items in the same category
+            const category = faqItem.parentElement;
+            category.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('open');
+            });
+
+            // Toggle current
+            if (!isOpen) {
+                faqItem.classList.add('open');
+            }
+        }
+
+        /* ============================================================
+           NEWSLETTER & CONTACT FORMS
+        ============================================================ */
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const success = document.getElementById('newsletterSuccess');
+            success.style.display = 'block';
+            e.target.querySelector('input').value = '';
+            setTimeout(() => { success.style.display = 'none'; }, 5000);
+        }
+
+        function handleContactForm(e) {
+            e.preventDefault();
+            const success = document.getElementById('contactSuccess');
+            success.style.display = 'block';
+            e.target.reset();
+            setTimeout(() => { success.style.display = 'none'; }, 5000);
+        }
+
+        /* ============================================================
+           SCROLL TO TOP
+        ============================================================ */
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        });
+
+        /* ============================================================
+           SCROLL REVEAL ANIMATIONS (IntersectionObserver)
+        ============================================================ */
+        function initRevealAnimations() {
+            const reveals = document.querySelectorAll('.reveal:not(.visible)');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        /* ============================================================
+           INITIALIZATION
+        ============================================================ */
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Initialize reveal animations
+            initRevealAnimations();
+
+            // Initialize cart display
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>
