@@ -925,9 +925,116 @@
             .gallery-item { height: 170px; }
             .media-modal-close { top: 0; right: 0; }
         }
+
+        /* ============================================================
+           SIGNATURE TOUCHES — preloader, cursor, progress, finder, social
+        ============================================================ */
+        /* Branded intro preloader (auto-dismisses even without JS) */
+        .preloader { position: fixed; inset: 0; z-index: 5000; background: #0d0b08; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: preOut 0.7s ease 1.9s forwards; }
+        .preloader.done { animation: preOut 0.55s ease forwards; }
+        @keyframes preOut { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+        .preloader-logo { font-family: var(--font-heading); color: #fff; font-size: clamp(2rem, 7vw, 3.6rem); letter-spacing: 10px; opacity: 0; animation: preUp 1s ease 0.15s forwards; }
+        .preloader-tag { color: var(--gold-light); font-size: 0.66rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 14px; opacity: 0; animation: preUp 1s ease 0.45s forwards; }
+        .preloader-line { width: 200px; height: 1px; background: rgba(255,255,255,0.14); margin-top: 26px; overflow: hidden; }
+        .preloader-line span { display: block; height: 100%; width: 50%; background: linear-gradient(90deg, transparent, var(--gold), transparent); transform: translateX(-130%); animation: preBar 1.5s ease 0.3s infinite; }
+        @keyframes preBar { to { transform: translateX(360%); } }
+        @keyframes preUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Scroll progress bar */
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 1100; background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark)); transition: width 0.1s linear; }
+
+        /* Hero entrance (pure CSS, ends visible — JS-independent) */
+        .hero--cinematic .hero-content > * { animation: heroIn 1s ease both; }
+        .hero--cinematic .hero-tagline { animation-delay: 2.0s; }
+        .hero--cinematic .hero-title { animation-delay: 2.15s; }
+        .hero--cinematic .hero-subtitle { animation-delay: 2.3s; }
+        .hero--cinematic .hero-btns { animation-delay: 2.45s; }
+        @keyframes heroIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom cursor + magnetic (desktop, fine pointer only) */
+        .cursor, .cursor-ring { display: none; }
+        @media (hover: hover) and (pointer: fine) {
+            body.cursor-on { cursor: none; }
+            body.cursor-on a, body.cursor-on button, body.cursor-on .video-card, body.cursor-on .size-option, body.cursor-on .finder-option { cursor: none; }
+            .cursor, .cursor-ring { position: fixed; top: 0; left: 0; z-index: 6000; pointer-events: none; border-radius: 50%; mix-blend-mode: difference; }
+            .cursor { width: 7px; height: 7px; background: #fff; margin: -3.5px 0 0 -3.5px; }
+            .cursor-ring { width: 38px; height: 38px; margin: -19px 0 0 -19px; border: 1px solid rgba(255,255,255,0.7); transition: width 0.25s ease, height 0.25s ease, margin 0.25s ease, background 0.25s ease, border-color 0.25s ease; }
+            .cursor-ring.hover { width: 60px; height: 60px; margin: -30px 0 0 -30px; background: rgba(255,255,255,0.12); border-color: transparent; }
+        }
+
+        /* Fragrance Finder */
+        .finder-section { padding: 110px 0; background: linear-gradient(180deg, var(--cream), var(--ivory)); }
+        .finder { max-width: 700px; margin: 40px auto 0; background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 52px 48px; text-align: center; }
+        .finder-progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; }
+        .finder-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--light-gray); transition: var(--transition); }
+        .finder-dot.active { background: var(--gold); width: 26px; border-radius: 50px; }
+        .finder-step-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+        .finder-q { font-family: var(--font-heading); font-size: 1.7rem; margin-bottom: 28px; line-height: 1.25; }
+        .finder-options { display: grid; gap: 12px; max-width: 420px; margin: 0 auto; }
+        .finder-option { padding: 16px 22px; border: 1px solid var(--light-gray); border-radius: var(--radius); cursor: pointer; transition: var(--transition); font-weight: 500; background: #fff; }
+        .finder-option:hover { border-color: var(--gold); background: var(--champagne); transform: translateY(-2px); }
+        .finder-result-bottle { width: 96px; margin: 0 auto 18px; }
+        .finder-result-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--warm-gray); margin-bottom: 8px; }
+        .finder-result h3 { font-size: 2.2rem; color: var(--gold-dark); margin-bottom: 10px; letter-spacing: 2px; }
+        .finder-result p { color: var(--warm-gray); max-width: 440px; margin: 0 auto 22px; line-height: 1.8; }
+        .finder-retake { margin-top: 16px; background: none; color: var(--warm-gray); text-decoration: underline; font-size: 0.85rem; display: block; margin-left: auto; margin-right: auto; }
+
+        /* Social / Follow the Journey */
+        .insta-section { padding: 90px 0; background: var(--ivory); }
+        .insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 36px; }
+        .insta-handle { text-align: center; color: var(--gold-dark); font-weight: 600; letter-spacing: 1px; margin-top: 20px; }
+
+        @media (max-width: 768px) {
+            .finder { padding: 36px 22px; }
+            .finder-q { font-size: 1.35rem; }
+            .insta-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .preloader { animation: none; display: none; }
+            .hero--cinematic .hero-content > * { animation: none; }
+            .preloader-logo, .preloader-tag { animation: none; opacity: 1; }
+        }
+
+        /* ============================================================
+           MOBILE HARDENING — small-screen refinements
+        ============================================================ */
+        @media (max-width: 600px) {
+            .container { padding: 0 16px; }
+            .hero--cinematic .hero-title { letter-spacing: 4px; }
+            .scroll-cue { display: none; }
+            .about-hero-image { height: 340px; }
+            .campaign-media { height: 300px; }
+            .reviews-summary { flex-direction: column; gap: 18px; }
+            .finder { padding: 30px 18px; }
+            .finder-result h3 { font-size: 1.75rem; }
+            .press-section { padding: 30px 0; }
+            .film-caption { font-size: 0.98rem; bottom: 20px; }
+            .video-title { font-size: 1rem; }
+            .insta-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .section-title { font-size: 1.55rem; }
+            .nav-logo { font-size: 1.35rem; letter-spacing: 1.5px; }
+            .cart-drawer { width: 100vw; max-width: 100vw; }
+        }
+        @media (max-width: 380px) {
+            .hero-title { letter-spacing: 2px; }
+            .badge-pill { font-size: 0.62rem; }
+            .size-option .size-price { font-size: 0.78rem; }
+        }
     </style>
 </head>
 <body>
+    <!-- Branded intro preloader (auto-dismisses; never blocks content) -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">LUMIÈRE</div>
+        <div class="preloader-tag">Crafted from Nature</div>
+        <div class="preloader-line"><span></span></div>
+    </div>
+
+    <!-- Scroll progress + custom cursor -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
     <!-- ============================================================
          NAVIGATION
     ============================================================ -->
@@ -1007,10 +1114,10 @@
                 <h1 class="hero-title">LUMIÈRE</h1>
                 <p class="hero-subtitle">"Crafted from Nature. Made for You."</p>
                 <div class="hero-btns">
-                    <button class="btn-primary" onclick="showPage('collections')">
+                    <button class="btn-primary magnetic" onclick="showPage('collections')">
                         <i data-lucide="sparkles" width="16" height="16"></i> Explore Collection
                     </button>
-                    <button class="btn-secondary" onclick="showPage('about')">
+                    <button class="btn-secondary magnetic" onclick="showPage('about')">
                         <i data-lucide="book-open" width="16" height="16"></i> Our Story
                     </button>
                 </div>
@@ -1144,6 +1251,16 @@
             </div>
         </section>
 
+        <!-- Fragrance Finder -->
+        <section class="finder-section">
+            <div class="container">
+                <p class="eyebrow center">Fragrance Finder</p>
+                <h2 class="section-title reveal">Discover Your Signature</h2>
+                <p class="section-subtitle reveal">Answer three questions and we'll reveal your perfect match</p>
+                <div class="finder reveal" id="finder"></div>
+            </div>
+        </section>
+
         <!-- Newsletter -->
         <section class="newsletter-section">
             <div class="container">
@@ -1154,6 +1271,16 @@
                     <button type="submit" class="btn-primary">Subscribe</button>
                 </form>
                 <p class="newsletter-success" id="newsletterSuccess">Welcome to the LUMIÈRE family! Check your inbox for a special surprise.</p>
+            </div>
+        </section>
+
+        <!-- Follow the Journey (social) -->
+        <section class="insta-section">
+            <div class="container">
+                <p class="eyebrow center">@lumiere.parfums</p>
+                <h2 class="section-title reveal">Follow the Journey</h2>
+                <div class="insta-grid reveal" id="instaGrid"></div>
+                <p class="insta-handle reveal">Tag #LUMIEREparfums to be featured</p>
             </div>
         </section>
     </div>
@@ -2432,6 +2559,119 @@
         }
 
         /* ============================================================
+           FRAGRANCE FINDER (interactive quiz)
+        ============================================================ */
+        const FINDER_QUESTIONS = [
+            { q: 'Which mood describes you best?', options: [
+                { label: 'Bold & mysterious', key: 'noir' },
+                { label: 'Romantic & soft', key: 'bloom' },
+                { label: 'Fresh & effortless', key: 'aqua' }
+            ]},
+            { q: 'Choose the notes you love most', options: [
+                { label: 'Oud, amber & spice', key: 'noir' },
+                { label: 'Jasmine, rose & peach', key: 'bloom' },
+                { label: 'Citrus, sea salt & musk', key: 'aqua' }
+            ]},
+            { q: 'When will you wear it?', options: [
+                { label: 'Evenings & occasions', key: 'noir' },
+                { label: 'Daytime & romance', key: 'bloom' },
+                { label: 'Everyday, anywhere', key: 'aqua' }
+            ]}
+        ];
+        const FINDER_RESULTS = {
+            noir: { name: 'NOIR', desc: 'Bold, magnetic and unforgettable. NOIR wraps you in aged oud, warm amber and smoky vetiver \u2014 for those who command the room.' },
+            bloom: { name: 'BLOOM', desc: 'Romantic and radiant. BLOOM blends Kerala jasmine, Damascus rose and sun-ripened peach into the scent of a garden at dawn.' },
+            aqua: { name: 'AQUA', desc: 'Fresh, clean and effortless. AQUA pairs crisp Italian bergamot with a sea-salt heart and soft white musk.' }
+        };
+        let finderStep = 0;
+        let finderScores = { noir: 0, bloom: 0, aqua: 0 };
+
+        function finderBottle(variant, name) {
+            return '<svg class="bottle bottle--' + variant + ' finder-result-bottle" viewBox="0 0 140 230" aria-hidden="true"><rect class="b-cap" x="54" y="6" width="32" height="30" rx="5"/><rect class="b-neck" x="60" y="34" width="20" height="14"/><rect class="b-body" x="30" y="48" width="80" height="168" rx="18"/><rect class="b-shine" x="40" y="62" width="13" height="140" rx="6"/><rect class="b-label" x="46" y="118" width="48" height="62" rx="6"/><text class="b-name" x="70" y="150">' + name + '</text><text class="b-sub" x="70" y="166">EAU DE PARFUM</text></svg>';
+        }
+
+        function renderFinder() {
+            var el = document.getElementById('finder');
+            if (!el) return;
+            if (finderStep < FINDER_QUESTIONS.length) {
+                var q = FINDER_QUESTIONS[finderStep];
+                var dots = '';
+                for (var i = 0; i < FINDER_QUESTIONS.length; i++) {
+                    dots += '<span class="finder-dot' + (i <= finderStep ? ' active' : '') + '"></span>';
+                }
+                var opts = q.options.map(function (o) {
+                    return '<button class="finder-option" onclick="answerFinder(\'' + o.key + '\')">' + o.label + '</button>';
+                }).join('');
+                el.innerHTML = '<div class="finder-progress">' + dots + '</div>' +
+                    '<div class="finder-step-label">Question ' + (finderStep + 1) + ' of ' + FINDER_QUESTIONS.length + '</div>' +
+                    '<div class="finder-q">' + q.q + '</div>' +
+                    '<div class="finder-options">' + opts + '</div>';
+            } else {
+                var best = 'noir', max = -1;
+                ['noir', 'bloom', 'aqua'].forEach(function (k) { if (finderScores[k] > max) { max = finderScores[k]; best = k; } });
+                var r = FINDER_RESULTS[best];
+                el.innerHTML = '<div class="finder-result-eyebrow">Your Signature Scent</div>' +
+                    finderBottle(best, r.name) +
+                    '<div class="finder-result"><h3>' + r.name + '</h3><p>' + r.desc + '</p>' +
+                    '<button class="btn-primary" onclick="showPage(\'' + best + '\')">Discover ' + r.name + '</button></div>' +
+                    '<button class="finder-retake" onclick="resetFinder()">Retake the quiz</button>';
+            }
+        }
+
+        function answerFinder(key) {
+            if (finderScores[key] !== undefined) finderScores[key] += 1;
+            finderStep += 1;
+            renderFinder();
+        }
+
+        function resetFinder() {
+            finderStep = 0;
+            finderScores = { noir: 0, bloom: 0, aqua: 0 };
+            renderFinder();
+        }
+
+        /* ============================================================
+           SOCIAL GALLERY
+        ============================================================ */
+        function renderInsta() {
+            var el = document.getElementById('instaGrid');
+            if (el) el.innerHTML = renderImageItems(['lumiere-ig1', 'lumiere-ig2', 'lumiere-ig3', 'lumiere-ig4', 'lumiere-ig5', 'lumiere-ig6'], '@lumiere.parfums');
+        }
+
+        /* ============================================================
+           PRELOADER + CUSTOM CURSOR + MAGNETIC
+        ============================================================ */
+        function hidePreloader() {
+            var p = document.getElementById('preloader');
+            if (p) p.classList.add('done');
+        }
+
+        function initCursor() {
+            var fine = false;
+            try { fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { fine = false; }
+            if (!fine) return;
+            var dot = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+            if (!dot || !ring) return;
+            document.body.classList.add('cursor-on');
+            var mx = -100, my = -100, rx = -100, ry = -100;
+            document.addEventListener('mousemove', function (e) {
+                mx = e.clientX; my = e.clientY;
+                dot.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+            });
+            (function loop() { rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18; ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)'; requestAnimationFrame(loop); })();
+            var sel = 'a, button, .video-card, .size-option, .finder-option, .collection-card, .gallery-item, .bloom-size-option, .aqua-tab, .related-card';
+            document.addEventListener('mouseover', function (e) { if (e.target.closest && e.target.closest(sel)) ring.classList.add('hover'); });
+            document.addEventListener('mouseout', function (e) { if (e.target.closest && e.target.closest(sel)) ring.classList.remove('hover'); });
+            document.querySelectorAll('.magnetic').forEach(function (el) {
+                el.addEventListener('mousemove', function (e) {
+                    var r = el.getBoundingClientRect();
+                    el.style.transform = 'translate(' + (e.clientX - (r.left + r.width / 2)) * 0.25 + 'px,' + (e.clientY - (r.top + r.height / 2)) * 0.4 + 'px)';
+                });
+                el.addEventListener('mouseleave', function () { el.style.transform = ''; });
+            });
+        }
+
+        /* ============================================================
            QUANTITY STEPPERS (product pages)
         ============================================================ */
         let productQty = { noir: 1, bloom: 1, aqua: 1 };
@@ -2904,6 +3144,12 @@
             if (nav) {
                 nav.classList.toggle('scrolled', window.scrollY > 30);
             }
+            const sp = document.getElementById('scrollProgress');
+            if (sp) {
+                const h = document.documentElement;
+                const max = (h.scrollHeight - h.clientHeight) || 1;
+                sp.style.width = Math.min(100, (window.scrollY / max) * 100) + '%';
+            }
         });
 
         /* ============================================================
@@ -2944,6 +3190,11 @@
                 updateCartDisplay();
                 initTilt();
                 renderHomeVideos();
+                renderFinder();
+                renderInsta();
+                initCursor();
+                if (document.readyState === 'complete') { hidePreloader(); }
+                window.addEventListener('load', hidePreloader);
                 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMedia(); });
             } catch (err) {
                 // Never let a JS error blank the page: reveal all content.
