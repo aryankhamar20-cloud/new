@@ -809,6 +809,89 @@
             *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
             .tilt3d { animation: none; transform: none; }
         }
+
+        /* ============================================================
+           WORLD-CLASS MEDIA — cinematic hero, film, editorial, marquee
+        ============================================================ */
+        .eyebrow { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+        .eyebrow.center { text-align: center; }
+        .gold-divider { width: 64px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
+
+        /* Cinematic hero */
+        .hero--cinematic { background: #0d0b08; color: #fff; }
+        .hero--cinematic::before { display: none; }
+        .hero-media { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+        .hero-film { position: absolute; inset: -12%;
+            background:
+                radial-gradient(closest-side at 28% 36%, rgba(201,169,110,0.55), transparent 60%),
+                radial-gradient(closest-side at 74% 62%, rgba(212,115,123,0.34), transparent 60%),
+                radial-gradient(closest-side at 55% 88%, rgba(139,189,217,0.30), transparent 60%),
+                linear-gradient(120deg, #15110b, #241a10 55%, #120f0a);
+            filter: saturate(1.05);
+            animation: meshDrift 20s ease-in-out infinite alternate;
+        }
+        @keyframes meshDrift { 0% { transform: translate3d(-2%, -1%, 0) scale(1.06); } 100% { transform: translate3d(2%, 2%, 0) scale(1.14); } }
+        .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.42; mix-blend-mode: screen; z-index: 1; }
+        .hero-grain { position: absolute; inset: 0; z-index: 2; opacity: 0.07; pointer-events: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+            animation: grainShift 1.2s steps(3) infinite; }
+        @keyframes grainShift { 0% { transform: translate(0,0); } 33% { transform: translate(-6px,4px); } 66% { transform: translate(4px,-6px); } 100% { transform: translate(0,0); } }
+        .hero-sweep { position: absolute; top: -50%; left: -60%; width: 50%; height: 200%; z-index: 2; pointer-events: none;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.06), transparent); transform: skewX(-18deg); animation: sweep 9s ease-in-out infinite; }
+        @keyframes sweep { 0% { left: -60%; } 55%, 100% { left: 140%; } }
+        .hero-overlay { position: absolute; inset: 0; z-index: 3; pointer-events: none;
+            background: radial-gradient(ellipse at 50% 40%, rgba(13,11,8,0.1), rgba(13,11,8,0.55) 75%), linear-gradient(180deg, rgba(13,11,8,0.5), transparent 30%, rgba(13,11,8,0.7)); }
+        .hero--cinematic .hero-content { z-index: 4; }
+        .hero--cinematic .hero-tagline { color: var(--gold-light); }
+        .hero--cinematic .hero-title { color: #fff; text-shadow: 0 2px 40px rgba(0,0,0,0.45); }
+        .hero--cinematic .hero-subtitle { color: rgba(255,255,255,0.82); }
+        .scroll-cue { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; }
+        .scroll-cue .line { width: 1px; height: 46px; background: linear-gradient(rgba(255,255,255,0.7), transparent); transform-origin: top; animation: scrollLine 2.2s ease-in-out infinite; }
+        @keyframes scrollLine { 0%, 100% { transform: scaleY(0.35); opacity: 0.3; } 50% { transform: scaleY(1); opacity: 0.85; } }
+
+        /* Reusable media frame with graceful fallback */
+        .media { position: relative; overflow: hidden; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--cream), var(--gold-light)); }
+        .media-img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.2,.8,.2,1); position: relative; z-index: 2; }
+        .media:hover .media-img { transform: scale(1.06); }
+        .media-fallback { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; color: var(--gold-dark); }
+        .media--duotone .media-img { filter: grayscale(1) contrast(1.05) brightness(0.95) sepia(0.22); }
+        .media--duotone::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(150deg, rgba(201,169,110,0.42), rgba(20,15,10,0.40)); mix-blend-mode: multiply; }
+
+        /* The Film section */
+        .film-section { padding: 100px 0 0; background: var(--ink); color: var(--ink-text); text-align: center; }
+        .film-stage { position: relative; height: 70vh; min-height: 420px; margin-top: 40px; overflow: hidden; }
+        .film-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; }
+        .film-fallback-art { z-index: 1; }
+        .film-overlay { position: absolute; inset: 0; z-index: 3; background: radial-gradient(ellipse at center, transparent 30%, rgba(13,11,8,0.55)); pointer-events: none; }
+        .film-caption { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); z-index: 4; font-family: var(--font-heading); font-style: italic; font-size: 1.3rem; color: #fff; letter-spacing: 1px; text-shadow: 0 2px 20px rgba(0,0,0,0.5); padding: 0 20px; }
+
+        /* Editorial campaign */
+        .campaign-section { padding: 110px 0; background: var(--ivory); }
+        .campaign-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+        .campaign-grid.reverse { direction: rtl; }
+        .campaign-grid.reverse > * { direction: ltr; }
+        .campaign-media { height: 560px; }
+        .campaign-text h2 { font-size: 2.6rem; margin-bottom: 18px; line-height: 1.15; }
+        .campaign-text p { color: var(--warm-gray); line-height: 1.85; margin-bottom: 24px; max-width: 460px; }
+
+        /* Press marquee */
+        .press-section { padding: 46px 0; background: var(--charcoal); color: #fff; overflow: hidden; }
+        .press-eyebrow { text-align: center; font-size: 0.66rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 24px; }
+        .marquee { position: relative; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+        .marquee-track { display: flex; gap: 64px; width: max-content; animation: marquee 26s linear infinite; }
+        .marquee-track span { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 3px; color: rgba(255,255,255,0.7); white-space: nowrap; }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        @media (max-width: 768px) {
+            .campaign-grid { grid-template-columns: 1fr; gap: 28px; }
+            .campaign-grid.reverse { direction: ltr; }
+            .campaign-media { height: 360px; }
+            .campaign-text h2 { font-size: 2rem; }
+            .film-stage { height: 52vh; }
+            .film-caption { font-size: 1.05rem; }
+            .marquee-track span { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -874,9 +957,18 @@
     ============================================================ -->
     <div class="page active" id="page-home">
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-decoration hero-decoration-1"></div>
-            <div class="hero-decoration hero-decoration-2"></div>
+        <section class="hero hero--cinematic">
+            <div class="hero-media">
+                <div class="hero-film"></div>
+                <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1" onerror="this.classList.add('hidden')">
+                    <source src="https://mdn.github.io/shared-assets/videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+                </video>
+                <div class="hero-grain"></div>
+                <div class="hero-sweep"></div>
+                <div class="hero-overlay"></div>
+            </div>
             <div class="hero-content">
                 <p class="hero-tagline">Artisan Perfumery from Kerala</p>
                 <h1 class="hero-title">LUMIÈRE</h1>
@@ -888,6 +980,18 @@
                     <button class="btn-secondary" onclick="showPage('about')">
                         <i data-lucide="book-open" width="16" height="16"></i> Our Story
                     </button>
+                </div>
+            </div>
+            <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+        </section>
+
+        <!-- Press / Accolades marquee -->
+        <section class="press-section">
+            <p class="press-eyebrow">As featured in</p>
+            <div class="marquee">
+                <div class="marquee-track">
+                    <span>VOGUE</span><span>GQ</span><span>ELLE</span><span>Harper's BAZAAR</span><span>FORBES</span><span>GRAZIA</span><span>Cond&eacute; Nast</span>
+                    <span>VOGUE</span><span>GQ</span><span>ELLE</span><span>Harper's BAZAAR</span><span>FORBES</span><span>GRAZIA</span><span>Cond&eacute; Nast</span>
                 </div>
             </div>
         </section>
@@ -917,13 +1021,32 @@
             </div>
         </section>
 
+        <!-- Editorial Campaign -->
+        <section class="campaign-section">
+            <div class="container">
+                <div class="campaign-grid">
+                    <figure class="media media--duotone campaign-media reveal">
+                        <img class="media-img" src="https://picsum.photos/seed/lumiere-campaign/1100/1300" alt="LUMIÈRE campaign imagery" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                        <div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>The Campaign</span></div></div>
+                    </figure>
+                    <div class="campaign-text reveal">
+                        <p class="eyebrow">The Campaign &mdash; SS26</p>
+                        <h2>Light, Captured in Glass</h2>
+                        <p>Our latest campaign follows a single ray of morning light as it moves through a Kerala garden &mdash; from the first jasmine at dawn to the warm amber of dusk. Three fragrances, one unbroken story of nature transformed.</p>
+                        <button class="btn-secondary" onclick="showPage('collections')">View the Collection</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Brand Story Teaser -->
         <section class="story-section">
             <div class="container">
                 <div class="story-content">
-                    <div class="story-image reveal">
-                        <div class="img-caption"><span class="img-monogram">L</span><span>The Kerala Atelier</span></div>
-                    </div>
+                    <figure class="story-image media media--duotone reveal">
+                        <img class="media-img" src="https://picsum.photos/seed/lumiere-atelier/900/760" alt="The LUMIÈRE atelier in the hills of Kerala" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                        <div class="media-fallback"><div class="img-caption"><span class="img-monogram">L</span><span>The Kerala Atelier</span></div></div>
+                    </figure>
                     <div class="story-text reveal">
                         <h2>Born in the Gardens of Kerala</h2>
                         <p>LUMIÈRE was born from a simple belief: that the finest fragrances come from the purest ingredients. Nestled in the verdant hills of Kerala, our atelier draws inspiration from centuries of botanical wisdom.</p>
@@ -931,6 +1054,25 @@
                         <button class="btn-secondary" onclick="showPage('about')">Discover Our Heritage</button>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- The Film -->
+        <section class="film-section">
+            <div class="container">
+                <p class="eyebrow center">The Film</p>
+                <h2 class="section-title reveal">A Scent, In Motion</h2>
+                <div class="gold-divider reveal"></div>
+            </div>
+            <div class="film-stage reveal">
+                <div class="hero-film film-fallback-art"></div>
+                <video class="film-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" onerror="this.classList.add('hidden')">
+                    <source src="https://mdn.github.io/shared-assets/videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+                </video>
+                <div class="film-overlay"></div>
+                <div class="film-caption">"Crafted from Nature. Made for You."</div>
             </div>
         </section>
 
@@ -984,9 +1126,10 @@
                     <p>LUMIÈRE was founded in 2019 in the heart of Kerala, India, where the air itself tells stories of jasmine, sandalwood, and monsoon rain. Our founder, inspired by generations of botanical knowledge, set out to create fragrances that capture the essence of Indian nature.</p>
                     <p>Today, LUMIÈRE stands at the intersection of traditional Indian perfumery and modern luxury, creating scents that resonate with the soul.</p>
                 </div>
-                <div class="about-hero-image reveal">
-                    <span class="img-caption"><span class="img-monogram">&#10047;</span><span>Kerala Botanical Gardens</span></span>
-                </div>
+                <figure class="about-hero-image media media--duotone reveal">
+                    <img class="media-img" src="https://picsum.photos/seed/lumiere-kerala/1000/1000" alt="Kerala botanical gardens" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                    <div class="media-fallback"><span class="img-caption"><span class="img-monogram">&#10047;</span><span>Kerala Botanical Gardens</span></span></div>
+                </figure>
             </div>
         </div>
 
