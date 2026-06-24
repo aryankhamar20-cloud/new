@@ -6,7 +6,7 @@
     <title>LUMIÈRE - Crafted from Nature. Made for You.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>document.documentElement.className += ' js';</script>
     <style>
         /* ============================================================
@@ -36,8 +36,8 @@
             --bloom-peach: #F5DDD0;
             --aqua-blue: #B8D8E8;
             --aqua-light: #E8F4FA;
-            --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-            --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+            --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
             --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
@@ -1020,6 +1020,70 @@
             .badge-pill { font-size: 0.62rem; }
             .size-option .size-price { font-size: 0.78rem; }
         }
+
+        /* ============================================================
+           WORLD-CLASS REFINEMENT v2 — color, type scale, layout, tablet
+        ============================================================ */
+        :root {
+            --charcoal: #1E1913;
+            --warm-gray: #6E665C;
+            --gold: #BE9E5E;
+            --gold-dark: #9C7C3C;
+            --ivory: #FBF9F4;
+            --cream: #F4EEE4;
+            --hairline: rgba(30, 25, 19, 0.08);
+        }
+
+        /* Refined display typography (Fraunces) */
+        .hero-title { font-family: var(--font-display); font-weight: 300; letter-spacing: 5px; }
+        .section-title {
+            font-family: var(--font-display); font-weight: 400;
+            font-size: clamp(1.95rem, 1.2rem + 2.6vw, 3rem); letter-spacing: -0.3px; line-height: 1.12;
+        }
+        .campaign-text h2, .story-text h2, .about-hero-text h1, .collections-hero h1,
+        .blog-hero h1, .noir-hero-text h1, .bloom-hero-overlay h1, .aqua-header h1,
+        .finder-q, .finder-result h3, .blog-post-body h1 {
+            font-family: var(--font-display);
+        }
+        .noir-hero-text h1, .aqua-header h1 { font-weight: 400; letter-spacing: 3px; }
+        .section-subtitle { font-size: 1.04rem; line-height: 1.75; letter-spacing: 0.1px; }
+        .eyebrow, .press-eyebrow, .finder-step-label { font-weight: 600; }
+        .btn-primary, .btn-secondary { letter-spacing: 1.2px; border-radius: 2px; }
+        .nav-logo { font-weight: 500; }
+
+        /* Hairline section rhythm + elevated cards */
+        .values-section, .testimonials-section { border-top: 1px solid var(--hairline); }
+        .value-card, .testimonial-card, .ingredient-card { border: 1px solid var(--hairline); }
+        .collection-card { box-shadow: 0 1px 0 var(--hairline); }
+
+        /* Softer, richer photo treatment so perfume imagery reads clearly */
+        .media--duotone .media-img { filter: grayscale(0.18) contrast(1.04) saturate(1.06) brightness(0.99); }
+        .media--duotone::after { background: linear-gradient(150deg, rgba(190,158,94,0.26), rgba(20,15,10,0.30)); }
+
+        /* ---- Tablet (landscape / iPad) ---- */
+        @media (max-width: 1024px) {
+            .container { padding: 0 30px; }
+            .values-grid, .testimonials-grid, .reviews-grid, .video-gallery { grid-template-columns: repeat(2, 1fr); }
+            .process-steps { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .aqua-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .campaign-grid { gap: 44px; }
+            .campaign-media { height: 480px; }
+            .story-content { gap: 44px; }
+        }
+
+        /* ---- Tablet (portrait) ---- */
+        @media (max-width: 900px) {
+            .collections-grid { grid-template-columns: repeat(2, 1fr); }
+            .campaign-grid { grid-template-columns: 1fr; gap: 30px; }
+            .campaign-grid.reverse { direction: ltr; }
+            .campaign-media { height: 420px; }
+            .noir-hero, .bloom-hero { grid-template-columns: 1fr; }
+            .noir-hero-image, .bloom-hero-image { min-height: 56vh; }
+            .about-hero { grid-template-columns: 1fr; gap: 36px; }
+            .ritual-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -1166,7 +1230,7 @@
             <div class="container">
                 <div class="campaign-grid">
                     <figure class="media media--duotone campaign-media reveal">
-                        <img class="media-img" src="https://picsum.photos/seed/lumiere-campaign/1100/1300" alt="LUMIÈRE campaign imagery" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                        <img class="media-img" src="https://loremflickr.com/1100/1300/perfume,fragrance,luxury?lock=7" alt="LUMIÈRE campaign imagery" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
                         <div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>The Campaign</span></div></div>
                     </figure>
                     <div class="campaign-text reveal">
@@ -1184,7 +1248,7 @@
             <div class="container">
                 <div class="story-content">
                     <figure class="story-image media media--duotone reveal">
-                        <img class="media-img" src="https://picsum.photos/seed/lumiere-atelier/900/760" alt="The LUMIÈRE atelier in the hills of Kerala" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                        <img class="media-img" src="https://loremflickr.com/900/760/perfumery,atelier,bottle?lock=5" alt="The LUMIÈRE atelier in the hills of Kerala" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
                         <div class="media-fallback"><div class="img-caption"><span class="img-monogram">L</span><span>The Kerala Atelier</span></div></div>
                     </figure>
                     <div class="story-text reveal">
@@ -1297,7 +1361,7 @@
                     <p>Today, LUMIÈRE stands at the intersection of traditional Indian perfumery and modern luxury, creating scents that resonate with the soul.</p>
                 </div>
                 <figure class="about-hero-image media media--duotone reveal">
-                    <img class="media-img" src="https://picsum.photos/seed/lumiere-kerala/1000/1000" alt="Kerala botanical gardens" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
+                    <img class="media-img" src="https://loremflickr.com/1000/1000/jasmine,flowers,botanical?lock=9" alt="Kerala botanical gardens" loading="lazy" decoding="async" onerror="this.classList.add('hidden')">
                     <div class="media-fallback"><span class="img-caption"><span class="img-monogram">&#10047;</span><span>Kerala Botanical Gardens</span></span></div>
                 </figure>
             </div>
@@ -2452,37 +2516,39 @@
            Swap `src`/`poster`/seed values for real asset URLs anytime.
         ============================================================ */
         const DEMO_VIDEO = 'https://mdn.github.io/shared-assets/videos/flower.mp4';
+        // Perfume-themed images via keyword (LoremFlickr); admin can swap for real URLs.
+        function flickr(kw, lock, w, h) { return 'https://loremflickr.com/' + (w || 640) + '/' + (h || 640) + '/' + kw + '?lock=' + lock; }
 
         const HOME_VIDEOS = [
-            { tag: 'Brand Film', title: 'The LUMIÈRE Story', duration: '2:32', poster: 'https://picsum.photos/seed/lumiere-home-v1/640/420', src: DEMO_VIDEO },
-            { tag: 'Behind the Scenes', title: 'Inside the Kerala Atelier', duration: '1:50', poster: 'https://picsum.photos/seed/lumiere-home-v2/640/420', src: DEMO_VIDEO },
-            { tag: 'Craft', title: 'From Petal to Bottle', duration: '1:12', poster: 'https://picsum.photos/seed/lumiere-home-v3/640/420', src: DEMO_VIDEO }
+            { tag: 'Brand Film', title: 'The LUMIÈRE Story', duration: '2:32', poster: flickr('perfume,fragrance,luxury', 11, 640, 420), src: DEMO_VIDEO },
+            { tag: 'Behind the Scenes', title: 'Inside the Kerala Atelier', duration: '1:50', poster: flickr('perfumery,laboratory,bottle', 12, 640, 420), src: DEMO_VIDEO },
+            { tag: 'Craft', title: 'From Petal to Bottle', duration: '1:12', poster: flickr('jasmine,flowers,perfume', 13, 640, 420), src: DEMO_VIDEO }
         ];
 
         const PRODUCT_MEDIA = {
             noir: {
                 videos: [
-                    { tag: 'Campaign', title: 'NOIR — The Film', duration: '1:24', poster: 'https://picsum.photos/seed/noir-v1/640/420', src: DEMO_VIDEO },
-                    { tag: 'Notes', title: 'Oud and Amber, Explained', duration: '0:48', poster: 'https://picsum.photos/seed/noir-v2/640/420', src: DEMO_VIDEO },
-                    { tag: 'Making Of', title: 'Blending NOIR', duration: '2:10', poster: 'https://picsum.photos/seed/noir-v3/640/420', src: DEMO_VIDEO }
+                    { tag: 'Campaign', title: 'NOIR — The Film', duration: '1:24', poster: flickr('perfume,oud,amber', 21, 640, 420), src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'Oud and Amber, Explained', duration: '0:48', poster: flickr('wood,sandalwood,incense', 22, 640, 420), src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Blending NOIR', duration: '2:10', poster: flickr('perfume,bottle,dark', 23, 640, 420), src: DEMO_VIDEO }
                 ],
-                images: ['noir-g1', 'noir-g2', 'noir-g3', 'noir-g4']
+                images: [flickr('perfume,oud', 31), flickr('amber,resin', 32), flickr('sandalwood,wood', 33), flickr('perfume,bottle,gold', 34)]
             },
             bloom: {
                 videos: [
-                    { tag: 'Campaign', title: 'BLOOM — A Garden at Dawn', duration: '1:38', poster: 'https://picsum.photos/seed/bloom-v1/640/420', src: DEMO_VIDEO },
-                    { tag: 'Notes', title: 'Jasmine and Rose, Up Close', duration: '0:52', poster: 'https://picsum.photos/seed/bloom-v2/640/420', src: DEMO_VIDEO },
-                    { tag: 'Making Of', title: 'Harvesting at First Light', duration: '1:46', poster: 'https://picsum.photos/seed/bloom-v3/640/420', src: DEMO_VIDEO }
+                    { tag: 'Campaign', title: 'BLOOM — A Garden at Dawn', duration: '1:38', poster: flickr('jasmine,perfume', 41, 640, 420), src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'Jasmine and Rose, Up Close', duration: '0:52', poster: flickr('rose,flowers', 42, 640, 420), src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Harvesting at First Light', duration: '1:46', poster: flickr('jasmine,garden,flowers', 43, 640, 420), src: DEMO_VIDEO }
                 ],
-                images: ['bloom-g1', 'bloom-g2', 'bloom-g3', 'bloom-g4']
+                images: [flickr('jasmine,flowers', 51), flickr('rose,pink', 52), flickr('peach,fruit', 53), flickr('perfume,floral,bottle', 54)]
             },
             aqua: {
                 videos: [
-                    { tag: 'Campaign', title: 'AQUA — Where Sea Meets Skin', duration: '1:15', poster: 'https://picsum.photos/seed/aqua-v1/640/420', src: DEMO_VIDEO },
-                    { tag: 'Notes', title: 'The Sea-Salt Accord', duration: '0:44', poster: 'https://picsum.photos/seed/aqua-v2/640/420', src: DEMO_VIDEO },
-                    { tag: 'Making Of', title: 'Bottling the Coast', duration: '1:30', poster: 'https://picsum.photos/seed/aqua-v3/640/420', src: DEMO_VIDEO }
+                    { tag: 'Campaign', title: 'AQUA — Where Sea Meets Skin', duration: '1:15', poster: flickr('ocean,sea,blue', 61, 640, 420), src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'The Sea-Salt Accord', duration: '0:44', poster: flickr('water,wave,blue', 62, 640, 420), src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Bottling the Coast', duration: '1:30', poster: flickr('perfume,bottle,blue', 63, 640, 420), src: DEMO_VIDEO }
                 ],
-                images: ['aqua-g1', 'aqua-g2', 'aqua-g3', 'aqua-g4']
+                images: [flickr('ocean,sea', 71), flickr('bergamot,citrus', 72), flickr('water,drops', 73), flickr('perfume,bottle,fresh', 74)]
             }
         };
 
@@ -2503,9 +2569,8 @@
             }).join('');
         }
 
-        function renderImageItems(seeds, label) {
-            return seeds.map(function (seed) {
-                var url = 'https://picsum.photos/seed/' + seed + '/640/640';
+        function renderImageItems(urls, label) {
+            return urls.map(function (url) {
                 return '<figure class="media media--duotone gallery-item" onclick="openImage(\'' + url + '\',\'' + escAttr(label) + '\')">' +
                     '<img class="media-img" src="' + url + '" alt="' + escAttr(label) + '" loading="lazy" decoding="async" onerror="this.classList.add(\'hidden\')">' +
                     '<div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>' + escAttr(label) + '</span></div></div>' +
@@ -2635,7 +2700,10 @@
         ============================================================ */
         function renderInsta() {
             var el = document.getElementById('instaGrid');
-            if (el) el.innerHTML = renderImageItems(['lumiere-ig1', 'lumiere-ig2', 'lumiere-ig3', 'lumiere-ig4', 'lumiere-ig5', 'lumiere-ig6'], '@lumiere.parfums');
+            if (el) el.innerHTML = renderImageItems([
+                flickr('perfume,bottle', 81), flickr('flowers,jasmine', 82), flickr('rose,petals', 83),
+                flickr('fragrance,luxury', 84), flickr('ocean,blue', 85), flickr('perfume,gold', 86)
+            ], '@lumiere.parfums');
         }
 
         /* ============================================================
