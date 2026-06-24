@@ -892,6 +892,39 @@
             .film-caption { font-size: 1.05rem; }
             .marquee-track span { font-size: 1.2rem; }
         }
+
+        /* ============================================================
+           VIDEO GALLERIES + IMAGE GALLERIES + MEDIA LIGHTBOX
+        ============================================================ */
+        .media-showcase { padding: 90px 0; background: var(--ivory); }
+        .media-showcase.alt { background: var(--cream); }
+        .mt-section { margin-top: 64px; }
+        .video-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .video-card { position: relative; border: none; background: none; padding: 0; cursor: pointer; text-align: left; display: block; width: 100%; }
+        .video-card-poster { height: 230px; border-radius: var(--radius-lg); }
+        .video-play { position: absolute; top: calc(50% - 18px); left: 50%; transform: translate(-50%, -50%); z-index: 5; width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; color: var(--charcoal); box-shadow: var(--shadow-md); transition: var(--transition); }
+        .video-card:hover .video-play { transform: translate(-50%, -50%) scale(1.12); background: #fff; }
+        .video-duration { position: absolute; top: 12px; right: 12px; z-index: 5; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.7rem; letter-spacing: 0.5px; padding: 3px 9px; border-radius: 6px; }
+        .video-title { display: block; padding: 14px 4px 0; font-family: var(--font-heading); font-size: 1.05rem; color: var(--charcoal); }
+        .video-tag { display: block; padding: 2px 4px 0; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .gallery-item { height: 210px; cursor: pointer; }
+
+        .media-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(10,8,6,0.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 28px; }
+        .media-modal.open { opacity: 1; pointer-events: auto; }
+        .media-modal-inner { position: relative; max-width: 920px; width: 100%; }
+        .media-modal-video, .media-modal-img { width: 100%; max-height: 80vh; border-radius: var(--radius-lg); display: block; background: #000; object-fit: contain; }
+        .media-modal-caption { color: rgba(255,255,255,0.85); text-align: center; margin-top: 14px; font-family: var(--font-heading); font-style: italic; font-size: 1.1rem; }
+        .media-modal-close { position: absolute; top: -48px; right: 0; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.15); color: #fff; font-size: 1.5rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .media-modal-close:hover { background: rgba(255,255,255,0.3); transform: rotate(90deg); }
+
+        @media (max-width: 768px) {
+            .video-gallery { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .video-card-poster { height: 210px; }
+            .gallery-item { height: 170px; }
+            .media-modal-close { top: 0; right: 0; }
+        }
     </style>
 </head>
 <body>
@@ -1073,6 +1106,16 @@
                 </video>
                 <div class="film-overlay"></div>
                 <div class="film-caption">"Crafted from Nature. Made for You."</div>
+            </div>
+        </section>
+
+        <!-- Home Video Stories -->
+        <section class="media-showcase">
+            <div class="container">
+                <p class="eyebrow center">Stories</p>
+                <h2 class="section-title reveal">Watch &amp; Discover</h2>
+                <p class="section-subtitle reveal">Step inside our world &mdash; from the Kerala atelier to the art of the blend</p>
+                <div class="video-gallery reveal" id="homeVideoGallery"></div>
             </div>
         </section>
 
@@ -1386,6 +1429,18 @@
             </div>
         </section>
 
+        <!-- NOIR videos + gallery (admin-managed media; demo data) -->
+        <section class="media-showcase alt">
+            <div class="container">
+                <p class="eyebrow center">Watch</p>
+                <h2 class="section-title reveal">NOIR in Motion</h2>
+                <div class="video-gallery reveal" id="noirVideos"></div>
+                <p class="eyebrow center mt-section">Gallery</p>
+                <h2 class="section-title reveal">The NOIR Gallery</h2>
+                <div class="gallery-grid reveal" id="noirGallery"></div>
+            </div>
+        </section>
+
         <!-- Related Products -->
         <section class="related-products">
             <div class="container">
@@ -1520,6 +1575,18 @@
                 <div class="reviews-grid reveal" id="bloomReviewsGrid"></div>
             </div>
         </section>
+
+        <!-- BLOOM videos + gallery (admin-managed media; demo data) -->
+        <section class="media-showcase alt">
+            <div class="container">
+                <p class="eyebrow center">Watch</p>
+                <h2 class="section-title reveal">BLOOM in Motion</h2>
+                <div class="video-gallery reveal" id="bloomVideos"></div>
+                <p class="eyebrow center mt-section">Gallery</p>
+                <h2 class="section-title reveal">The BLOOM Gallery</h2>
+                <div class="gallery-grid reveal" id="bloomGallery"></div>
+            </div>
+        </section>
     </div>
 
     <!-- ============================================================
@@ -1624,6 +1691,18 @@
                 <h2 class="section-title reveal">Reviews</h2>
                 <div class="reviews-summary reveal" id="aquaReviewsSummary"></div>
                 <div class="reviews-grid reveal" id="aquaReviewsGrid"></div>
+            </div>
+        </section>
+
+        <!-- AQUA videos + gallery (admin-managed media; demo data) -->
+        <section class="media-showcase alt">
+            <div class="container">
+                <p class="eyebrow center">Watch</p>
+                <h2 class="section-title reveal">AQUA in Motion</h2>
+                <div class="video-gallery reveal" id="aquaVideos"></div>
+                <p class="eyebrow center mt-section">Gallery</p>
+                <h2 class="section-title reveal">The AQUA Gallery</h2>
+                <div class="gallery-grid reveal" id="aquaGallery"></div>
             </div>
         </section>
     </div>
@@ -2050,6 +2129,18 @@
     </div>
 
     <!-- ============================================================
+         MEDIA LIGHTBOX (video + image)
+    ============================================================ -->
+    <div class="media-modal" id="mediaModal" onclick="closeMedia()">
+        <div class="media-modal-inner" onclick="event.stopPropagation()">
+            <button class="media-modal-close" onclick="closeMedia()" aria-label="Close">&times;</button>
+            <video class="media-modal-video hidden" id="modalVideo" controls playsinline preload="metadata"></video>
+            <img class="media-modal-img hidden" id="modalImg" alt="">
+            <p class="media-modal-caption" id="modalCaption"></p>
+        </div>
+    </div>
+
+    <!-- ============================================================
          FOOTER
     ============================================================ -->
     <footer class="footer">
@@ -2229,6 +2320,118 @@
         }
 
         /* ============================================================
+           MEDIA LIBRARY (videos + images) — DEMO DATA
+           Admin: edit these arrays to manage each product's media.
+           Swap `src`/`poster`/seed values for real asset URLs anytime.
+        ============================================================ */
+        const DEMO_VIDEO = 'https://mdn.github.io/shared-assets/videos/flower.mp4';
+
+        const HOME_VIDEOS = [
+            { tag: 'Brand Film', title: 'The LUMIÈRE Story', duration: '2:32', poster: 'https://picsum.photos/seed/lumiere-home-v1/640/420', src: DEMO_VIDEO },
+            { tag: 'Behind the Scenes', title: 'Inside the Kerala Atelier', duration: '1:50', poster: 'https://picsum.photos/seed/lumiere-home-v2/640/420', src: DEMO_VIDEO },
+            { tag: 'Craft', title: 'From Petal to Bottle', duration: '1:12', poster: 'https://picsum.photos/seed/lumiere-home-v3/640/420', src: DEMO_VIDEO }
+        ];
+
+        const PRODUCT_MEDIA = {
+            noir: {
+                videos: [
+                    { tag: 'Campaign', title: 'NOIR — The Film', duration: '1:24', poster: 'https://picsum.photos/seed/noir-v1/640/420', src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'Oud and Amber, Explained', duration: '0:48', poster: 'https://picsum.photos/seed/noir-v2/640/420', src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Blending NOIR', duration: '2:10', poster: 'https://picsum.photos/seed/noir-v3/640/420', src: DEMO_VIDEO }
+                ],
+                images: ['noir-g1', 'noir-g2', 'noir-g3', 'noir-g4']
+            },
+            bloom: {
+                videos: [
+                    { tag: 'Campaign', title: 'BLOOM — A Garden at Dawn', duration: '1:38', poster: 'https://picsum.photos/seed/bloom-v1/640/420', src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'Jasmine and Rose, Up Close', duration: '0:52', poster: 'https://picsum.photos/seed/bloom-v2/640/420', src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Harvesting at First Light', duration: '1:46', poster: 'https://picsum.photos/seed/bloom-v3/640/420', src: DEMO_VIDEO }
+                ],
+                images: ['bloom-g1', 'bloom-g2', 'bloom-g3', 'bloom-g4']
+            },
+            aqua: {
+                videos: [
+                    { tag: 'Campaign', title: 'AQUA — Where Sea Meets Skin', duration: '1:15', poster: 'https://picsum.photos/seed/aqua-v1/640/420', src: DEMO_VIDEO },
+                    { tag: 'Notes', title: 'The Sea-Salt Accord', duration: '0:44', poster: 'https://picsum.photos/seed/aqua-v2/640/420', src: DEMO_VIDEO },
+                    { tag: 'Making Of', title: 'Bottling the Coast', duration: '1:30', poster: 'https://picsum.photos/seed/aqua-v3/640/420', src: DEMO_VIDEO }
+                ],
+                images: ['aqua-g1', 'aqua-g2', 'aqua-g3', 'aqua-g4']
+            }
+        };
+
+        function escAttr(s) { return String(s).replace(/'/g, '\u2019').replace(/"/g, ''); }
+
+        function renderVideoCards(list) {
+            return list.map(function (v) {
+                return '<button class="video-card" onclick="openVideo(\'' + v.src + '\',\'' + escAttr(v.title) + '\')">' +
+                    '<figure class="media media--duotone video-card-poster">' +
+                        '<img class="media-img" src="' + v.poster + '" alt="' + escAttr(v.title) + '" loading="lazy" decoding="async" onerror="this.classList.add(\'hidden\')">' +
+                        '<div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#9658;</span><span>' + escAttr(v.tag) + '</span></div></div>' +
+                    '</figure>' +
+                    '<span class="video-duration">' + v.duration + '</span>' +
+                    '<span class="video-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>' +
+                    '<span class="video-tag">' + escAttr(v.tag) + '</span>' +
+                    '<span class="video-title">' + escAttr(v.title) + '</span>' +
+                '</button>';
+            }).join('');
+        }
+
+        function renderImageItems(seeds, label) {
+            return seeds.map(function (seed) {
+                var url = 'https://picsum.photos/seed/' + seed + '/640/640';
+                return '<figure class="media media--duotone gallery-item" onclick="openImage(\'' + url + '\',\'' + escAttr(label) + '\')">' +
+                    '<img class="media-img" src="' + url + '" alt="' + escAttr(label) + '" loading="lazy" decoding="async" onerror="this.classList.add(\'hidden\')">' +
+                    '<div class="media-fallback"><div class="img-caption"><span class="img-monogram">&#10047;</span><span>' + escAttr(label) + '</span></div></div>' +
+                '</figure>';
+            }).join('');
+        }
+
+        function renderMediaGallery(product) {
+            var data = PRODUCT_MEDIA[product];
+            if (!data) return;
+            var v = document.getElementById(product + 'Videos');
+            if (v) v.innerHTML = renderVideoCards(data.videos);
+            var g = document.getElementById(product + 'Gallery');
+            if (g) g.innerHTML = renderImageItems(data.images, product.toUpperCase() + ' Gallery');
+        }
+
+        function renderHomeVideos() {
+            var el = document.getElementById('homeVideoGallery');
+            if (el) el.innerHTML = renderVideoCards(HOME_VIDEOS);
+        }
+
+        /* Media lightbox (video + image) */
+        function openVideo(src, title) {
+            var m = document.getElementById('mediaModal'),
+                v = document.getElementById('modalVideo'),
+                img = document.getElementById('modalImg');
+            img.classList.add('hidden'); img.removeAttribute('src');
+            v.classList.remove('hidden'); v.src = src;
+            document.getElementById('modalCaption').textContent = title || '';
+            m.classList.add('open');
+            try { v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+        }
+
+        function openImage(src, caption) {
+            var m = document.getElementById('mediaModal'),
+                v = document.getElementById('modalVideo'),
+                img = document.getElementById('modalImg');
+            try { v.pause(); } catch (e) {}
+            v.classList.add('hidden'); v.removeAttribute('src');
+            img.src = src; img.classList.remove('hidden');
+            document.getElementById('modalCaption').textContent = caption || '';
+            m.classList.add('open');
+        }
+
+        function closeMedia() {
+            var m = document.getElementById('mediaModal'),
+                v = document.getElementById('modalVideo');
+            try { v.pause(); } catch (e) {}
+            v.removeAttribute('src');
+            m.classList.remove('open');
+        }
+
+        /* ============================================================
            QUANTITY STEPPERS (product pages)
         ============================================================ */
         let productQty = { noir: 1, bloom: 1, aqua: 1 };
@@ -2306,9 +2509,10 @@
                 updatePaymentTotal();
             }
 
-            // Product pages: render demo reviews and bind 3D tilt
+            // Product pages: render demo reviews, media galleries, and bind 3D tilt
             if (pageId === 'noir' || pageId === 'bloom' || pageId === 'aqua') {
                 renderReviews(pageId);
+                renderMediaGallery(pageId);
                 setTimeout(initTilt, 60);
             }
 
@@ -2739,6 +2943,8 @@
                 initRevealAnimations();
                 updateCartDisplay();
                 initTilt();
+                renderHomeVideos();
+                document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMedia(); });
             } catch (err) {
                 // Never let a JS error blank the page: reveal all content.
                 revealAll();
